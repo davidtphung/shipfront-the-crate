@@ -1,0 +1,10 @@
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#1a1a1a"/>
+  <rect x="100" y="350" width="600" height="200" stroke="#333" stroke-width="2" fill="#0d0d0d"/>
+  <rect x="120" y="370" width="120" height="160" stroke="#444" stroke-width="1" fill="#000"/>
+  <rect x="260" y="370" width="120" height="160" stroke="#444" stroke-width="1" fill="#000"/>
+  <rect x="400" y="370" width="120" height="160" stroke="#444" stroke-width="1" fill="#000"/>
+  <rect x="540" y="370" width="120" height="160" stroke="#444" stroke-width="1" fill="#000"/>
+  <line x1="200" y1="250" x2="600" y2="250" stroke="#333" stroke-width="4"/>
+  <text x="400" y="580" font-family="monospace" font-size="12" fill="#333" text-anchor="middle">INBOUND DOCK</text>
+</svg>
