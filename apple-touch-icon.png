@@ -1,4 +1,14 @@
 <svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="180" height="180" fill="#000000" rx="40"/>
-  <path d="M45 67.5 L45 135 L112.5 135 L112.5 67.5 L45 67.5 M45 67.5 L78.75 45 L146.25 45 L112.5 67.5 M112.5 135 L146.25 112.5 L146.25 45 M146.25 45 L112.5 67.5 M112.5 67.5 L112.5 135" stroke="#FF2D2D" stroke-width="4" fill="none"/>
+  <rect width="180" height="180" rx="40" fill="#000000"/>
+  <!-- Back face -->
+  <path d="M55 72 L90 55 L125 72 L125 108 L90 125 L55 108 Z" stroke="#FF2D2D" stroke-width="2.5" fill="none"/>
+  <!-- Front face -->
+  <path d="M40 82 L75 65 L110 82 L110 118 L75 135 L40 118 Z" stroke="#FF2D2D" stroke-width="2.5" fill="none"/>
+  <!-- Connecting edges -->
+  <line x1="55" y1="72" x2="40" y2="82" stroke="#FF2D2D" stroke-width="2.5"/>
+  <line x1="90" y1="55" x2="75" y2="65" stroke="#FF2D2D" stroke-width="2.5"/>
+  <line x1="125" y1="72" x2="110" y2="82" stroke="#FF2D2D" stroke-width="2.5"/>
+  <line x1="125" y1="108" x2="110" y2="118" stroke="#FF2D2D" stroke-width="2.5"/>
+  <line x1="90" y1="125" x2="75" y2="135" stroke="#FF2D2D" stroke-width="2.5"/>
+  <line x1="55" y1="108" x2="40" y2="118" stroke="#FF2D2D" stroke-width="2.5"/>
 </svg>
