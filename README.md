@@ -22,11 +22,11 @@ Shipfront Terminal demo: **THE CRATE**. Black ground, white type, red #FF2D2D wi
 - Get a Quote `/quote/`
 - Contact `/contact/`
 
-## Identity Lock (THE CRATE 1A)
+## Identity Lock (THE CRATE 1A EVEN)
 
 - **Language**: Terminal. Ground #000000. Type white. Grotesque hierarchy (Inter or similar).
 - **Accent**: #FF2D2D only. CTA fill is #FF2D2D with BLACK label (7:1+ contrast).
-- **Logo**: THE CRATE 1A. Side-on axonometric 12-edge wire cube, even line weight, red #FF2D2D.
+- **Logo**: THE CRATE 1A EVEN. Side-on axonometric 12-edge even wire cube, red #FF2D2D on black.
 - **Tagline**: You Sell. We Ship.
 
 ## Development
