@@ -6,6 +6,16 @@ Shipfront Terminal demo: **THE CRATE**. Black ground, white type, red #FF2D2D wi
 
 🔗 **https://davidtphung.github.io/shipfront-the-crate/**
 
+> **Note**: GitHub Pages must be enabled in repository settings to make the site live.
+> 
+> To enable:
+> 1. Go to Settings → Pages
+> 2. Under "Build and deployment", select "Deploy from a branch"
+> 3. Select branch: `gh-pages`, folder: `/ (root)`
+> 4. Click Save
+>
+> The site will be live at the URL above within a few minutes.
+
 ## Pages
 
 - Home `/`
