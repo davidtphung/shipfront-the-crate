@@ -17,11 +17,8 @@
         <nav role="navigation" aria-label="Main navigation">
             <a href="./" class="logo" aria-label="Shipfront home">
                 <svg width="32" height="32" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <!-- Back face -->
                     <path d="M50 65 L90 45 L130 65 L130 105 L90 125 L50 105 Z" stroke="#FF2D2D" stroke-width="3" fill="none"/>
-                    <!-- Front face -->
                     <path d="M30 75 L70 55 L110 75 L110 115 L70 135 L30 115 Z" stroke="#FF2D2D" stroke-width="3" fill="none"/>
-                    <!-- Connecting edges -->
                     <line x1="50" y1="65" x2="30" y2="75" stroke="#FF2D2D" stroke-width="3"/>
                     <line x1="90" y1="45" x2="70" y2="55" stroke="#FF2D2D" stroke-width="3"/>
                     <line x1="130" y1="65" x2="110" y2="75" stroke="#FF2D2D" stroke-width="3"/>
@@ -42,12 +39,9 @@
     <main id="main" role="main">
         <section class="hero" aria-label="Hero section">
             <div class="hero-content">
-                <svg class="hero-logo" width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <!-- Back face -->
+                <svg class="hero-logo" width="120" height="120" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <path d="M50 65 L90 45 L130 65 L130 105 L90 125 L50 105 Z" stroke="#FF2D2D" stroke-width="2" fill="none"/>
-                    <!-- Front face -->
                     <path d="M30 75 L70 55 L110 75 L110 115 L70 135 L30 115 Z" stroke="#FF2D2D" stroke-width="2" fill="none"/>
-                    <!-- Connecting edges -->
                     <line x1="50" y1="65" x2="30" y2="75" stroke="#FF2D2D" stroke-width="2"/>
                     <line x1="90" y1="45" x2="70" y2="55" stroke="#FF2D2D" stroke-width="2"/>
                     <line x1="130" y1="65" x2="110" y2="75" stroke="#FF2D2D" stroke-width="2"/>
@@ -62,68 +56,49 @@
         </section>
 
         <section id="why-shipfront" class="services" aria-label="Our services">
-            <div class="cards-grid">
-                <article class="card" tabindex="0">
-                    <div class="card-image" style="background-color: #1a1a1a;">
-                        <img src="images/procurement.jpg" alt="Inbound pallet at warehouse dock">
-                    </div>
-                    <div class="card-content">
-                        <h2>Procurement</h2>
-                        <p>They buy. We receive at 1933 S. Broadway.</p>
-                    </div>
-                </article>
+            <div class="content-wrapper">
+                <div class="cards-grid">
+                    <article class="card card-tall" tabindex="0">
+                        <div class="card-image">
+                            <img src="images/procurement.jpg" alt="Inbound pallet at warehouse dock">
+                        </div>
+                        <div class="card-overlay">
+                            <h2 class="card-label">PROCUREMENT</h2>
+                            <p class="card-body">They buy. We receive at 1933 S. Broadway.</p>
+                        </div>
+                    </article>
 
-                <article class="card" tabindex="0">
-                    <div class="card-image" style="background-color: #1a1a1a;">
-                        <img src="images/logistics.jpg" alt="White trailer at dock door">
-                    </div>
-                    <div class="card-content">
-                        <h2>Logistics</h2>
-                        <p>Freight arrives. We do not run the truck.</p>
-                    </div>
-                </article>
+                    <article class="card card-short" tabindex="0">
+                        <div class="card-image">
+                            <img src="images/logistics.jpg" alt="White trailer at dock door">
+                        </div>
+                        <div class="card-overlay">
+                            <h2 class="card-label">LOGISTICS</h2>
+                            <p class="card-body">Freight arrives. We do not run the truck.</p>
+                        </div>
+                    </article>
 
-                <article class="card" tabindex="0">
-                    <div class="card-image" style="background-color: #1a1a1a;">
-                        <img src="images/fulfillment.jpg" alt="Warehouse racking and pick aisle">
-                    </div>
-                    <div class="card-content">
-                        <h2>Fulfillment</h2>
-                        <p>Pick, pack, dock on our floor.</p>
-                    </div>
-                </article>
+                    <article class="card card-medium" tabindex="0">
+                        <div class="card-image">
+                            <img src="images/fulfillment.jpg" alt="Warehouse racking and pick aisle">
+                        </div>
+                        <div class="card-overlay">
+                            <h2 class="card-label">FULFILLMENT</h2>
+                            <p class="card-body">Pick, pack, dock on our floor.</p>
+                        </div>
+                    </article>
 
-                <article class="card" tabindex="0">
-                    <div class="card-image" style="background-color: #1a1a1a;">
-                        <img src="images/integration.jpg" alt="Warehouse scanning tablet station">
-                    </div>
-                    <div class="card-content">
-                        <h2>Integration</h2>
-                        <p>The store talks to the floor.</p>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <section class="value-chain" aria-label="Value chain">
-            <div class="chain-container">
-                <div class="chain-item">
-                    <span class="chain-label">Port</span>
-                </div>
-                <span class="chain-arrow">→</span>
-                <div class="chain-item">
-                    <span class="chain-label">Freight</span>
-                </div>
-                <span class="chain-arrow">→</span>
-                <div class="chain-item active">
-                    <span class="chain-label">Warehouse</span>
-                </div>
-                <span class="chain-arrow">→</span>
-                <div class="chain-item">
-                    <span class="chain-label">Customer</span>
+                    <article class="card card-medium" tabindex="0">
+                        <div class="card-image">
+                            <img src="images/integration.jpg" alt="Warehouse scanning tablet station">
+                        </div>
+                        <div class="card-overlay">
+                            <h2 class="card-label">INTEGRATION</h2>
+                            <p class="card-body">The store talks to the floor.</p>
+                        </div>
+                    </article>
                 </div>
             </div>
-            <p class="chain-note">Shipfront sits in warehouse + integration only.</p>
         </section>
     </main>
 
