@@ -98,24 +98,16 @@ address {
   top: 12px;
 }
 
-/* Dashed grid + crop marks. Permanent low-opacity layer on black. */
+/* Figma 6:541 grid. 48px hairline, white at 7%, full canvas. */
 .blueprint {
   position: fixed;
-  inset: -10%;
+  inset: 0;
   z-index: 0;
   pointer-events: none;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48'><path d='M48 0H0V48' fill='none' stroke='rgba(255,255,255,0.1)' stroke-width='1' stroke-dasharray='2 5'/></svg>");
-  background-size: var(--grid) var(--grid);
-  animation: grid-slide 32s var(--ease) infinite alternate;
-}
-
-@keyframes grid-slide {
-  from {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-  to {
-    transform: translate3d(-20px, 14px, 0) scale(1.04);
-  }
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+  background-size: 48px 48px;
 }
 
 .canvas-grain,
@@ -209,10 +201,7 @@ body::after {
   right: 0;
   left: 0;
   z-index: 20;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: 16px;
+  display: block;
   padding: 0 20px;
   background: transparent;
   border: 0;
@@ -408,28 +397,26 @@ footer p {
 .hero {
   position: relative;
   overflow: hidden;
-  min-height: 100vh;
-  padding: 128px 0 80px;
+  min-height: auto;
+  padding: 128px 0 64px;
   background: #000;
 }
 
 .hero-copy {
   z-index: 2;
-  width: min(1100px, calc(100% - 40px));
+  width: min(1200px, calc(100% - 40px));
 }
 
 .hero-title {
-  display: flex;
-  flex-direction: column;
-  margin: 0 0 22px;
-  margin-left: max(-8vw, -72px);
-  width: 112vw;
-  max-width: none;
+  display: block;
+  margin: 0 0 18px;
+  width: auto;
+  max-width: 16ch;
   font-family: var(--font);
-  font-size: clamp(64px, 15vw, 188px);
+  font-size: 88px;
   font-weight: 700;
-  line-height: 0.78;
-  letter-spacing: -0.06em;
+  line-height: 88px;
+  letter-spacing: -0.03em;
   text-transform: none;
   color: #fff;
   -webkit-text-fill-color: #fff;
@@ -554,7 +541,46 @@ footer p {
   border-color: var(--accent);
 }
 
-/* 2x2 lock: 592x360 gap 16. Rest-is-image. */
+/* 2x2 lock: 592x360 gap 16. Rest-is-image. One bounding box. */
+.cards-box {
+  position: relative;
+  width: 1200px;
+  max-width: 100%;
+  margin: 28px auto 0;
+  padding: 0;
+  border: 1px solid var(--accent);
+}
+
+.reg-sq {
+  position: absolute;
+  z-index: 5;
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  pointer-events: none;
+}
+
+.reg-sq.tl { top: -3px; left: -3px; }
+.reg-sq.tr { top: -3px; right: -3px; }
+.reg-sq.bl { bottom: -3px; left: -3px; }
+.reg-sq.br { bottom: -3px; right: -3px; }
+
+.coord {
+  position: absolute;
+  z-index: 5;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  pointer-events: none;
+}
+
+.coord.tl { top: -18px; left: 10px; }
+.coord.tr { top: -18px; right: 10px; }
+.coord.bl { bottom: -18px; left: 10px; }
+.coord.br { bottom: -18px; right: 10px; }
+
 .cards-grid,
 .card-grid {
   display: grid;
@@ -562,54 +588,8 @@ footer p {
   gap: 16px;
   width: 1200px;
   max-width: 100%;
-  margin: 28px auto 0;
+  margin: 0;
   justify-content: center;
-}
-
-.frame {
-  position: relative;
-  width: 592px;
-  max-width: 100%;
-}
-
-.frame::before {
-  content: "";
-  position: absolute;
-  inset: -8px;
-  z-index: 4;
-  pointer-events: none;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  background-image:
-    linear-gradient(var(--mark), var(--mark)),
-    linear-gradient(var(--mark), var(--mark)),
-    linear-gradient(var(--mark), var(--mark)),
-    linear-gradient(var(--mark), var(--mark)),
-    linear-gradient(var(--mark), var(--mark)),
-    linear-gradient(var(--mark), var(--mark)),
-    linear-gradient(var(--mark), var(--mark)),
-    linear-gradient(var(--mark), var(--mark));
-  background-size: 12px 1px, 1px 12px, 12px 1px, 1px 12px, 12px 1px, 1px 12px, 12px 1px, 1px 12px;
-  background-position: top left, top left, top right, top right, bottom left, bottom left, bottom right, bottom right;
-  background-repeat: no-repeat;
-}
-
-.frame::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  z-index: 4;
-  width: 14px;
-  height: 14px;
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  background-image:
-    linear-gradient(var(--accent), var(--accent)),
-    linear-gradient(var(--accent), var(--accent));
-  background-size: 14px 1px, 1px 14px;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0.7;
 }
 
 .card {
@@ -709,18 +689,25 @@ footer p {
   gap: 36px;
   align-items: center;
   margin: 0 0 48px;
+  clear: both;
 }
 
 .why-row-flip {
   grid-template-columns: minmax(0, 1fr) 592px;
+  margin-bottom: 72px;
 }
 
-.why-row-flip .frame {
+.why-row-flip .why-still {
   order: 2;
 }
 
 .why-row-flip .why-copy {
   order: 1;
+}
+
+.why-integrations {
+  clear: both;
+  margin-top: 24px;
 }
 
 .why-row-type {
@@ -732,6 +719,7 @@ footer p {
   max-width: 100%;
   height: 280px;
   overflow: hidden;
+  border: 1px solid var(--line);
   border-radius: 0;
 }
 
@@ -758,8 +746,9 @@ footer p {
   border: 1px solid var(--line);
   border-radius: 0;
   background: transparent;
+  font-family: var(--mono);
   font-size: 11px;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
@@ -965,13 +954,13 @@ footer {
 .js [data-reveal].is-in > *:nth-child(8) { transition-delay: 420ms; }
 
 @media (max-width: 1240px) {
+  .cards-box,
   .cards-grid,
   .card-grid {
     width: min(1200px, calc(100% - 40px));
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .frame,
   .card,
   .why-still {
     width: 100%;
@@ -982,7 +971,7 @@ footer {
     grid-template-columns: 1fr;
   }
 
-  .why-row-flip .frame,
+  .why-row-flip .why-still,
   .why-row-flip .why-copy {
     order: 0;
   }
@@ -1019,9 +1008,10 @@ footer {
   }
 
   .hero-title {
-    margin-left: -12px;
-    width: 108vw;
-    font-size: clamp(52px, 17vw, 104px);
+    margin-left: 0;
+    width: auto;
+    font-size: clamp(40px, 12vw, 88px);
+    line-height: 1;
   }
 
   .hero-cube {
