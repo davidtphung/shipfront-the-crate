@@ -16,14 +16,21 @@
     --spacing-48: 48px;
 }
 
+/* Reduced motion: cross-fade only, drop springs */
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
     *::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
+        transition-duration: 200ms !important;
+        transition-property: opacity !important;
         scroll-behavior: auto !important;
+    }
+    
+    .card-overlay {
+        transform: none !important;
+        transition: opacity 200ms ease !important;
     }
 }
 
@@ -129,6 +136,7 @@ nav {
     letter-spacing: 0.05em;
     text-decoration: none;
     font-weight: 400;
+    transition: color 180ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nav-links a:hover {
@@ -136,7 +144,12 @@ nav {
     text-decoration: none;
 }
 
-/* CTA buttons */
+.nav-links a:active {
+    opacity: 0.7;
+    transition-duration: 50ms;
+}
+
+/* CTA buttons - Apple fluid feedback on pointer-down */
 .cta-button,
 .cta-button-large {
     background-color: var(--red);
@@ -148,19 +161,27 @@ nav {
     letter-spacing: 0.05em;
     border: none;
     cursor: pointer;
-    transition: opacity 80ms ease;
-    display: inline-block;
-    text-decoration: none;
-    min-height: 44px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    min-height: 44px;
+    text-decoration: none;
+    transition: transform 180ms cubic-bezier(0.4, 0, 0.2, 1), opacity 180ms cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
 }
 
 .cta-button:hover,
 .cta-button-large:hover {
     opacity: 0.9;
     text-decoration: none;
+}
+
+/* Instant feedback on pointer-down, critically damped spring-like timing */
+.cta-button:active,
+.cta-button-large:active {
+    transform: scale(0.97);
+    opacity: 0.85;
+    transition-duration: 50ms;
 }
 
 .cta-button-large {
@@ -223,6 +244,14 @@ nav {
     border-radius: 8px;
     overflow: hidden;
     cursor: pointer;
+    transition: transform 180ms cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+}
+
+/* Subtle press feedback on pointer-down */
+.card:active {
+    transform: scale(0.99);
+    transition-duration: 50ms;
 }
 
 .card-tall {
@@ -274,25 +303,14 @@ nav {
     background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.7) 50%, transparent 100%);
     padding: var(--spacing-24);
     transform: translateY(100%);
-    transition: transform 80ms ease;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .card-overlay {
-        transform: none;
-        opacity: 0;
-        transition: opacity 0.01ms;
-    }
-    
-    .card:hover .card-overlay,
-    .card:focus .card-overlay {
-        opacity: 1;
-    }
+    transition: transform 340ms cubic-bezier(0.36, 0, 0.66, -0.56);
+    will-change: transform;
 }
 
 .card:hover .card-overlay,
 .card:focus .card-overlay {
     transform: translateY(0);
+    transition: transform 340ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .card-label {

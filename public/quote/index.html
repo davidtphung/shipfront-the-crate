@@ -75,10 +75,28 @@
     </footer>
 
     <script>
-        document.getElementById('quoteForm').addEventListener('submit', function(e) {
+        const form = document.getElementById('quoteForm');
+        const notice = document.getElementById('formNotice');
+        
+        form.addEventListener('submit', function(e) {
             e.preventDefault();
-            document.getElementById('formNotice').style.display = 'block';
-            document.getElementById('formNotice').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            
+            // Show notice with fluid reveal
+            notice.style.display = 'block';
+            notice.style.opacity = '0';
+            notice.style.transform = 'translateY(-8px)';
+            
+            // Critically damped spring-like reveal (transform + opacity)
+            requestAnimationFrame(() => {
+                notice.style.transition = 'opacity 340ms cubic-bezier(0.34, 1.56, 0.64, 1), transform 340ms cubic-bezier(0.34, 1.56, 0.64, 1)';
+                notice.style.opacity = '1';
+                notice.style.transform = 'translateY(0)';
+            });
+            
+            // Respect reduced motion
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const scrollBehavior = prefersReducedMotion ? 'auto' : 'smooth';
+            notice.scrollIntoView({ behavior: scrollBehavior, block: 'nearest' });
         });
     </script>
 </body>
