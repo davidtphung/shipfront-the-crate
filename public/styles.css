@@ -37,10 +37,13 @@
   --accent: #ff2d2d;
   --muted: rgba(255, 255, 255, 0.6);
   --line: rgba(255, 255, 255, 0.16);
+  --hair: rgba(255, 255, 255, 0.08);
+  --mark: rgba(255, 255, 255, 0.55);
   --font: "Space Grotesk", sans-serif;
   --mono: "JetBrains Mono", ui-monospace, monospace;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --press: cubic-bezier(0.22, 1, 0.36, 1);
+  --grid: 48px;
 }
 
 *,
@@ -95,7 +98,72 @@ address {
   top: 12px;
 }
 
+/* Exposed blueprint grid. Hairline, low opacity. */
+.blueprint {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--hair) 1px, transparent 1px),
+    linear-gradient(90deg, var(--hair) 1px, transparent 1px);
+  background-size: var(--grid) var(--grid);
+}
+
+.grid-tick {
+  position: fixed;
+  top: calc(var(--grid) * 3);
+  left: 0;
+  z-index: 6;
+  width: 28px;
+  height: 1px;
+  background: var(--accent);
+  pointer-events: none;
+}
+
+.hud-corners {
+  position: fixed;
+  inset: 10px;
+  z-index: 18;
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hud-corners::before,
+.hud-corners::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--mark);
+}
+
+.hud-corners::before {
+  top: -1px;
+  left: -1px;
+  border-right: 0;
+  border-bottom: 0;
+}
+
+.hud-corners::after {
+  right: -1px;
+  bottom: -1px;
+  border-left: 0;
+  border-top: 0;
+}
+
+.edge-rule {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 1px;
+  background: var(--line);
+}
+
 .content-wrapper {
+  position: relative;
+  z-index: 2;
   width: min(1200px, calc(100% - 40px));
   margin: 0 auto;
 }
@@ -104,13 +172,18 @@ address {
   width: min(640px, calc(100% - 40px));
 }
 
-/* 1. Transparent fixed nav over hero. No border, no blur at rest. */
-header {
+/* HUD nav. Real links. */
+.hud-bar {
   position: fixed;
   top: 0;
   right: 0;
   left: 0;
   z-index: 20;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 16px;
+  padding: 0 20px;
   background: transparent;
   border: 0;
   box-shadow: none;
@@ -118,13 +191,38 @@ header {
   -webkit-backdrop-filter: none;
 }
 
+.hud-bar::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--line);
+}
+
+.stamp {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.stamp-fold {
+  position: absolute;
+  right: 24px;
+  bottom: 28px;
+  z-index: 3;
+}
+
 nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  width: min(1200px, calc(100% - 40px));
-  margin: 0 auto;
   min-height: 72px;
 }
 
@@ -169,7 +267,6 @@ nav {
   color: var(--accent);
 }
 
-/* CTA: #000 on #FF2D2D, pill, 0.12s cubic-bezier, press 0.97 */
 .cta-pill,
 .why-cta,
 .cta-button-large {
@@ -206,7 +303,6 @@ nav {
   transform: scale(0.97);
 }
 
-/* 2 + 3. Two-step type. Rule-flanked Space Grotesk 400 eyebrow. */
 .eyebrow {
   display: flex;
   align-items: center;
@@ -241,7 +337,6 @@ nav {
   display: none;
 }
 
-h1,
 h2,
 .why-copy h3 {
   margin: 0;
@@ -260,8 +355,7 @@ h2,
 .contact-block p,
 .hours-list,
 address,
-footer p,
-.quote-form + .form-notice {
+footer p {
   font-size: 15px;
   line-height: 1.55;
 }
@@ -272,40 +366,62 @@ footer p,
   color: var(--muted);
 }
 
-.meta {
-  font-family: var(--mono);
+.step,
+.card-step {
+  margin: 0 0 8px;
   font-size: 11px;
-  font-weight: 400;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--muted);
 }
 
-/* 4. Hero = flat black + type. Cube peeks the lower fold. */
 .hero {
   position: relative;
   overflow: hidden;
   min-height: 100vh;
-  padding: 128px 0 0;
+  padding: 128px 0 80px;
   background: #000;
 }
 
-.hero .content-wrapper {
-  position: relative;
+.hero-copy {
   z-index: 2;
-  width: min(720px, calc(100% - 40px));
+  width: min(1100px, calc(100% - 40px));
 }
 
-.hero h1 {
-  margin: 0 0 18px;
+.hero-title {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 22px;
+  margin-left: max(-4vw, -48px);
+  width: min(104vw, 1240px);
+  font-family: var(--font);
+  font-size: clamp(56px, 13vw, 168px);
+  font-weight: 700;
+  line-height: 0.82;
+  letter-spacing: -0.055em;
+  text-transform: none;
+  color: #fff;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
+    url("images/fulfillment.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 0.6px rgba(255, 255, 255, 0.55);
 }
 
 .hero .lede {
-  margin: 0 0 22px;
+  margin: 0 0 14px;
   max-width: 34em;
 }
 
-/* 5. Spec chips under lede. Existing labels only. */
+.hero .lede + .lede {
+  margin-bottom: 22px;
+}
+
 .spec-chips {
   display: flex;
   flex-wrap: wrap;
@@ -339,9 +455,19 @@ footer p,
 .hero-cube svg {
   width: 100%;
   height: auto;
+  transform-origin: 50% 50%;
 }
 
-/* 8. One near-black band. 1px accent hairline top and bottom. */
+.cube-spin {
+  animation: crate-spin 72s linear infinite;
+}
+
+@keyframes crate-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .inverse-band {
   background: var(--band);
   border-top: 1px solid var(--accent);
@@ -349,6 +475,7 @@ footer p,
 }
 
 .band {
+  position: relative;
   padding: 88px 0;
 }
 
@@ -370,7 +497,7 @@ footer p,
   min-height: 160px;
   padding: 28px;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 0;
   background: transparent;
   box-shadow: none;
   display: flex;
@@ -384,7 +511,7 @@ footer p,
   border-color: var(--accent);
 }
 
-/* 6. Even card grid. 2x2 lock: 592x360 gap 16. Rest-is-image. */
+/* 2x2 lock: 592x360 gap 16. Rest-is-image. */
 .cards-grid,
 .card-grid {
   display: grid;
@@ -396,6 +523,52 @@ footer p,
   justify-content: center;
 }
 
+.frame {
+  position: relative;
+  width: 592px;
+  max-width: 100%;
+}
+
+.frame::before {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  z-index: 4;
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background-image:
+    linear-gradient(var(--mark), var(--mark)),
+    linear-gradient(var(--mark), var(--mark)),
+    linear-gradient(var(--mark), var(--mark)),
+    linear-gradient(var(--mark), var(--mark)),
+    linear-gradient(var(--mark), var(--mark)),
+    linear-gradient(var(--mark), var(--mark)),
+    linear-gradient(var(--mark), var(--mark)),
+    linear-gradient(var(--mark), var(--mark));
+  background-size: 12px 1px, 1px 12px, 12px 1px, 1px 12px, 12px 1px, 1px 12px, 12px 1px, 1px 12px;
+  background-position: top left, top left, top right, top right, bottom left, bottom left, bottom right, bottom right;
+  background-repeat: no-repeat;
+}
+
+.frame::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 4;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  background-image:
+    linear-gradient(var(--accent), var(--accent)),
+    linear-gradient(var(--accent), var(--accent));
+  background-size: 14px 1px, 1px 14px;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.7;
+}
+
 .card {
   position: relative;
   width: 592px;
@@ -403,21 +576,40 @@ footer p,
   height: 360px;
   overflow: hidden;
   border: 0;
-  border-radius: 8px;
+  border-radius: 0;
   background: #000;
   box-shadow: none;
 }
 
 .card-image,
-.card img {
+.card img,
+.why-still img {
   display: block;
   width: 100%;
   height: 100%;
 }
 
-.card img {
+.card img,
+.why-still img {
   object-fit: cover;
   transition: none;
+}
+
+.still-grain {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.still-grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.22;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.55 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-size: 160px 160px;
 }
 
 .card-overlay,
@@ -431,6 +623,7 @@ footer p,
   background: rgba(0, 0, 0, 0.6);
   opacity: 0;
   transition: opacity 80ms linear;
+  z-index: 2;
 }
 
 .card:hover .card-overlay,
@@ -448,10 +641,6 @@ footer p,
   font-size: 15px;
   font-weight: 400;
   line-height: 1.3;
-}
-
-.card-step {
-  margin: 0 0 8px;
 }
 
 .card-body,
@@ -483,7 +672,7 @@ footer p,
   grid-template-columns: minmax(0, 1fr) 592px;
 }
 
-.why-row-flip .why-still {
+.why-row-flip .frame {
   order: 2;
 }
 
@@ -500,13 +689,7 @@ footer p,
   max-width: 100%;
   height: 280px;
   overflow: hidden;
-  border-radius: 8px;
-}
-
-.why-still img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  border-radius: 0;
 }
 
 .why-copy h3 {
@@ -530,7 +713,7 @@ footer p,
 .chips li {
   padding: 6px 12px;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 0;
   background: transparent;
   font-size: 11px;
   letter-spacing: 0.08em;
@@ -542,12 +725,18 @@ footer p,
 }
 
 .page-hero {
+  position: relative;
   padding: 128px 0 48px;
   background: #000;
 }
 
 .page-hero h1 {
-  margin-bottom: 14px;
+  margin: 0 0 14px;
+  font-family: var(--font);
+  font-size: clamp(48px, 8vw, 88px);
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: -0.04em;
 }
 
 .page-hero .lede {
@@ -564,7 +753,7 @@ footer p,
 .form {
   padding: 28px;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 0;
   background: transparent;
   box-shadow: none;
 }
@@ -588,7 +777,7 @@ textarea {
   min-height: 44px;
   padding: 10px 12px;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 0;
   background: transparent;
   color: var(--type);
   font: inherit;
@@ -627,7 +816,7 @@ textarea {
   min-height: 160px;
   padding: 28px;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 0;
   background: transparent;
   box-shadow: none;
 }
@@ -654,8 +843,9 @@ textarea {
   margin-top: 28px;
 }
 
-/* 9. Footer: oversized wordmark left, 3 columns, Built by David T Phung. */
 footer {
+  position: relative;
+  z-index: 2;
   padding: 72px 0 40px;
   border-top: 1px solid var(--line);
   background: #000;
@@ -671,8 +861,8 @@ footer {
 .footer-mark {
   margin: 0;
   font-size: clamp(36px, 6vw, 72px);
-  font-weight: 400;
-  letter-spacing: 0.08em;
+  font-weight: 700;
+  letter-spacing: 0.06em;
   line-height: 0.95;
   text-transform: uppercase;
 }
@@ -699,7 +889,6 @@ footer {
   color: var(--muted);
 }
 
-/* 7. Section enter. 400ms ease, 20px, 60ms stagger, once. */
 .js [data-reveal] {
   opacity: 0;
   transform: translateY(20px);
@@ -738,6 +927,7 @@ footer {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .frame,
   .card,
   .why-still {
     width: 100%;
@@ -748,7 +938,7 @@ footer {
     grid-template-columns: 1fr;
   }
 
-  .why-row-flip .why-still,
+  .why-row-flip .frame,
   .why-row-flip .why-copy {
     order: 0;
   }
@@ -759,6 +949,16 @@ footer {
 }
 
 @media (max-width: 860px) {
+  .hud-bar {
+    grid-template-columns: 1fr;
+    padding-top: 8px;
+  }
+
+  .hud-bar .stamp:first-child,
+  .hud-bar .stamp:last-child {
+    display: none;
+  }
+
   .nav-links {
     gap: 14px;
   }
@@ -774,6 +974,12 @@ footer {
     padding-bottom: 220px;
   }
 
+  .hero-title {
+    margin-left: 0;
+    width: 100%;
+    font-size: clamp(48px, 16vw, 96px);
+  }
+
   .hero-cube {
     right: -40px;
     bottom: -80px;
@@ -782,10 +988,6 @@ footer {
 }
 
 @media (max-width: 640px) {
-  .nav-links .nav-text {
-    display: none;
-  }
-
   .cards-grid,
   .card-grid {
     grid-template-columns: 1fr;
@@ -804,6 +1006,10 @@ footer {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+
+  .cube-spin {
+    animation: none;
   }
 
   .cta-pill:active,
