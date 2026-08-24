@@ -12,8 +12,12 @@
 </head>
 <body>
     <a href="#main" class="skip-link">Skip to main content</a>
+    <div class="blueprint" aria-hidden="true"></div>
+    <div class="grid-tick" aria-hidden="true"></div>
+    <div class="hud-corners" aria-hidden="true"></div>
 
-    <header role="banner">
+    <header class="hud-bar" role="banner">
+        <span class="stamp">1933 S. BROADWAY</span>
         <nav role="navigation" aria-label="Main navigation">
             <a href="./" class="logo" aria-label="Shipfront home">
                 <svg class="mark" width="20" height="20" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -29,18 +33,23 @@
                 <span class="wordmark">SHIPFRONT</span>
             </a>
             <ul class="nav-links">
-                <li><a class="nav-text" href="#why">Why Shipfront</a></li>
+                <li><a class="nav-text" href="#why">Why</a></li>
                 <li><a class="nav-text" href="contact/">Contact</a></li>
-                <li><a class="cta-pill" href="quote/">Get a Quote</a></li>
+                <li><a class="cta-pill" href="quote/">Quote</a></li>
             </ul>
         </nav>
+        <span class="stamp">LOS ANGELES</span>
     </header>
 
     <main id="main" role="main">
         <section class="hero" aria-label="Hero">
-            <div class="content-wrapper">
+            <div class="edge-rule" aria-hidden="true"></div>
+            <div class="content-wrapper hero-copy">
                 <p class="eyebrow">Warehouse and integration</p>
-                <h1>You Sell. We Ship.</h1>
+                <h1 class="hero-title">
+                    <span>You Sell.</span>
+                    <span>We Ship.</span>
+                </h1>
                 <p class="lede">You sell. We run the floor.</p>
                 <p class="lede">Los Angeles floor for inbound, pick, pack, and store-to-floor integrations. We sit in warehouse and integration. Not the port. Not the van.</p>
                 <ul class="spec-chips">
@@ -51,8 +60,9 @@
                 </ul>
                 <a href="quote/" class="cta-pill">Get a Quote</a>
             </div>
+            <p class="stamp stamp-fold" aria-hidden="true">3PL</p>
             <div class="hero-cube" aria-hidden="true">
-                <svg width="220" height="220" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg class="cube-spin" width="220" height="220" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M50 65 L90 45 L130 65 L130 105 L90 125 L50 105 Z" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke" fill="none"/>
                     <path d="M30 75 L70 55 L110 75 L110 115 L70 135 L30 115 Z" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke" fill="none"/>
                     <line x1="50" y1="65" x2="30" y2="75" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke"/>
@@ -71,19 +81,19 @@
                 <h2 id="lane-heading">Port to customer.</h2>
                 <ol class="route" aria-label="Value chain from port to customer">
                     <li>
-                        <span class="meta">01</span>
+                        <span class="step">01</span>
                         <span>Port</span>
                     </li>
                     <li>
-                        <span class="meta">02</span>
+                        <span class="step">02</span>
                         <span>Freight</span>
                     </li>
                     <li class="route-ours">
-                        <span class="meta">03</span>
+                        <span class="step">03</span>
                         <span>Warehouse</span>
                     </li>
                     <li>
-                        <span class="meta">04</span>
+                        <span class="step">04</span>
                         <span>Customer</span>
                     </li>
                 </ol>
@@ -92,53 +102,62 @@
         </section>
 
         <section id="floor" class="band why" aria-labelledby="floor-heading">
+            <div class="edge-rule" aria-hidden="true"></div>
             <div class="content-wrapper" data-reveal>
                 <p class="eyebrow">The floor</p>
                 <h2 id="floor-heading">The floor.</h2>
                 <div class="cards-grid">
-                    <article class="card" tabindex="0">
-                        <div class="card-image">
-                            <img src="images/procurement.jpg" alt="Inbound pallet at warehouse dock">
-                        </div>
-                        <div class="card-overlay">
-                            <p class="card-step meta">01</p>
-                            <h3 class="card-label">Procurement</h3>
-                            <p class="card-body">They buy. Freight arrives at our floor. Inbound at 1933 S. Broadway.</p>
-                        </div>
-                    </article>
+                    <div class="frame">
+                        <article class="card" tabindex="0">
+                            <div class="card-image still-grain">
+                                <img src="images/procurement.jpg" alt="Inbound pallet at warehouse dock">
+                            </div>
+                            <div class="card-overlay">
+                                <p class="card-step">01</p>
+                                <h3 class="card-label">Procurement</h3>
+                                <p class="card-body">They buy. Freight arrives at our floor. Inbound at 1933 S. Broadway.</p>
+                            </div>
+                        </article>
+                    </div>
 
-                    <article class="card" tabindex="0">
-                        <div class="card-image">
-                            <img src="images/logistics-usa.jpg" alt="American long-hood freight trucks in a lot">
-                        </div>
-                        <div class="card-overlay">
-                            <p class="card-step meta">02</p>
-                            <h3 class="card-label">Logistics</h3>
-                            <p class="card-body">Freight is coordinated. We do not run the truck.</p>
-                        </div>
-                    </article>
+                    <div class="frame">
+                        <article class="card" tabindex="0">
+                            <div class="card-image still-grain">
+                                <img src="images/logistics-usa.jpg" alt="American long-hood freight trucks in a lot">
+                            </div>
+                            <div class="card-overlay">
+                                <p class="card-step">02</p>
+                                <h3 class="card-label">Logistics</h3>
+                                <p class="card-body">Freight is coordinated. We do not run the truck.</p>
+                            </div>
+                        </article>
+                    </div>
 
-                    <article class="card" tabindex="0">
-                        <div class="card-image">
-                            <img src="images/fulfillment.jpg" alt="Warehouse racking and pick aisle">
-                        </div>
-                        <div class="card-overlay">
-                            <p class="card-step meta">03</p>
-                            <h3 class="card-label">Fulfillment</h3>
-                            <p class="card-body">Pick, pack, label, dock on our floor.</p>
-                        </div>
-                    </article>
+                    <div class="frame">
+                        <article class="card" tabindex="0">
+                            <div class="card-image still-grain">
+                                <img src="images/fulfillment.jpg" alt="Warehouse racking and pick aisle">
+                            </div>
+                            <div class="card-overlay">
+                                <p class="card-step">03</p>
+                                <h3 class="card-label">Fulfillment</h3>
+                                <p class="card-body">Pick, pack, label, dock on our floor.</p>
+                            </div>
+                        </article>
+                    </div>
 
-                    <article class="card" tabindex="0">
-                        <div class="card-image">
-                            <img src="images/integration.jpg" alt="Warehouse scanning tablet station">
-                        </div>
-                        <div class="card-overlay">
-                            <p class="card-step meta">04</p>
-                            <h3 class="card-label">Integration</h3>
-                            <p class="card-body">The store talks to the floor.</p>
-                        </div>
-                    </article>
+                    <div class="frame">
+                        <article class="card" tabindex="0">
+                            <div class="card-image still-grain">
+                                <img src="images/integration.jpg" alt="Warehouse scanning tablet station">
+                            </div>
+                            <div class="card-overlay">
+                                <p class="card-step">04</p>
+                                <h3 class="card-label">Integration</h3>
+                                <p class="card-body">The store talks to the floor.</p>
+                            </div>
+                        </article>
+                    </div>
                 </div>
             </div>
         </section>
@@ -150,8 +169,10 @@
                 <h2 id="why-heading">Why Shipfront</h2>
 
                 <article class="why-row">
-                    <div class="why-still">
-                        <img src="images/procurement.jpg" alt="Inbound pallet at warehouse dock">
+                    <div class="frame">
+                        <div class="why-still still-grain">
+                            <img src="images/procurement.jpg" alt="Inbound pallet at warehouse dock">
+                        </div>
                     </div>
                     <div class="why-copy">
                         <h3>Warehousing</h3>
@@ -160,8 +181,10 @@
                 </article>
 
                 <article class="why-row why-row-flip">
-                    <div class="why-still">
-                        <img src="images/fulfillment.jpg" alt="Warehouse racking and pick aisle">
+                    <div class="frame">
+                        <div class="why-still still-grain">
+                            <img src="images/fulfillment.jpg" alt="Warehouse racking and pick aisle">
+                        </div>
                     </div>
                     <div class="why-copy">
                         <h3>Fulfillment</h3>
@@ -179,8 +202,10 @@
                 </article>
 
                 <article class="why-row">
-                    <div class="why-still">
-                        <img src="images/integration.jpg" alt="Warehouse scanning tablet station">
+                    <div class="frame">
+                        <div class="why-still still-grain">
+                            <img src="images/integration.jpg" alt="Warehouse scanning tablet station">
+                        </div>
                     </div>
                     <div class="why-copy">
                         <h3>eCommerce Integrations</h3>
