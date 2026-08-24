@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="/shipfront-the-crate/">
     <title>Contact | Shipfront</title>
-    <meta name="description" content="Contact Shipfront at our Los Angeles warehouse location.">
+    <meta name="description" content="Visit Shipfront at 1933 S. Broadway, Los Angeles, CA 90007.">
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
 </head>
 <body>
     <a href="#main" class="skip-link">Skip to main content</a>
-    
+
     <header role="banner">
         <nav role="navigation" aria-label="Main navigation">
             <a href="./" class="logo" aria-label="Shipfront home">
@@ -29,41 +29,49 @@
                 <span class="wordmark">SHIPFRONT</span>
             </a>
             <ul class="nav-links">
-                <li><a href="./#why-shipfront">Why Shipfront</a></li>
-                <li><a href="contact/" aria-current="page">Contact</a></li>
-                <li><a href="quote/" class="cta-button">Get a Quote</a></li>
+                <li><a class="chip" href="./#why-shipfront">Why Shipfront</a></li>
+                <li><a class="chip" href="contact/" aria-current="page">Contact</a></li>
+                <li><a class="chip" href="quote/">Get a Quote</a></li>
             </ul>
         </nav>
     </header>
 
     <main id="main" role="main">
-        <section class="contact-section">
-            <p class="eyebrow"><span class="meta">Los Angeles</span></p>
-            <h1>Visit Us Today</h1>
-            
-            <div class="contact-grid">
-                <div class="contact-block">
-                    <h2>Location</h2>
-                    <address>
-                        Shipfront<br>
-                        1933 S. Broadway<br>
-                        Los Angeles, CA 90007
-                    </address>
+        <section class="page-hero" aria-label="Contact">
+            <div class="content-wrapper">
+                <p class="eyebrow"><span class="meta">Location</span></p>
+                <h1>Visit Us Today</h1>
+                <p class="lede">The floor is at 1933 S. Broadway, Los Angeles, CA 90007.</p>
+            </div>
+        </section>
+
+        <section class="band page-band" data-reveal>
+            <div class="content-wrapper">
+                <div class="contact-grid">
+                    <div class="contact-block">
+                        <h2>Location</h2>
+                        <address>
+                            Shipfront<br>
+                            1933 S. Broadway<br>
+                            Los Angeles, CA 90007
+                        </address>
+                    </div>
+                    <div class="contact-block">
+                        <h2>Hours</h2>
+                        <dl class="hours-list">
+                            <dt>Monday - Friday</dt>
+                            <dd>9 am - 5 pm</dd>
+                            <dt>Saturday - Sunday</dt>
+                            <dd>Appointment only</dd>
+                        </dl>
+                    </div>
+                    <div class="contact-block">
+                        <h2>Email</h2>
+                        <p><a href="mailto:info@myshipfront.com">info@myshipfront.com</a></p>
+                    </div>
                 </div>
-                
-                <div class="contact-block">
-                    <h2>Hours</h2>
-                    <dl class="hours-list">
-                        <dt>Monday - Friday</dt>
-                        <dd>9 am - 5 pm</dd>
-                        <dt>Saturday - Sunday</dt>
-                        <dd>Appointment only</dd>
-                    </dl>
-                </div>
-                
-                <div class="contact-block">
-                    <h2>Email</h2>
-                    <p><a href="mailto:info@myshipfront.com">info@myshipfront.com</a></p>
+                <div class="hero-actions">
+                    <a href="quote/" class="cta-button-large">Get a Quote</a>
                 </div>
             </div>
         </section>
@@ -72,5 +80,6 @@
     <footer role="contentinfo">
         <p>Built by David T Phung</p>
     </footer>
+    <script src="js/site.js"></script>
 </body>
 </html>
