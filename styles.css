@@ -34,6 +34,13 @@
     }
 }
 
+/* Reduced transparency: solid black, no translucency */
+@media (prefers-reduced-transparency: reduce) {
+    .card-overlay {
+        background: rgba(0, 0, 0, 1);
+    }
+}
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     background-color: var(--black);
@@ -149,7 +156,7 @@ nav {
     transition-duration: 50ms;
 }
 
-/* CTA buttons - Apple fluid feedback on pointer-down */
+/* CTA buttons - critically damped spring on release from pointer-down */
 .cta-button,
 .cta-button-large {
     background-color: var(--red);
@@ -166,7 +173,7 @@ nav {
     justify-content: center;
     min-height: 44px;
     text-decoration: none;
-    transition: transform 180ms cubic-bezier(0.4, 0, 0.2, 1), opacity 180ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 340ms cubic-bezier(0.25, 0.1, 0.25, 1), opacity 180ms ease;
     will-change: transform;
 }
 
@@ -176,12 +183,12 @@ nav {
     text-decoration: none;
 }
 
-/* Instant feedback on pointer-down, critically damped spring-like timing */
+/* Scale 0.97 on pointer-down, spring back on release (bounce 0, response 0.3-0.4) */
 .cta-button:active,
 .cta-button-large:active {
     transform: scale(0.97);
     opacity: 0.85;
-    transition-duration: 50ms;
+    transition-duration: 0ms;
 }
 
 .cta-button-large {
@@ -244,14 +251,11 @@ nav {
     border-radius: 8px;
     overflow: hidden;
     cursor: pointer;
-    transition: transform 180ms cubic-bezier(0.4, 0, 0.2, 1);
-    will-change: transform;
 }
 
-/* Subtle press feedback on pointer-down */
 .card:active {
     transform: scale(0.99);
-    transition-duration: 50ms;
+    transition: transform 50ms ease;
 }
 
 .card-tall {
@@ -293,6 +297,7 @@ nav {
     height: 100%;
     object-fit: cover;
     display: block;
+    transition: none;
 }
 
 .card-overlay {
