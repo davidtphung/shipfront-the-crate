@@ -4,17 +4,57 @@
 
     if (reduce || !('IntersectionObserver' in window)) {
         nodes.forEach(function (el) { el.classList.add('is-in'); });
-        return;
+    } else {
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-in');
+                    io.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
+
+        nodes.forEach(function (el) { io.observe(el); });
     }
 
-    var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-in');
-                io.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
+    function headerOffset() {
+        var header = document.querySelector('header');
+        return header ? header.offsetHeight : 0;
+    }
 
-    nodes.forEach(function (el) { io.observe(el); });
+    function scrollToWhy() {
+        var el = document.getElementById('why');
+        if (!el) return false;
+        var end = el.getBoundingClientRect().top + window.scrollY - headerOffset();
+        if (end < 0) end = 0;
+
+        if (reduce) {
+            window.scrollTo(0, end);
+            return true;
+        }
+
+        var start = window.scrollY;
+        var t0 = performance.now();
+        function tick(now) {
+            var t = Math.min(1, (now - t0) / 200);
+            window.scrollTo(0, start + (end - start) * t);
+            if (t < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+        return true;
+    }
+
+    document.querySelectorAll('a[href="#why"], a[href$="#why"]').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+            var dest = document.getElementById('why');
+            if (!dest) return;
+            e.preventDefault();
+            scrollToWhy();
+            if (history.replaceState) history.replaceState(null, '', '#why');
+        });
+    });
+
+    if (window.location.hash === '#why') {
+        window.addEventListener('load', function () { scrollToWhy(); });
+    }
 }());
