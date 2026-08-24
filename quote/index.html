@@ -29,9 +29,9 @@
                 <span class="wordmark">SHIPFRONT</span>
             </a>
             <ul class="nav-links">
-                <li><a class="chip" href="./#why">Why Shipfront</a></li>
-                <li><a class="chip" href="contact/">Contact</a></li>
-                <li><a class="chip" href="quote/" aria-current="page">Get a Quote</a></li>
+                <li><a class="nav-text" href="./#why">Why Shipfront</a></li>
+                <li><a class="nav-text" href="contact/">Contact</a></li>
+                <li><a class="cta-pill" href="quote/" aria-current="page">Get a Quote</a></li>
             </ul>
         </nav>
     </header>
@@ -39,14 +39,14 @@
     <main id="main" role="main">
         <section class="page-hero" aria-label="Quote">
             <div class="content-wrapper narrow">
-                <p class="eyebrow"><span class="meta">Quote</span></p>
+                <p class="eyebrow">Quote</p>
                 <h1>Get a Quote</h1>
                 <p class="lede">Name, email, and company. This preview does not send.</p>
             </div>
         </section>
 
-        <section class="band page-band" data-reveal>
-            <div class="content-wrapper narrow">
+        <section class="band page-band">
+            <div class="content-wrapper narrow" data-reveal>
                 <form class="quote-form" id="quoteForm" aria-label="Quote request form">
                     <div class="form-group">
                         <label for="name">Name</label>
@@ -60,7 +60,7 @@
                         <label for="company">Company</label>
                         <input type="text" id="company" name="company" required aria-required="true" autocomplete="organization">
                     </div>
-                    <button type="submit" class="cta-button-large">Submit Request</button>
+                    <button type="submit" class="cta-pill">Submit Request</button>
                 </form>
 
                 <div class="form-notice" id="formNotice" hidden role="alert">
@@ -72,7 +72,23 @@
     </main>
 
     <footer role="contentinfo">
-        <p>Built by David T Phung</p>
+        <div class="content-wrapper footer-grid">
+            <p class="footer-mark">SHIPFRONT</p>
+            <div>
+                <p class="eyebrow">Home</p>
+                <a href="./">Home</a>
+                <a href="./#why">Why Shipfront</a>
+            </div>
+            <div>
+                <p class="eyebrow">Quote</p>
+                <a href="quote/">Get a Quote</a>
+            </div>
+            <div>
+                <p class="eyebrow">Contact</p>
+                <a href="contact/">Visit Us Today</a>
+            </div>
+        </div>
+        <p class="footer-byline">Built by David T Phung</p>
     </footer>
 
     <script src="js/site.js"></script>

@@ -29,9 +29,9 @@
                 <span class="wordmark">SHIPFRONT</span>
             </a>
             <ul class="nav-links">
-                <li><a class="chip" href="#why">Why Shipfront</a></li>
-                <li><a class="chip" href="contact/">Contact</a></li>
-                <li><a class="chip" href="quote/">Get a Quote</a></li>
+                <li><a class="nav-text" href="#why">Why Shipfront</a></li>
+                <li><a class="nav-text" href="contact/">Contact</a></li>
+                <li><a class="cta-pill" href="quote/">Get a Quote</a></li>
             </ul>
         </nav>
     </header>
@@ -39,29 +39,34 @@
     <main id="main" role="main">
         <section class="hero" aria-label="Hero">
             <div class="content-wrapper">
-                <p class="eyebrow"><span class="meta">Warehousing / Fulfillment / eCommerce integrations</span></p>
-                <div class="hero-lockup">
-                    <svg class="mark" width="44" height="44" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <path d="M50 65 L90 45 L130 65 L130 105 L90 125 L50 105 Z" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke" fill="none"/>
-                        <path d="M30 75 L70 55 L110 75 L110 115 L70 135 L30 115 Z" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke" fill="none"/>
-                        <line x1="50" y1="65" x2="30" y2="75" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke"/>
-                        <line x1="90" y1="45" x2="70" y2="55" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke"/>
-                        <line x1="130" y1="65" x2="110" y2="75" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke"/>
-                        <line x1="130" y1="105" x2="110" y2="115" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke"/>
-                        <line x1="90" y1="125" x2="70" y2="135" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke"/>
-                        <line x1="50" y1="105" x2="30" y2="115" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke"/>
-                    </svg>
-                    <p class="brand-line">SHIPFRONT</p>
-                </div>
+                <p class="eyebrow">Warehouse and integration</p>
                 <h1>You Sell. We Ship.</h1>
                 <p class="lede">Los Angeles floor for inbound, pick, pack, and store-to-floor integrations. We sit in warehouse and integration. Not the port. Not the van.</p>
-                <a href="quote/" class="cta-button-large">Get a Quote</a>
+                <ul class="spec-chips">
+                    <li>Warehousing</li>
+                    <li>Fulfillment</li>
+                    <li>eCommerce</li>
+                    <li>Location</li>
+                </ul>
+                <a href="quote/" class="cta-pill">Get a Quote</a>
+            </div>
+            <div class="hero-cube" aria-hidden="true">
+                <svg width="220" height="220" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50 65 L90 45 L130 65 L130 105 L90 125 L50 105 Z" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke" fill="none"/>
+                    <path d="M30 75 L70 55 L110 75 L110 115 L70 135 L30 115 Z" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke" fill="none"/>
+                    <line x1="50" y1="65" x2="30" y2="75" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke"/>
+                    <line x1="90" y1="45" x2="70" y2="55" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke"/>
+                    <line x1="130" y1="65" x2="110" y2="75" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke"/>
+                    <line x1="130" y1="105" x2="110" y2="115" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke"/>
+                    <line x1="90" y1="125" x2="70" y2="135" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke"/>
+                    <line x1="50" y1="105" x2="30" y2="115" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke"/>
+                </svg>
             </div>
         </section>
 
-        <section class="band lane" data-reveal aria-labelledby="lane-heading">
-            <div class="content-wrapper">
-                <p class="eyebrow"><span class="meta">The lane</span></p>
+        <section class="band lane inverse-band" aria-labelledby="lane-heading">
+            <div class="content-wrapper" data-reveal>
+                <p class="eyebrow">The lane</p>
                 <h2 id="lane-heading">Port to customer.</h2>
                 <ol class="route" aria-label="Value chain from port to customer">
                     <li>
@@ -81,14 +86,14 @@
                         <span>Customer</span>
                     </li>
                 </ol>
-                <p class="note">Shipfront sits in warehouse and integration.</p>
+                <p class="lede">Shipfront sits in warehouse and integration.</p>
             </div>
         </section>
 
-        <section id="floor" class="band why" data-reveal aria-labelledby="floor-heading">
-            <div class="content-wrapper">
-                <p class="eyebrow"><span class="meta">The floor</span></p>
-                <h2 id="floor-heading">Four stills.</h2>
+        <section id="floor" class="band why" aria-labelledby="floor-heading">
+            <div class="content-wrapper" data-reveal>
+                <p class="eyebrow">The floor</p>
+                <h2 id="floor-heading">The floor.</h2>
                 <div class="cards-grid">
                     <article class="card" tabindex="0">
                         <div class="card-image">
@@ -120,7 +125,6 @@
                             <p class="card-step meta">03</p>
                             <h3 class="card-label">Fulfillment</h3>
                             <p class="card-body">Pick, pack, label, dock on our floor.</p>
-                            <p class="card-meta meta">Inbound | Kitting | Storage | FBA Prep | Outbound | Last-Mile | Same-Day</p>
                         </div>
                     </article>
 
@@ -131,16 +135,17 @@
                         <div class="card-overlay">
                             <p class="card-step meta">04</p>
                             <h3 class="card-label">Integration</h3>
-                            <p class="card-body">The store talks to the floor. eCommerce integrations connect shop to pick.</p>
+                            <p class="card-body">The store talks to the floor.</p>
                         </div>
                     </article>
                 </div>
             </div>
         </section>
 
-        <section id="why" class="band why-rows" data-reveal aria-labelledby="why-heading">
-            <div class="content-wrapper">
+        <section id="why" class="band why-rows" aria-labelledby="why-heading">
+            <div class="content-wrapper" data-reveal>
                 <div class="why-rule" aria-hidden="true"></div>
+                <p class="eyebrow">Why Shipfront</p>
                 <h2 id="why-heading">Why Shipfront</h2>
 
                 <article class="why-row">
@@ -189,13 +194,29 @@
                     </div>
                 </article>
 
-                <a href="quote/" class="cta-button-large why-cta">Get a Quote</a>
+                <a href="quote/" class="cta-pill why-cta">Get a Quote</a>
             </div>
         </section>
     </main>
 
     <footer role="contentinfo">
-        <p>Built by David T Phung</p>
+        <div class="content-wrapper footer-grid">
+            <p class="footer-mark">SHIPFRONT</p>
+            <div>
+                <p class="eyebrow">Home</p>
+                <a href="./">Home</a>
+                <a href="./#why">Why Shipfront</a>
+            </div>
+            <div>
+                <p class="eyebrow">Quote</p>
+                <a href="quote/">Get a Quote</a>
+            </div>
+            <div>
+                <p class="eyebrow">Contact</p>
+                <a href="contact/">Visit Us Today</a>
+            </div>
+        </div>
+        <p class="footer-byline">Built by David T Phung</p>
     </footer>
     <script src="js/site.js"></script>
 </body>
