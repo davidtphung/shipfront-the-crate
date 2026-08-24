@@ -88,7 +88,7 @@
             
             // Critically damped spring-like reveal (transform + opacity)
             requestAnimationFrame(() => {
-                notice.style.transition = 'opacity 340ms cubic-bezier(0.34, 1.56, 0.64, 1), transform 340ms cubic-bezier(0.34, 1.56, 0.64, 1)';
+                notice.style.transition = 'opacity 340ms cubic-bezier(0.25, 0.1, 0.25, 1), transform 340ms cubic-bezier(0.25, 0.1, 0.25, 1)';
                 notice.style.opacity = '1';
                 notice.style.transform = 'translateY(0)';
             });
