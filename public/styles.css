@@ -402,15 +402,15 @@ footer p {
   text-transform: none;
   color: #fff;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
+    linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.86)),
     url("images/fulfillment.jpg");
-  background-position: center;
+  background-position: center 40%;
   background-size: cover;
   background-repeat: no-repeat;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  -webkit-text-stroke: 0.6px rgba(255, 255, 255, 0.55);
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.92);
 }
 
 .hero .lede {
