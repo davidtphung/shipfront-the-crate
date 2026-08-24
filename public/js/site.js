@@ -1,4 +1,6 @@
 (function () {
+    document.documentElement.classList.add('js');
+
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var nodes = document.querySelectorAll('[data-reveal]');
 

@@ -29,9 +29,9 @@
                 <span class="wordmark">SHIPFRONT</span>
             </a>
             <ul class="nav-links">
-                <li><a class="chip" href="./#why">Why Shipfront</a></li>
-                <li><a class="chip" href="contact/" aria-current="page">Contact</a></li>
-                <li><a class="chip" href="quote/">Get a Quote</a></li>
+                <li><a class="nav-text" href="./#why">Why Shipfront</a></li>
+                <li><a class="nav-text" href="contact/" aria-current="page">Contact</a></li>
+                <li><a class="cta-pill" href="quote/">Get a Quote</a></li>
             </ul>
         </nav>
     </header>
@@ -39,14 +39,14 @@
     <main id="main" role="main">
         <section class="page-hero" aria-label="Contact">
             <div class="content-wrapper">
-                <p class="eyebrow"><span class="meta">Location</span></p>
+                <p class="eyebrow">Location</p>
                 <h1>Visit Us Today</h1>
                 <p class="lede">The floor is at 1933 S. Broadway, Los Angeles, CA 90007.</p>
             </div>
         </section>
 
-        <section class="band page-band" data-reveal>
-            <div class="content-wrapper">
+        <section class="band page-band">
+            <div class="content-wrapper" data-reveal>
                 <div class="contact-grid">
                     <div class="contact-block">
                         <h2>Location</h2>
@@ -71,14 +71,30 @@
                     </div>
                 </div>
                 <div class="hero-actions">
-                    <a href="quote/" class="cta-button-large">Get a Quote</a>
+                    <a href="quote/" class="cta-pill">Get a Quote</a>
                 </div>
             </div>
         </section>
     </main>
 
     <footer role="contentinfo">
-        <p>Built by David T Phung</p>
+        <div class="content-wrapper footer-grid">
+            <p class="footer-mark">SHIPFRONT</p>
+            <div>
+                <p class="eyebrow">Home</p>
+                <a href="./">Home</a>
+                <a href="./#why">Why Shipfront</a>
+            </div>
+            <div>
+                <p class="eyebrow">Quote</p>
+                <a href="quote/">Get a Quote</a>
+            </div>
+            <div>
+                <p class="eyebrow">Contact</p>
+                <a href="contact/">Visit Us Today</a>
+            </div>
+        </div>
+        <p class="footer-byline">Built by David T Phung</p>
     </footer>
     <script src="js/site.js"></script>
 </body>
