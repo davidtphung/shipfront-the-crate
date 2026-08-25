@@ -35,19 +35,19 @@
         </nav>
     </header>
 
-    <main id="main" role="main">
+    <main id="main" role="main" tabindex="-1">
         <section class="page-hero" aria-label="Quote">
             <p class="stamp stamp-fold" aria-hidden="true">3PL</p>
             <div class="content-wrapper narrow">
                 <p class="eyebrow">Quote</p>
                 <h1>Get a Quote</h1>
-                <p class="lede">Name, email, and company. This preview does not send.</p>
+                <p class="lede" id="quote-hint">Name, email, and company. This preview does not send.</p>
             </div>
         </section>
 
         <section class="band page-band">
             <div class="content-wrapper narrow" data-reveal>
-                <form class="quote-form" id="quoteForm" aria-label="Quote request form">
+                <form class="quote-form" id="quoteForm" aria-label="Quote request form" aria-describedby="quote-hint">
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" id="name" name="name" required aria-required="true" autocomplete="name">
@@ -63,7 +63,7 @@
                     <button type="submit" class="cta-pill">Submit Request</button>
                 </form>
 
-                <div class="form-notice" id="formNotice" hidden role="alert">
+                <div class="form-notice" id="formNotice" hidden role="status" aria-live="polite" tabindex="-1">
                     <p><strong>This preview does not send.</strong></p>
                     <p>For quote requests, please email <a href="mailto:info@myshipfront.com">info@myshipfront.com</a></p>
                 </div>
@@ -111,6 +111,7 @@
 
             const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             notice.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'nearest' });
+            notice.focus();
         });
     </script>
 </body>

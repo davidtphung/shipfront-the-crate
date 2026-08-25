@@ -54,6 +54,7 @@
 
 html {
   scroll-behavior: auto;
+  color-scheme: dark;
 }
 
 html,
@@ -86,16 +87,32 @@ address {
 .skip-link {
   position: absolute;
   left: 12px;
-  top: -48px;
+  top: -80px;
   z-index: 40;
-  padding: 8px 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 16px;
   background: var(--accent);
   color: #000;
   font-size: 14px;
+  font-weight: 700;
 }
 
-.skip-link:focus {
+.skip-link:focus,
+.skip-link:focus-visible {
   top: 12px;
+}
+
+#main,
+#floor,
+#why {
+  scroll-margin-top: 80px;
+}
+
+#main:focus {
+  outline: none;
 }
 
 /* Figma 6:541 grid. 48px hairline, white at 7%, full canvas. */
@@ -628,12 +645,25 @@ footer p {
   --lift: 0px;
 }
 
-.js .bento-tile.is-in:hover,
-.js .bento-tile.is-in:focus-visible {
-  --lift: -8px;
-  --zoom: 1.015;
-  z-index: 3;
-  transition-duration: 0.28s;
+@media (hover: hover) and (pointer: fine) {
+  .js .bento-tile.is-in:hover {
+    --lift: -8px;
+    --zoom: 1.015;
+    z-index: 3;
+    transition-duration: 0.28s;
+  }
+
+  .js .bento-tile--pop.is-in:hover {
+    box-shadow: 0 16px 48px rgba(255, 45, 45, 0.12);
+  }
+
+  .bento-tile--photo:hover .card-overlay {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.38) 40%, rgba(0, 0, 0, 0.92) 100%);
+  }
+
+  .bento-tile--photo:hover .card-image img {
+    animation: bento-ken 8s linear forwards;
+  }
 }
 
 .bento-tile--tall {
@@ -645,6 +675,12 @@ footer p {
   flex: 0 0 auto;
   min-height: 148px;
   padding: 22px 22px 24px;
+}
+
+.bento-tile--loc address {
+  margin: 0;
+  font-style: normal;
+  color: var(--muted);
 }
 
 .bento-tile--sm {
@@ -719,9 +755,8 @@ footer p {
   color: rgba(255, 255, 255, 0.78);
 }
 
-.js .bento-tile--pop.is-in:hover,
-.js .bento-tile--pop.is-in:focus-visible {
-  box-shadow: 0 16px 48px rgba(255, 45, 45, 0.12);
+.bento-tile--pop .card-label {
+  color: #fff;
 }
 
 .bento-tile--cloud {
@@ -740,8 +775,12 @@ footer p {
 
 .bento-tile--ful .chips li,
 .chips-cloud li {
-  border-color: rgba(255, 255, 255, 0.16);
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  border-color: rgba(255, 255, 255, 0.28);
   border-radius: 999px;
+  color: rgba(255, 255, 255, 0.92);
 }
 
 .bento-tile--photo {
@@ -755,24 +794,26 @@ footer p {
 
 .bento-tile--photo .card-overlay {
   opacity: 1;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.18) 42%, rgba(0, 0, 0, 0.78) 100%);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.28) 42%, rgba(0, 0, 0, 0.88) 100%);
   transition: background 0.28s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.bento-tile--photo:hover .card-overlay,
-.bento-tile--photo:focus-visible .card-overlay {
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.16) 0%, rgba(0, 0, 0, 0.32) 40%, rgba(0, 0, 0, 0.88) 100%);
+.bento-tile--photo .card-label {
+  color: #fff;
+}
+
+.bento-tile--photo .card-step,
+.bento-tile--photo .card-body {
+  color: rgba(255, 255, 255, 0.92);
 }
 
 .bento-tile--photo .card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   transform: scale(1);
   transform-origin: 50% 42%;
   transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.bento-tile--photo:hover .card-image img,
-.bento-tile--photo:focus-visible .card-image img {
-  animation: bento-ken 8s linear forwards;
 }
 
 @keyframes bento-ken {
@@ -999,6 +1040,11 @@ textarea {
   font-size: 15px;
 }
 
+input:focus-visible,
+textarea:focus-visible {
+  border-color: var(--accent);
+}
+
 textarea {
   min-height: 120px;
   resize: vertical;
@@ -1094,8 +1140,14 @@ footer {
 .footer-grid a {
   display: flex;
   align-items: center;
-  min-height: 36px;
+  min-height: 44px;
   font-size: 15px;
+}
+
+.footer-grid a:hover,
+.footer-grid a:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .footer-byline {
@@ -1266,4 +1318,24 @@ footer {
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
+}
+
+@media (forced-colors: active) {
+  .bento-tile,
+  .cards-box,
+  .chips li,
+  input,
+  textarea,
+  .cta-pill {
+    border: 1px solid ButtonText;
+  }
+
+  .bento-tile--pop {
+    background: Canvas;
+    color: CanvasText;
+  }
+
+  .card-overlay {
+    background: Canvas;
+  }
 }
