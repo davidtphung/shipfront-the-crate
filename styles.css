@@ -401,6 +401,22 @@ nav {
   flex: 0 0 28px;
 }
 
+/* Sleeve index. Catalog meta pulled from the existing step numbers. */
+.eyebrow-sleeve {
+  gap: 0;
+}
+
+.eyebrow-sleeve > span:first-child {
+  padding: 0 14px;
+}
+
+.eyebrow-sleeve .sleeve-index {
+  padding: 0 14px;
+  border-left: 1px solid currentColor;
+  color: rgba(255, 255, 255, 0.42);
+  letter-spacing: 0.2em;
+}
+
 .hero .eyebrow::after,
 .page-hero .eyebrow::after {
   display: none;
@@ -471,6 +487,12 @@ footer p {
 .hero-copy {
   z-index: 2;
   width: min(1200px, calc(100% - 40px));
+  /* The empty right half of the wrapper must not swallow the mark's hover. */
+  pointer-events: none;
+}
+
+.hero-copy > * {
+  pointer-events: auto;
 }
 
 .hero-title {
@@ -547,7 +569,7 @@ footer p {
   z-index: 1;
   width: min(36vw, 430px);
   opacity: 0.5;
-  pointer-events: none;
+  perspective: 1400px;
 }
 
 .hero-cube svg {
@@ -562,13 +584,91 @@ footer p {
   stroke-width: 0.14;
 }
 
-.cube-spin {
-  animation: crate-spin 150s linear infinite;
+/* THE CRATE living mark. The 1A EVEN paths are untouched: the stroke draws
+   itself on load, then the three inner faces breathe on an even 10s cycle.
+   No yaw at rest. CRATE stays even, never corner-on. */
+.js .mark g path,
+.js .cube-spin g path {
+  stroke-dashoffset: 0;
 }
 
-@keyframes crate-spin {
+.js .mark g path:nth-child(1),
+.js .cube-spin g path:nth-child(1) {
+  --len: 36;
+  stroke-dasharray: 36;
+  animation: crate-draw 0.7s ease-out both;
+}
+
+.js .mark g path:nth-child(2),
+.js .cube-spin g path:nth-child(2) {
+  --len: 12;
+  stroke-dasharray: 12;
+  animation:
+    crate-draw 0.55s ease-out 0.3s both,
+    crate-face 10s ease-in-out 1.15s infinite;
+}
+
+.js .mark g path:nth-child(3),
+.js .cube-spin g path:nth-child(3) {
+  --len: 6;
+  stroke-dasharray: 6;
+  animation:
+    crate-draw 0.5s ease-out 0.45s both,
+    crate-face 10s ease-in-out 1.15s infinite;
+}
+
+.js .mark g path:nth-child(4),
+.js .cube-spin g path:nth-child(4) {
+  --len: 12;
+  stroke-dasharray: 12;
+  animation:
+    crate-draw 0.55s ease-out 0.5s both,
+    crate-face 10s ease-in-out 1.15s infinite;
+}
+
+@keyframes crate-draw {
+  from {
+    stroke-dashoffset: var(--len, 36);
+  }
   to {
-    transform: rotate(360deg);
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes crate-face {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
+/* Nav mark: an even 8deg nod, 180ms. */
+.logo .mark {
+  transform-origin: 50% 50%;
+  transition: transform 180ms ease-out;
+}
+
+.logo:hover .mark,
+.logo:focus-visible .mark {
+  transform: perspective(160px) rotateX(8deg);
+}
+
+/* Hero mark: one slow even nod, then it settles back flat. A yaw would
+   crush this flat wireframe to a line at 90deg, so the nod carries it. */
+.hero-cube.is-nodding .cube-spin {
+  animation: crate-nod 12s ease-in-out both;
+}
+
+@keyframes crate-nod {
+  0%,
+  100% {
+    transform: rotateX(0deg);
+  }
+  50% {
+    transform: rotateX(8deg);
   }
 }
 
@@ -914,8 +1014,13 @@ footer p {
   transition: none;
 }
 
-.bento-tile--photo .card-step {
+/* Track-list feel: the four cut numbers carry the accent. Other meta does not. */
+#floor .bento-tile--photo .card-step,
+#floor .bento-tile--sm .card-step,
+#floor .bento-tile--ful .card-step {
   margin: 0 0 6px;
+  color: var(--accent);
+  opacity: 0.9;
 }
 
 .bento-tile--photo .card-label {
@@ -1708,9 +1813,24 @@ footer {
     transform: none;
   }
 
+  /* Static drawn cube. No draw-on, no face pulse, no nod.
+     :nth-child(n) matches the specificity of the draw rules above. */
+  .js .mark g path:nth-child(n),
+  .js .cube-spin g path:nth-child(n),
+  .hero-cube.is-nodding .cube-spin,
   .cube-spin,
   .blueprint {
     animation: none;
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+
+  .logo .mark,
+  .logo:hover .mark,
+  .logo:focus-visible .mark {
+    transform: none;
+    transition: none;
   }
 
   .cta-pill:active,

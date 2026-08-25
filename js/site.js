@@ -113,6 +113,30 @@
         });
     }
 
+    /* Hero mark: one slow even nod per invitation, then it settles back flat.
+       A nod already under way is never restarted or cut short. */
+    var cube = document.querySelector('.hero-cube');
+    var hero = document.querySelector('.hero');
+
+    if (cube && hero) {
+        var nodding = false;
+
+        function nodCube() {
+            if (nodding || reduceOn()) return;
+            nodding = true;
+            cube.classList.add('is-nodding');
+        }
+
+        cube.addEventListener('animationend', function (ev) {
+            if (ev.animationName !== 'crate-nod') return;
+            cube.classList.remove('is-nodding');
+            nodding = false;
+        });
+
+        cube.addEventListener('pointerenter', nodCube);
+        hero.addEventListener('focusin', nodCube);
+    }
+
     function headerOffset() {
         var header = document.querySelector('header');
         return header ? header.offsetHeight : 0;
