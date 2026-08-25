@@ -10,67 +10,106 @@
 
     var nodes = document.querySelectorAll('[data-reveal]');
     var tiles = document.querySelectorAll('.bento-tile');
-    var revealIo = null;
-    var bentoIo = null;
+    var rows = document.querySelectorAll('.why-row');
+    var bar = document.querySelector('.hud-bar');
 
-    function showReveal() {
-        nodes.forEach(function (el) { el.classList.add('is-in'); });
+    function showAll(list) {
+        Array.prototype.forEach.call(list, function (el) { el.classList.add('is-in'); });
     }
 
-    function showTiles() {
-        tiles.forEach(function (tile) { tile.classList.add('is-in'); });
+    /* Nav settles into a solid black hairline bar once the hero starts to leave. */
+    if (bar) {
+        var settled = null;
+        var ticking = false;
+
+        function syncBar() {
+            var next = window.scrollY > 28;
+            if (next !== settled) {
+                settled = next;
+                bar.classList.toggle('is-solid', next);
+            }
+            ticking = false;
+        }
+
+        syncBar();
+        window.addEventListener('scroll', function () {
+            if (ticking) return;
+            ticking = true;
+            requestAnimationFrame(syncBar);
+        }, { passive: true });
     }
 
+    /* Band entrances. Long fade-up, one idea at a time. */
     function observeReveal() {
         if (reduceOn() || !('IntersectionObserver' in window)) {
-            showReveal();
+            showAll(nodes);
             return;
         }
 
-        revealIo = new IntersectionObserver(function (entries) {
+        var io = new IntersectionObserver(function (entries) {
             entries.forEach(function (entry) {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-in');
-                    revealIo.unobserve(entry.target);
-                }
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('is-in');
+                io.unobserve(entry.target);
             });
-        }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
+        }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
 
-        nodes.forEach(function (el) { revealIo.observe(el); });
+        Array.prototype.forEach.call(nodes, function (el) { io.observe(el); });
     }
 
-    function observeBento() {
+    /* Floor bento. Staggered arrival, 90ms apart. */
+    function observeTiles() {
         if (!tiles.length) return;
 
         if (reduceOn() || !('IntersectionObserver' in window)) {
-            showTiles();
+            showAll(tiles);
             return;
         }
 
-        bentoIo = new IntersectionObserver(function (entries) {
+        var io = new IntersectionObserver(function (entries) {
             entries.forEach(function (entry) {
                 if (!entry.isIntersecting) return;
                 var tile = entry.target;
-                var i = Number(tile.getAttribute('data-stagger') || 0);
-                window.setTimeout(function () { tile.classList.add('is-in'); }, i * 70);
-                bentoIo.unobserve(tile);
+                var step = Number(tile.getAttribute('data-stagger') || 0);
+                window.setTimeout(function () { tile.classList.add('is-in'); }, step * 90);
+                io.unobserve(tile);
             });
-        }, { threshold: 0.08, rootMargin: '0px 0px 0px 0px' });
+        }, { threshold: 0.08 });
 
-        tiles.forEach(function (tile) { bentoIo.observe(tile); });
+        Array.prototype.forEach.call(tiles, function (tile) { io.observe(tile); });
+        window.setTimeout(function () { showAll(tiles); }, 2600);
+    }
 
-        window.setTimeout(showTiles, 1600);
+    /* Why rows. The still clips open from its own bottom edge. */
+    function observeRows() {
+        if (!rows.length) return;
+
+        if (reduceOn() || !('IntersectionObserver' in window)) {
+            showAll(rows);
+            return;
+        }
+
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('is-in');
+                io.unobserve(entry.target);
+            });
+        }, { threshold: 0.2, rootMargin: '0px 0px -8% 0px' });
+
+        Array.prototype.forEach.call(rows, function (row) { io.observe(row); });
     }
 
     observeReveal();
-    observeBento();
+    observeTiles();
+    observeRows();
 
     if (motionQuery.addEventListener) {
         motionQuery.addEventListener('change', function () {
-            if (reduceOn()) {
-                showReveal();
-                showTiles();
-            }
+            if (!reduceOn()) return;
+            showAll(nodes);
+            showAll(tiles);
+            showAll(rows);
         });
     }
 
@@ -93,8 +132,9 @@
         var start = window.scrollY;
         var t0 = performance.now();
         function tick(now) {
-            var t = Math.min(1, (now - t0) / 200);
-            window.scrollTo(0, start + (end - start) * t);
+            var t = Math.min(1, (now - t0) / 480);
+            var eased = 1 - Math.pow(1 - t, 3);
+            window.scrollTo(0, start + (end - start) * eased);
             if (t < 1) requestAnimationFrame(tick);
         }
         requestAnimationFrame(tick);
@@ -117,21 +157,20 @@
         window.addEventListener('load', function () { scrollToWhy(); });
     }
 
+    /* Soft key light follows the pointer across a tile. No tilt, no sweep. */
     if (!tiles.length || reduceOn() || !finePointer.matches) return;
 
-    tiles.forEach(function (tile) {
+    Array.prototype.forEach.call(tiles, function (tile) {
         tile.addEventListener('pointermove', function (ev) {
             if (ev.pointerType !== 'mouse') return;
             var box = tile.getBoundingClientRect();
             if (!box.width || !box.height) return;
-            var px = (ev.clientX - box.left) / box.width - 0.5;
-            var py = (ev.clientY - box.top) / box.height - 0.5;
-            tile.style.setProperty('--rx', (-py * 8).toFixed(2) + 'deg');
-            tile.style.setProperty('--ry', (px * 8).toFixed(2) + 'deg');
+            tile.style.setProperty('--mx', (((ev.clientX - box.left) / box.width) * 100).toFixed(1) + '%');
+            tile.style.setProperty('--my', (((ev.clientY - box.top) / box.height) * 100).toFixed(1) + '%');
         });
         tile.addEventListener('pointerleave', function () {
-            tile.style.setProperty('--rx', '0deg');
-            tile.style.setProperty('--ry', '0deg');
+            tile.style.setProperty('--mx', '50%');
+            tile.style.setProperty('--my', '50%');
         });
     });
 }());
