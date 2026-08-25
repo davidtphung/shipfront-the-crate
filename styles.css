@@ -1058,9 +1058,12 @@ footer p {
   filter: saturate(0.86) contrast(1.03) brightness(0.9);
 }
 
-/* Same dock aerial, landscape crop. Keep the painted marks out of frame. */
+/* Same dock aerial, landscape crop. The horizontal crop keeps the painted
+   marks out of frame, which frees the vertical band to sit on the trailers. */
 .why-still--dock img {
-  object-position: 50% 10%;
+  width: 124%;
+  max-width: none;
+  object-position: 50% 34%;
 }
 
 /* Clip reveal: the still opens from its own bottom edge as the row enters. */
