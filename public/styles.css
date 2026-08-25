@@ -111,7 +111,8 @@ address {
   scroll-margin-top: 80px;
 }
 
-#main:focus {
+#main:focus,
+#why:focus {
   outline: none;
 }
 
