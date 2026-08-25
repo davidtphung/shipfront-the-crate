@@ -2,13 +2,14 @@
     document.documentElement.classList.add('js');
 
     var motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
 
     function reduceOn() {
         return motionQuery.matches;
     }
 
     var nodes = document.querySelectorAll('[data-reveal]');
-    var tiles = document.querySelectorAll('.card');
+    var tiles = document.querySelectorAll('.bento-tile');
     var rows = document.querySelectorAll('.why-row');
     var bar = document.querySelector('.hud-bar');
 
@@ -56,7 +57,7 @@
         Array.prototype.forEach.call(nodes, function (el) { io.observe(el); });
     }
 
-    /* Floor cards. Staggered arrival, 90ms apart. */
+    /* Floor bento. Staggered arrival, 90ms apart. */
     function observeTiles() {
         if (!tiles.length) return;
 
@@ -180,35 +181,20 @@
         window.addEventListener('load', function () { scrollToWhy(); });
     }
 
-    function bindChipFolds() {
-        var lists = document.querySelectorAll('[data-chip-fold]');
-        Array.prototype.forEach.call(lists, function (list) {
-            var items = Array.prototype.slice.call(list.children).filter(function (el) {
-                return el.tagName === 'LI' && !el.classList.contains('chip-more-item');
-            });
-            if (items.length <= 4) return;
+    /* Soft key light follows the pointer across a tile. No tilt, no sweep. */
+    if (!tiles.length || reduceOn() || !finePointer.matches) return;
 
-            var extra = items.slice(4);
-            extra.forEach(function (li) { li.hidden = true; });
-
-            var wrap = document.createElement('li');
-            wrap.className = 'chip-more-item';
-            var btn = document.createElement('button');
-            btn.type = 'button';
-            btn.className = 'chip-more';
-            btn.setAttribute('aria-expanded', 'false');
-            btn.textContent = 'More';
-            wrap.appendChild(btn);
-            list.appendChild(wrap);
-
-            btn.addEventListener('click', function () {
-                var open = btn.getAttribute('aria-expanded') === 'true';
-                extra.forEach(function (li) { li.hidden = open; });
-                btn.setAttribute('aria-expanded', open ? 'false' : 'true');
-                btn.textContent = open ? 'More' : 'Less';
-            });
+    Array.prototype.forEach.call(tiles, function (tile) {
+        tile.addEventListener('pointermove', function (ev) {
+            if (ev.pointerType !== 'mouse') return;
+            var box = tile.getBoundingClientRect();
+            if (!box.width || !box.height) return;
+            tile.style.setProperty('--mx', (((ev.clientX - box.left) / box.width) * 100).toFixed(1) + '%');
+            tile.style.setProperty('--my', (((ev.clientY - box.top) / box.height) * 100).toFixed(1) + '%');
         });
-    }
-
-    bindChipFolds();
+        tile.addEventListener('pointerleave', function () {
+            tile.style.setProperty('--mx', '50%');
+            tile.style.setProperty('--my', '50%');
+        });
+    });
 }());

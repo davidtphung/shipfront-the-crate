@@ -57,6 +57,7 @@
 
         <section class="band lane inverse-band" aria-labelledby="lane-heading">
             <div class="content-wrapper" data-reveal>
+                <p class="eyebrow">The lane</p>
                 <h2 id="lane-heading">Port to customer.</h2>
                 <ol class="route" aria-label="Value chain from port to customer">
                     <li>
@@ -83,44 +84,96 @@
         <section id="floor" class="band why" aria-labelledby="floor-heading">
             <div class="edge-rule" aria-hidden="true"></div>
             <div class="content-wrapper" data-reveal>
+                <p class="eyebrow eyebrow-sleeve">
+                    <span>The floor</span>
+                    <span class="sleeve-index">SF-01 / SF-04</span>
+                </p>
                 <h2 id="floor-heading">The floor.</h2>
-                <div class="cards-grid">
-                    <article class="card" tabindex="0" data-stagger="0" aria-labelledby="floor-procurement">
-                        <div class="card-image still-grain">
-                            <img src="images/procurement.jpg" alt="Warehouse racking and pick bins stocked with cartons" width="800" height="1080" decoding="async">
+                <div class="cards-box">
+                    <span class="reg-sq tl" aria-hidden="true"></span>
+                    <span class="reg-sq tr" aria-hidden="true"></span>
+                    <span class="reg-sq bl" aria-hidden="true"></span>
+                    <span class="reg-sq br" aria-hidden="true"></span>
+                    <span class="coord tl" aria-hidden="true">0, 0</span>
+                    <span class="coord tr" aria-hidden="true">1200, 0</span>
+                    <span class="coord bl" aria-hidden="true">0, 640</span>
+                    <span class="coord br" aria-hidden="true">1200, 640</span>
+                    <div class="cards-grid bento-grid">
+                        <div class="bento-col">
+                            <article class="bento-tile bento-tile--photo bento-tile--tall" data-stagger="0" aria-labelledby="floor-logistics">
+                                <div class="card-image still-grain">
+                                    <img src="images/logistics.jpg" alt="American long-hood freight trucks parked in a lot" width="2400" height="1596" decoding="async">
+                                </div>
+                                <div class="card-overlay">
+                                    <p class="card-step">02</p>
+                                    <h3 class="card-label" id="floor-logistics">Logistics</h3>
+                                    <p class="card-body">Freight is coordinated. We do not run the truck.</p>
+                                </div>
+                            </article>
+                            <article class="bento-tile bento-tile--loc" data-stagger="1" aria-labelledby="floor-location">
+                                <p class="card-step">Location</p>
+                                <h3 class="card-label" id="floor-location">1933 S. Broadway, Los Angeles CA 90007.</h3>
+                                <address class="card-body">Downtown L.A., next to the 10, 110, and 101.</address>
+                            </article>
                         </div>
-                        <div class="card-overlay">
-                            <h3 class="card-label" id="floor-procurement">Procurement</h3>
-                            <p class="card-body">They buy. Freight arrives at our floor. Inbound at 1933 S. Broadway.</p>
+
+                        <div class="bento-col">
+                            <article class="bento-tile bento-tile--sm" data-stagger="2" aria-labelledby="floor-procurement">
+                                <div class="bento-sm-copy">
+                                    <p class="card-step">01</p>
+                                    <h3 class="card-label" id="floor-procurement">Procurement</h3>
+                                    <p class="card-body">They buy. Freight arrives at our floor. Inbound at 1933 S. Broadway.</p>
+                                </div>
+                                <div class="bento-sm-still still-grain">
+                                    <img src="images/procurement.jpg" alt="" width="800" height="1080" decoding="async">
+                                </div>
+                            </article>
+                            <article class="bento-tile bento-tile--ful" data-stagger="3" aria-labelledby="floor-fulfillment">
+                                <p class="card-step">03</p>
+                                <h3 class="card-label" id="floor-fulfillment">Fulfillment</h3>
+                                <p class="card-body">Pick, pack, label, dock on our floor.</p>
+                                <ul class="chips" aria-label="Fulfillment on the floor">
+                                    <li>Inbound</li>
+                                    <li>Kitting</li>
+                                    <li>Storage</li>
+                                    <li>FBA Prep</li>
+                                    <li>Outbound</li>
+                                    <li>Last-Mile Delivery</li>
+                                    <li>Same-Day Delivery</li>
+                                </ul>
+                            </article>
+                            <article class="bento-tile bento-tile--pop" data-stagger="4" aria-labelledby="floor-pop">
+                                <h3 class="card-label" id="floor-pop">You sell. We run the floor.</h3>
+                                <p class="card-body">Shipfront sits in warehouse and integration.</p>
+                            </article>
                         </div>
-                    </article>
-                    <article class="card" tabindex="0" data-stagger="1" aria-labelledby="floor-logistics">
-                        <div class="card-image still-grain">
-                            <img src="images/logistics.jpg" alt="American long-hood freight trucks parked in a lot" width="2400" height="1596" decoding="async">
+
+                        <div class="bento-col">
+                            <article class="bento-tile bento-tile--photo bento-tile--tall bento-tile--dock" data-stagger="5" aria-labelledby="floor-integration">
+                                <div class="card-image still-grain">
+                                    <img src="images/integration.jpg" alt="Trailers parked in rows at loading docks, seen from above" width="800" height="1080" decoding="async">
+                                </div>
+                                <div class="card-overlay">
+                                    <p class="card-step">04</p>
+                                    <h3 class="card-label" id="floor-integration">Integration</h3>
+                                    <p class="card-body">The store talks to the floor.</p>
+                                </div>
+                            </article>
+                            <article class="bento-tile bento-tile--cloud" data-stagger="6" aria-labelledby="floor-cloud">
+                                <ul class="chips chips-cloud" aria-label="Fulfillment on the floor">
+                                    <li>Inbound</li>
+                                    <li>Kitting</li>
+                                    <li>Storage</li>
+                                    <li>FBA Prep</li>
+                                    <li>Outbound</li>
+                                    <li>Last-Mile Delivery</li>
+                                    <li>Same-Day Delivery</li>
+                                </ul>
+                                <h3 class="card-label" id="floor-cloud">Fulfillment and integration.</h3>
+                                <p class="card-body">The stack you already sell on.</p>
+                            </article>
                         </div>
-                        <div class="card-overlay">
-                            <h3 class="card-label" id="floor-logistics">Logistics</h3>
-                            <p class="card-body">Freight is coordinated. We do not run the truck.</p>
-                        </div>
-                    </article>
-                    <article class="card" tabindex="0" data-stagger="2" aria-labelledby="floor-fulfillment">
-                        <div class="card-image still-grain">
-                            <img src="images/fulfillment.jpg" alt="Warehouse racking and pick aisle" width="800" height="1080" decoding="async">
-                        </div>
-                        <div class="card-overlay">
-                            <h3 class="card-label" id="floor-fulfillment">Fulfillment</h3>
-                            <p class="card-body">Pick, pack, label, dock on our floor.</p>
-                        </div>
-                    </article>
-                    <article class="card card--dock" tabindex="0" data-stagger="3" aria-labelledby="floor-integration">
-                        <div class="card-image still-grain">
-                            <img src="images/integration.jpg" alt="Trailers parked in rows at loading docks, seen from above" width="800" height="1080" decoding="async">
-                        </div>
-                        <div class="card-overlay">
-                            <h3 class="card-label" id="floor-integration">Integration</h3>
-                            <p class="card-body">The store talks to the floor.</p>
-                        </div>
-                    </article>
+                    </div>
                 </div>
             </div>
         </section>
@@ -128,6 +181,7 @@
         <section id="why" class="band why-rows" aria-labelledby="why-heading">
             <div class="content-wrapper" data-reveal>
                 <div class="why-rule" aria-hidden="true"></div>
+                <p class="eyebrow">Why Shipfront</p>
                 <h2 id="why-heading">Why Shipfront</h2>
 
                 <article class="why-row">
@@ -135,11 +189,19 @@
                         <img src="images/procurement.jpg" alt="Warehouse racking and pick bins stocked with cartons">
                     </div>
                     <div class="why-copy">
-                        <p class="beat">Hold</p>
                         <h3>Warehousing</h3>
                         <p>Our warehouses provide the necessary space, security, temperature-control, and FDA compliant capabilities to store your products before shipping them to customers.</p>
+                    </div>
+                </article>
+
+                <article class="why-row why-row-flip">
+                    <div class="why-still still-grain">
+                        <img src="images/fulfillment.jpg" alt="Warehouse racking and pick aisle">
+                    </div>
+                    <div class="why-copy">
+                        <h3>Fulfillment</h3>
                         <p>We build custom workflows to pick, pack, label, and ship your products exactly how you would like.</p>
-                        <ul class="chips" data-chip-fold aria-label="Fulfillment on the floor">
+                        <ul class="chips">
                             <li>Inbound</li>
                             <li>Kitting</li>
                             <li>Storage</li>
@@ -151,17 +213,24 @@
                     </div>
                 </article>
 
-                <article class="why-row why-row-flip">
+                <article class="why-row why-integrations">
                     <div class="why-still why-still--dock still-grain">
                         <img src="images/integration.jpg" alt="Trailers parked in rows at loading docks, seen from above">
                     </div>
                     <div class="why-copy">
-                        <p class="beat">Connect</p>
                         <h3>eCommerce Integrations</h3>
                         <p>The stack you already sell on.</p>
+                    </div>
+                </article>
+
+                <article class="why-row why-row-type">
+                    <div class="why-copy">
+                        <h3>Location</h3>
                         <p>1933 S. Broadway, Los Angeles CA 90007. Downtown L.A., next to the 10, 110, and 101.</p>
                     </div>
                 </article>
+
+                <a href="quote/" class="cta-pill why-cta">Get a Quote</a>
             </div>
         </section>
     </main>
