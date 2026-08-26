@@ -12,6 +12,7 @@
 </head>
 <body>
     <a href="#main" class="skip-link">Skip to main content</a>
+    <div class="stage-light" aria-hidden="true"></div>
     <div class="blueprint" aria-hidden="true"></div>
 
     <header class="hud-bar" role="banner">
@@ -28,9 +29,9 @@
                 <span class="wordmark">SHIPFRONT</span>
             </a>
             <ul class="nav-links">
-                <li><a class="nav-text" href="#why">Why Shipfront</a></li>
-                <li><a class="nav-text" href="contact/">Contact</a></li>
+                <li><a class="nav-text" href="./">Home</a></li>
                 <li><a class="cta-pill" href="quote/">Get a Quote</a></li>
+                <li><a class="nav-text" href="contact/">Contact</a></li>
             </ul>
         </nav>
     </header>
@@ -38,10 +39,19 @@
     <main id="main" role="main" tabindex="-1">
         <section class="hero" aria-label="Hero">
             <div class="content-wrapper hero-copy">
-                <h1 class="hero-title">You Sell. We Ship.</h1>
-                <p class="lede">You sell. We run the floor.</p>
-                <p class="lede">A person at Shipfront replies. The warehouse is at 1933 S. Broadway.</p>
-                <a href="quote/" class="cta-pill">Get a Quote</a>
+                <p class="eyebrow hero-eyebrow">Third party logistics, downtown L.A.</p>
+                <div class="clip-mask">
+                    <h1 class="hero-title">You Sell. We Ship.</h1>
+                </div>
+                <div class="clip-mask hero-line">
+                    <p class="lede">You sell. We run the floor.</p>
+                </div>
+                <div class="clip-mask hero-line">
+                    <p class="lede">A person at Shipfront replies. The warehouse is at 1933 S. Broadway.</p>
+                </div>
+                <div class="hero-act">
+                    <a href="quote/" class="cta-pill">Get a Quote</a>
+                </div>
             </div>
             <div class="hero-cube" aria-hidden="true">
                 <svg class="cube-spin" width="220" height="220" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -57,8 +67,10 @@
 
         <section class="band lane inverse-band" aria-labelledby="lane-heading">
             <div class="content-wrapper" data-reveal>
-                <p class="eyebrow">The lane</p>
-                <h2 id="lane-heading">Port to customer.</h2>
+                <div class="section-head" data-scrub>
+                    <p class="eyebrow">The lane</p>
+                    <h2 class="clip-line" id="lane-heading"><span>Port to customer.</span></h2>
+                </div>
                 <ol class="route" aria-label="Value chain from port to customer">
                     <li>
                         <span class="step">01</span>
@@ -84,11 +96,13 @@
         <section id="floor" class="band why" aria-labelledby="floor-heading">
             <div class="edge-rule" aria-hidden="true"></div>
             <div class="content-wrapper" data-reveal>
-                <p class="eyebrow eyebrow-sleeve">
-                    <span>The floor</span>
-                    <span class="sleeve-index">SF-01 / SF-04</span>
-                </p>
-                <h2 id="floor-heading">The floor.</h2>
+                <div class="section-head" data-scrub>
+                    <p class="eyebrow eyebrow-sleeve">
+                        <span>The floor</span>
+                        <span class="sleeve-index">SF-01 / SF-04</span>
+                    </p>
+                    <h2 class="clip-line" id="floor-heading"><span>The floor.</span></h2>
+                </div>
                 <div class="cards-box">
                     <span class="reg-sq tl" aria-hidden="true"></span>
                     <span class="reg-sq tr" aria-hidden="true"></span>
@@ -181,8 +195,10 @@
         <section id="why" class="band why-rows" aria-labelledby="why-heading">
             <div class="content-wrapper" data-reveal>
                 <div class="why-rule" aria-hidden="true"></div>
-                <p class="eyebrow">Why Shipfront</p>
-                <h2 id="why-heading">Why Shipfront</h2>
+                <div class="section-head" data-scrub>
+                    <p class="eyebrow">Why Shipfront</p>
+                    <h2 class="clip-line" id="why-heading"><span>Why Shipfront</span></h2>
+                </div>
 
                 <article class="why-row">
                     <div class="why-still still-grain">
@@ -190,7 +206,7 @@
                     </div>
                     <div class="why-copy">
                         <h3>Warehousing</h3>
-                        <p>Our warehouses provide the necessary space, security, temperature-control, and FDA compliant capabilities to store your products before shipping them to customers.</p>
+                        <p>Our warehouses hold your product on our floor, secured and organized, until it ships to your customer.</p>
                     </div>
                 </article>
 
@@ -236,8 +252,10 @@
     </main>
 
     <footer role="contentinfo">
-        <div class="content-wrapper footer-grid">
-            <p class="footer-mark">SHIPFRONT</p>
+        <div class="content-wrapper footer-grid" data-reveal>
+            <div class="clip-mask footer-mark-mask">
+                <p class="footer-mark">SHIPFRONT</p>
+            </div>
             <div>
                 <p class="eyebrow">Home</p>
                 <a href="./">Home</a>

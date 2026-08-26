@@ -45,8 +45,9 @@
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --press: cubic-bezier(0.22, 1, 0.36, 1);
   --cine: 0.82s;
+  --cine-long: 0.95s;
   --grid: 48px;
-  --air: 140px;
+  --air: 196px;
   /* Figma 6:541 Asimov card set */
   --card-move: 220ms;
   --card-press: 120ms;
@@ -115,7 +116,7 @@ address {
 #main,
 #floor,
 #why {
-  scroll-margin-top: 80px;
+  scroll-margin-top: 96px;
 }
 
 #main:focus,
@@ -130,11 +131,24 @@ address {
   z-index: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
   background-size: 48px 48px;
-  -webkit-mask-image: radial-gradient(125% 95% at 50% 0%, #000 0%, rgba(0, 0, 0, 0.6) 48%, transparent 88%);
-  mask-image: radial-gradient(125% 95% at 50% 0%, #000 0%, rgba(0, 0, 0, 0.6) 48%, transparent 88%);
+  -webkit-mask-image: radial-gradient(125% 95% at 50% 0%, #000 0%, rgba(0, 0, 0, 0.55) 44%, transparent 84%);
+  mask-image: radial-gradient(125% 95% at 50% 0%, #000 0%, rgba(0, 0, 0, 0.55) 44%, transparent 84%);
+}
+
+/* Soft radial stage light. White only, under 6%, so the black stays black
+   and the type keeps its full contrast. */
+.stage-light {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(118% 66% at 50% -12%, rgba(255, 255, 255, 0.055), transparent 62%),
+    radial-gradient(80% 54% at 8% 6%, rgba(255, 255, 255, 0.028), transparent 58%),
+    radial-gradient(70% 60% at 96% 84%, rgba(255, 255, 255, 0.022), transparent 60%);
 }
 
 .canvas-grain,
@@ -144,7 +158,7 @@ body::after {
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  opacity: 0.07;
+  opacity: 0.05;
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.6 0'/></filter><rect width='100%25' height='100%25' filter='url(%23g)'/></svg>");
   background-size: 180px 180px;
@@ -221,8 +235,11 @@ body::after {
   width: min(640px, calc(100% - 40px));
 }
 
-/* HUD nav. Transparent over the hero, solid once the page moves. */
+/* HUD nav. Transparent over the hero, then a compact dark bar. The settle is
+   scrubbed off scroll position, so the bar arrives instead of snapping. */
 .hud-bar {
+  --settle: 0;
+  --read: 0;
   position: fixed;
   top: 0;
   right: 0;
@@ -230,12 +247,11 @@ body::after {
   z-index: 20;
   display: block;
   padding: 0 20px;
-  background: transparent;
+  background: rgba(0, 0, 0, calc(var(--settle) * 0.96));
   border: 0;
   box-shadow: none;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
-  transition: background 0.45s var(--ease);
 }
 
 .hud-bar::before {
@@ -246,21 +262,30 @@ body::after {
   bottom: 0;
   height: 1px;
   background: var(--line);
-  opacity: 0;
-  transition: opacity 0.4s var(--ease);
+  opacity: var(--settle);
 }
 
+/* Reading position, drawn on the same hairline. One accent, no second colour. */
+.hud-bar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--accent);
+  opacity: calc(var(--settle) * 0.9);
+  transform: scaleX(var(--read));
+  transform-origin: 0 50%;
+}
+
+html:not(.js) .hud-bar,
 .hud-bar.is-solid {
-  background: #000;
+  --settle: 1;
 }
 
-.hud-bar.is-solid::before {
-  opacity: 1;
-}
-
-html:not(.js) .hud-bar::before,
-.hud-bar:focus-within::before {
-  opacity: 1;
+.hud-bar:focus-within {
+  --settle: 1;
 }
 
 .stamp {
@@ -285,7 +310,7 @@ nav {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  min-height: 72px;
+  min-height: calc(92px - var(--settle, 0) * 28px);
 }
 
 .logo {
@@ -339,6 +364,8 @@ nav {
 .cta-pill,
 .why-cta,
 .cta-button-large {
+  --btn: 0px;
+  --btn-z: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -354,7 +381,11 @@ nav {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: transform 0.12s var(--press), opacity 0.12s var(--press);
+  transform: translateY(var(--btn)) scale(var(--btn-z));
+  box-shadow: 0 0 0 rgba(255, 45, 45, 0);
+  transition:
+    transform var(--card-move) var(--ease),
+    box-shadow var(--card-move) var(--ease);
 }
 
 .cta-pill:hover,
@@ -363,13 +394,41 @@ nav {
 .why-cta:focus-visible,
 .cta-button-large:hover,
 .cta-button-large:focus-visible {
-  opacity: 0.92;
+  --btn: -2px;
+  box-shadow: 0 10px 26px rgba(255, 45, 45, 0.24);
 }
 
 .cta-pill:active,
 .why-cta:active,
 .cta-button-large:active {
-  transform: scale(0.97);
+  --btn: 0px;
+  --btn-z: 0.97;
+  transition-duration: var(--card-press);
+  transition-timing-function: ease-out;
+}
+
+/* Text links in the bar get their own hairline instead of a second pill. */
+.nav-text {
+  position: relative;
+}
+
+.nav-text::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 12px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  opacity: 0.6;
+  transition: transform var(--card-move) var(--ease);
+}
+
+.nav-text:hover::after,
+.nav-text:focus-visible::after {
+  transform: scaleX(1);
 }
 
 .eyebrow {
@@ -422,6 +481,54 @@ nav {
   display: none;
 }
 
+/* Clipped upward reveal. The mask carries the overflow so the line arrives
+   from under its own baseline. A little bottom padding keeps descenders whole. */
+.clip-mask,
+.clip-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
+}
+
+.clip-line > span {
+  display: block;
+}
+
+.js .clip-line > span {
+  transform: translateY(112%);
+}
+
+.js .is-in [data-scrub] .clip-line > span,
+.js [data-reveal].is-in .clip-line > span {
+  transform: none;
+  transition: transform var(--cine-long) var(--ease) 80ms;
+}
+
+/* Section heads drift up and shrink as they leave frame. Scroll drives it,
+   so the move reads as camera rather than as a triggered animation. */
+.js [data-scrub] {
+  transform: translate3d(0, calc(var(--exit, 0) * -46px), 0) scale(calc(1 - var(--exit, 0) * 0.02));
+  transform-origin: 0 50%;
+  opacity: calc(1 - var(--exit, 0) * 0.6);
+  will-change: transform, opacity;
+}
+
+.js [data-scrub] > .eyebrow {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.js [data-reveal].is-in [data-scrub] > .eyebrow {
+  opacity: 1;
+  transform: none;
+  transition: opacity var(--cine) var(--ease), transform var(--cine) var(--ease);
+}
+
+.section-head {
+  margin: 0 0 4px;
+}
+
 h2,
 .why-copy h3 {
   margin: 0;
@@ -466,12 +573,13 @@ footer p {
   overflow: hidden;
   display: flex;
   align-items: center;
-  min-height: min(88vh, 900px);
-  padding: 184px 0 128px;
+  min-height: min(92vh, 980px);
+  padding: 216px 0 168px;
   background: transparent;
 }
 
-/* Soft accent bloom behind the mark. 6% ceiling, no wash on the black. */
+/* The one red ambient glow on the site. 6% ceiling, no wash on the black.
+   It breathes on a 26s cycle so the hero is never fully still. */
 .hero::before {
   content: "";
   position: absolute;
@@ -482,6 +590,84 @@ footer p {
   height: min(78vw, 940px);
   pointer-events: none;
   background: radial-gradient(circle at 50% 50%, rgba(255, 45, 45, 0.06) 0%, rgba(255, 45, 45, 0.03) 38%, transparent 68%);
+}
+
+.js .hero::before {
+  animation: ember 26s ease-in-out infinite;
+}
+
+@keyframes ember {
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.hero-eyebrow {
+  margin-bottom: 26px;
+}
+
+.hero-line + .hero-line {
+  margin-top: 10px;
+}
+
+.hero-act {
+  margin-top: 42px;
+}
+
+/* Hero entrance. One idea at a time: label, headline, the lines, the CTA. */
+.js .hero-eyebrow,
+.js .hero-act {
+  opacity: 0;
+  animation: rise-in var(--cine) var(--ease) both;
+}
+
+.js .hero-eyebrow {
+  animation-delay: 120ms;
+}
+
+.js .hero-act {
+  animation-delay: 900ms;
+}
+
+.js .clip-mask > h1,
+.js .hero-line > .lede {
+  animation: clip-rise var(--cine-long) var(--ease) both;
+}
+
+.js .clip-mask > h1 {
+  animation-delay: 240ms;
+}
+
+.js .hero-line > .lede {
+  animation-delay: 560ms;
+}
+
+.js .hero-line + .hero-line > .lede {
+  animation-delay: 680ms;
+}
+
+@keyframes clip-rise {
+  from {
+    transform: translateY(112%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .hero-copy {
@@ -532,14 +718,10 @@ footer p {
 }
 
 .hero .lede {
-  margin: 0 0 12px;
+  margin: 0;
   max-width: 32em;
   font-size: 17px;
   line-height: 1.6;
-}
-
-.hero .lede + .lede {
-  margin-bottom: 36px;
 }
 
 .spec-chips {
@@ -684,21 +866,50 @@ footer p {
 }
 
 .lane .lede {
-  margin: 40px 0 0;
+  margin: 56px 0 0;
   max-width: 34em;
 }
 
 .route {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 16px;
-  margin: 44px 0 0;
+  margin: 56px 0 0;
   padding: 0;
   list-style: none;
 }
 
+/* The lane itself. A single accent hairline that draws port to customer
+   once the band arrives, then holds. */
+.route::before {
+  content: "";
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  top: 50%;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(255, 45, 45, 0), var(--accent) 12%, var(--accent) 88%, rgba(255, 45, 45, 0));
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.js .route::before {
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+}
+
+.js [data-reveal].is-in .route::before {
+  transform: scaleX(1);
+  transition: transform 1.1s var(--ease) 260ms;
+}
+
 .route li {
-  min-height: 172px;
+  --rise: 0px;
+  --rz: 1;
+  position: relative;
+  z-index: 1;
+  min-height: 176px;
   padding: 28px;
   border: 1px solid var(--hair);
   border-radius: 20px;
@@ -709,17 +920,40 @@ footer p {
   justify-content: space-between;
   gap: 16px;
   font-size: 15px;
-  transition: border-color 0.5s var(--ease), transform 0.5s var(--ease);
+  transform: translateY(var(--rise)) scale(var(--rz));
+  transition:
+    border-color var(--card-move) ease-out,
+    transform var(--cine) var(--ease),
+    opacity var(--cine) var(--ease);
 }
 
 .route li.route-ours {
   border-color: rgba(255, 45, 45, 0.55);
 }
 
+.js .route li {
+  --rise: 20px;
+  --rz: 0.98;
+  opacity: 0;
+}
+
+.js [data-reveal].is-in .route li {
+  --rise: 0px;
+  --rz: 1;
+  opacity: 1;
+}
+
+.js [data-reveal].is-in .route li:nth-child(1) { transition-delay: 240ms; }
+.js [data-reveal].is-in .route li:nth-child(2) { transition-delay: 350ms; }
+.js [data-reveal].is-in .route li:nth-child(3) { transition-delay: 460ms; }
+.js [data-reveal].is-in .route li:nth-child(4) { transition-delay: 570ms; }
+
 @media (hover: hover) and (pointer: fine) {
   .route li:hover {
-    border-color: rgba(255, 255, 255, 0.2);
-    transform: translateY(-4px);
+    --rise: -6px;
+    border-color: rgba(255, 255, 255, 0.24);
+    transition-duration: var(--card-move);
+    transition-delay: 0ms;
   }
 
   .route li.route-ours:hover {
@@ -732,7 +966,7 @@ footer p {
   position: relative;
   width: 1200px;
   max-width: 100%;
-  margin: 44px auto 0;
+  margin: 64px auto 0;
   padding: 16px;
   border: 1px solid rgba(255, 45, 45, 0.42);
   overflow: visible;
@@ -790,7 +1024,7 @@ footer p {
 .bento-tile {
   --rx: 0deg;
   --ry: 0deg;
-  --lift: 18px;
+  --lift: 0px;
   --zoom: 1;
   --mx: 50%;
   --my: 50%;
@@ -824,18 +1058,21 @@ footer p {
 
 .js .bento-tile {
   opacity: 0;
+  --lift: 22px;
+  --zoom: 0.98;
 }
 
 .js .bento-tile.is-in {
   opacity: 1;
   --lift: 0px;
+  --zoom: 1;
 }
 
 @media (hover: hover) and (pointer: fine) {
   .js .bento-tile.is-in:hover {
-    --lift: -5px;
+    --lift: -6px;
     z-index: 3;
-    border-color: rgba(255, 255, 255, 0.16);
+    border-color: rgba(255, 255, 255, 0.22);
     transition-duration: var(--card-move);
     transition-timing-function: ease-out;
   }
@@ -1132,11 +1369,11 @@ footer p {
 }
 
 .why-rows {
-  padding-top: 96px;
+  padding-top: 128px;
 }
 
-.why-rows h2 {
-  margin-bottom: 88px;
+.why-rows .section-head {
+  margin-bottom: 104px;
 }
 
 .why-row {
@@ -1144,13 +1381,13 @@ footer p {
   grid-template-columns: 592px minmax(0, 1fr);
   gap: 56px;
   align-items: center;
-  margin: 0 0 104px;
+  margin: 0 0 124px;
   clear: both;
 }
 
 .why-row-flip {
   grid-template-columns: minmax(0, 1fr) 592px;
-  margin-bottom: 104px;
+  margin-bottom: 124px;
 }
 
 .why-row-flip .why-still {
@@ -1168,6 +1405,11 @@ footer p {
 
 .why-row-type {
   grid-template-columns: minmax(0, 1fr);
+}
+
+/* The band already carries the air. The last row does not need to repeat it. */
+.why-rows .why-row:last-of-type {
+  margin-bottom: 64px;
 }
 
 .why-still {
@@ -1436,19 +1678,21 @@ textarea {
 }
 
 .contact-block {
+  --rise: 0px;
   min-height: 200px;
   padding: 32px;
   border: 1px solid var(--hair);
   border-radius: 24px;
   background: var(--panel);
   box-shadow: none;
-  transition: border-color 0.5s var(--ease), transform 0.5s var(--ease);
+  transform: translateY(var(--rise));
+  transition: border-color var(--card-move) ease-out, transform var(--card-move) var(--ease);
 }
 
 @media (hover: hover) and (pointer: fine) {
   .contact-block:hover {
-    border-color: rgba(255, 255, 255, 0.18);
-    transform: translateY(-4px);
+    --rise: -6px;
+    border-color: rgba(255, 255, 255, 0.24);
   }
 }
 
@@ -1514,6 +1758,17 @@ body {
   border-top: 1px solid var(--hair);
 }
 
+/* The dock waits under the fold and rises once the hero is behind you. */
+.js .dock-bar {
+  transform: translateY(100%);
+  transition: transform 460ms var(--ease);
+}
+
+.js .dock-bar.is-up,
+.js .dock-bar:focus-within {
+  transform: none;
+}
+
 .dock-bar p {
   margin: 0;
   color: var(--type);
@@ -1549,6 +1804,15 @@ footer {
   text-transform: uppercase;
 }
 
+.js [data-reveal] .footer-mark {
+  transform: translateY(112%);
+}
+
+.js [data-reveal].is-in .footer-mark {
+  transform: none;
+  transition: transform var(--cine-long) var(--ease) 60ms;
+}
+
 .footer-grid .eyebrow {
   margin-bottom: 8px;
 }
@@ -1580,7 +1844,7 @@ footer {
 /* Long, quiet entrances. One idea arrives at a time. */
 .js [data-reveal] {
   opacity: 0;
-  transform: translateY(24px);
+  transform: translateY(20px);
 }
 
 .js [data-reveal].is-in {
@@ -1589,14 +1853,14 @@ footer {
   transition: opacity var(--cine) var(--ease), transform var(--cine) var(--ease);
 }
 
-.js [data-reveal] > * {
+.js [data-reveal] > *:not([data-scrub]) {
   opacity: 0;
-  transform: translateY(18px);
+  transform: translateY(14px) scale(0.98);
 }
 
-.js [data-reveal].is-in > * {
+.js [data-reveal].is-in > *:not([data-scrub]) {
   opacity: 1;
-  transform: none;
+  transform: translateY(0) scale(1);
   transition: opacity var(--cine) var(--ease), transform var(--cine) var(--ease);
 }
 
@@ -1778,11 +2042,67 @@ footer {
 @media (prefers-reduced-motion: reduce) {
   [data-reveal],
   [data-reveal] > *,
+  [data-reveal] > *:not([data-scrub]),
   [data-reveal].is-in,
-  [data-reveal].is-in > * {
+  [data-reveal].is-in > *,
+  [data-reveal].is-in > *:not([data-scrub]) {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+
+  /* Static. No clip reveal, no scrubbed drift, no draw, no rise. */
+  .js [data-scrub],
+  .js .clip-line > span,
+  .js .is-in [data-scrub] .clip-line > span,
+  .js [data-reveal].is-in .clip-line > span,
+  .js [data-scrub] > .eyebrow,
+  .js [data-reveal].is-in [data-scrub] > .eyebrow,
+  .js [data-reveal] .footer-mark,
+  .js [data-reveal].is-in .footer-mark,
+  .js .clip-mask > h1,
+  .js .hero-line > .lede,
+  .js .hero-line + .hero-line > .lede,
+  .js .hero-eyebrow,
+  .js .hero-act,
+  .js .route::before,
+  .js [data-reveal].is-in .route::before,
+  .js .route li,
+  .js [data-reveal].is-in .route li,
+  .js .dock-bar,
+  .js .dock-bar.is-up {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    animation: none;
+    will-change: auto;
+  }
+
+  .js .hero::before {
+    animation: none;
+    opacity: 1;
+  }
+
+  .nav-text::after,
+  .nav-text:hover::after,
+  .nav-text:focus-visible::after {
+    transition: none;
+  }
+
+  .cta-pill,
+  .why-cta,
+  .cta-button-large,
+  .cta-pill:hover,
+  .why-cta:hover,
+  .cta-button-large:hover,
+  .cta-pill:focus-visible,
+  .why-cta:focus-visible,
+  .cta-button-large:focus-visible {
+    --btn: 0px;
+    --btn-z: 1;
+    transform: none;
+    transition: none;
+    box-shadow: none;
   }
 
   .js .bento-tile,
@@ -1848,8 +2168,13 @@ footer {
     transition: none;
   }
 
+  .hud-bar::after {
+    display: none;
+  }
+
   .route li:hover,
   .contact-block:hover {
+    --rise: 0px;
     transform: none;
   }
 

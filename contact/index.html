@@ -12,6 +12,7 @@
 </head>
 <body>
     <a href="#main" class="skip-link">Skip to main content</a>
+    <div class="stage-light" aria-hidden="true"></div>
     <div class="blueprint" aria-hidden="true"></div>
 
     <header class="hud-bar" role="banner">
@@ -28,9 +29,9 @@
                 <span class="wordmark">SHIPFRONT</span>
             </a>
             <ul class="nav-links">
-                <li><a class="nav-text" href="./#why">Why Shipfront</a></li>
-                <li><a class="nav-text" href="contact/" aria-current="page">Contact</a></li>
+                <li><a class="nav-text" href="./">Home</a></li>
                 <li><a class="cta-pill" href="quote/">Get a Quote</a></li>
+                <li><a class="nav-text" href="contact/" aria-current="page">Contact</a></li>
             </ul>
         </nav>
     </header>
@@ -39,9 +40,13 @@
         <section class="page-hero" aria-label="Contact">
             <p class="stamp stamp-fold" aria-hidden="true">3PL</p>
             <div class="content-wrapper">
-                <p class="eyebrow">Location</p>
-                <h1>Visit Us Today</h1>
-                <p class="lede">The floor is at 1933 S. Broadway, Los Angeles, CA 90007.</p>
+                <p class="eyebrow hero-eyebrow">Location</p>
+                <div class="clip-mask">
+                    <h1>Visit Us Today</h1>
+                </div>
+                <div class="clip-mask hero-line">
+                    <p class="lede">The floor is at 1933 S. Broadway, Los Angeles, CA 90007.</p>
+                </div>
             </div>
         </section>
 
@@ -78,8 +83,10 @@
     </main>
 
     <footer role="contentinfo">
-        <div class="content-wrapper footer-grid">
-            <p class="footer-mark">SHIPFRONT</p>
+        <div class="content-wrapper footer-grid" data-reveal>
+            <div class="clip-mask footer-mark-mask">
+                <p class="footer-mark">SHIPFRONT</p>
+            </div>
             <div>
                 <p class="eyebrow">Home</p>
                 <a href="./">Home</a>
