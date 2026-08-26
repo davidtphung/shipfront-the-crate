@@ -1,122 +1,17 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <base href="/shipfront-the-crate/">
-    <title>Get a Quote | Shipfront</title>
-    <meta name="description" content="Request a quote for Shipfront fulfillment services.">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
-</head>
-<body>
-    <a href="#main" class="skip-link">Skip to main content</a>
-    <div class="blueprint" aria-hidden="true"></div>
-
-    <header class="hud-bar" role="banner">
-        <nav role="navigation" aria-label="Main navigation">
-            <a href="./" class="logo" aria-label="Shipfront home">
-                <svg class="mark" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <g stroke="#FF2D2D" stroke-width="1.25" stroke-linecap="square" stroke-linejoin="miter">
-                        <path d="M7 9 L12 6 L17 9 L17 15 L12 18 L7 15 Z"/>
-                        <path d="M7 9 L12 12 L17 9"/>
-                        <path d="M12 12 L12 18"/>
-                        <path d="M7 15 L12 12 L17 15"/>
-                    </g>
-                </svg>
-                <span class="wordmark">SHIPFRONT</span>
-            </a>
-            <ul class="nav-links">
-                <li><a class="nav-text" href="./#why">Why Shipfront</a></li>
-                <li><a class="nav-text" href="contact/">Contact</a></li>
-                <li><a class="cta-pill" href="quote/" aria-current="page">Get a Quote</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main id="main" role="main" tabindex="-1">
-        <section class="page-hero" aria-label="Quote">
-            <p class="stamp stamp-fold" aria-hidden="true">3PL</p>
-            <div class="content-wrapper narrow">
-                <p class="eyebrow">Quote</p>
-                <h1>Get a Quote</h1>
-                <p class="lede" id="quote-hint">Name, email, and company. This preview does not send.</p>
-            </div>
-        </section>
-
-        <section class="band page-band">
-            <div class="content-wrapper narrow" data-reveal>
-                <form class="quote-form" id="quoteForm" aria-label="Quote request form" aria-describedby="quote-hint">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" required aria-required="true" autocomplete="name">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required aria-required="true" autocomplete="email">
-                    </div>
-                    <div class="form-group">
-                        <label for="company">Company</label>
-                        <input type="text" id="company" name="company" required aria-required="true" autocomplete="organization">
-                    </div>
-                    <button type="submit" class="cta-pill">Submit Request</button>
-                </form>
-
-                <div class="form-notice" id="formNotice" hidden role="status" aria-live="polite" tabindex="-1">
-                    <p><strong>This preview does not send.</strong></p>
-                    <p>For quote requests, please email <a href="mailto:info@myshipfront.com">info@myshipfront.com</a></p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer role="contentinfo">
-        <div class="content-wrapper footer-grid">
-            <p class="footer-mark">SHIPFRONT</p>
-            <div>
-                <p class="eyebrow">Home</p>
-                <a href="./">Home</a>
-                <a href="./#why">Why Shipfront</a>
-            </div>
-            <div>
-                <p class="eyebrow">Quote</p>
-                <a href="quote/">Get a Quote</a>
-            </div>
-            <div>
-                <p class="eyebrow">Contact</p>
-                <a href="contact/">Visit Us Today</a>
-            </div>
-        </div>
-        <p class="footer-byline">Built by David T Phung</p>
-    </footer>
-    <aside class="dock-bar" aria-label="Get a Quote">
-        <p>A person at Shipfront replies.</p>
-        <a class="cta-pill" href="quote/" aria-current="page">Get a Quote</a>
-    </aside>
-
-    <script src="js/site.js"></script>
-    <script>
-        const form = document.getElementById('quoteForm');
-        const notice = document.getElementById('formNotice');
-
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            notice.hidden = false;
-            notice.style.display = 'block';
-            notice.style.opacity = '0';
-            notice.style.transform = 'translateY(-8px)';
-
-            requestAnimationFrame(function () {
-                notice.style.transition = 'opacity 200ms ease, transform 200ms cubic-bezier(0.25, 0.1, 0.25, 1)';
-                notice.style.opacity = '1';
-                notice.style.transform = 'translateY(0)';
-            });
-
-            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            notice.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'nearest' });
-            notice.focus();
-        });
-    </script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="/shipfront-the-crate/" />
+    <title>Shipfront | The Crate</title>
+    <meta name="description" content="Shipfront is the freight operating system. Bookings, carriers, documents, exceptions, and live tracking in one workspace." />
+    <link rel="icon" type="image/svg+xml" href="/shipfront-the-crate/favicon.svg" />
+    <link rel="apple-touch-icon" href="/shipfront-the-crate/apple-touch-icon.png" />
+    <script type="module" crossorigin src="/shipfront-the-crate/app/index-BGA4ZRRf.js"></script>
+    <link rel="stylesheet" crossorigin href="/shipfront-the-crate/app/index-B3-eDZio.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
 </html>

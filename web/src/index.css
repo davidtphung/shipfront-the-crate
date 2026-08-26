@@ -1,0 +1,141 @@
+@import "tailwindcss";
+@import "@fontsource-variable/geist";
+@import "@fontsource/jetbrains-mono/400.css";
+@import "@fontsource/jetbrains-mono/500.css";
+
+:root {
+  --bg-primary: #07090d;
+  --bg-secondary: #0c1017;
+  --bg-surface: #111722;
+  --bg-elevated: #151d2b;
+  --text-primary: #f5f7fa;
+  --text-secondary: #aab4c3;
+  --text-muted: #707d90;
+  --blue: #5b7cff;
+  --cyan: #53d9ff;
+  --violet: #a88bff;
+  --green: #43e7a8;
+  --warning: #ffb454;
+  --critical: #ff6978;
+  --border-subtle: rgba(184, 202, 225, 0.12);
+  --border-active: rgba(111, 147, 255, 0.48);
+  --ease-enter: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-std: cubic-bezier(0.16, 1, 0.3, 1);
+  --font: "Geist Variable", "Geist", "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+@theme inline {
+  --color-bg: var(--bg-primary);
+  --color-bg-2: var(--bg-secondary);
+  --color-surface: var(--bg-surface);
+  --color-elevated: var(--bg-elevated);
+  --color-ink: var(--text-primary);
+  --color-mist: var(--text-secondary);
+  --color-dim: var(--text-muted);
+  --color-blue: var(--blue);
+  --color-cyan: var(--cyan);
+  --color-violet: var(--violet);
+  --color-green: var(--green);
+  --color-warning: var(--warning);
+  --color-critical: var(--critical);
+  --font-sans: var(--font);
+  --font-mono: var(--mono);
+}
+
+html {
+  color-scheme: dark;
+  scroll-behavior: auto;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font);
+}
+
+body {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.6;
+  background:
+    radial-gradient(80% 50% at 80% 0%, rgba(91, 124, 255, 0.14), transparent 55%),
+    radial-gradient(50% 40% at 10% 20%, rgba(83, 217, 255, 0.06), transparent 50%),
+    var(--bg-primary);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.22;
+  background-image:
+    linear-gradient(rgba(184, 202, 225, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(184, 202, 225, 0.06) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(80% 70% at 50% 0%, #000 0%, transparent 78%);
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+#root {
+  position: relative;
+  z-index: 2;
+}
+
+:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -80px;
+  z-index: 80;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 16px;
+  background: var(--blue);
+  color: #07090d;
+  font-weight: 600;
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+@media (max-width: 760px) {
+  body {
+    font-size: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
