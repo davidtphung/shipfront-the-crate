@@ -2013,6 +2013,15 @@ footer {
     letter-spacing: 0.06em;
   }
 
+  /* The hero label runs long on a phone. Drop the leading rule and tighten. */
+  .hero-eyebrow {
+    letter-spacing: 0.1em;
+  }
+
+  .hero-eyebrow::before {
+    display: none;
+  }
+
   .nav-links .cta-pill {
     padding: 0 16px;
   }
