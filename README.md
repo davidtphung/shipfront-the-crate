@@ -1,6 +1,6 @@
 # shipfront-the-crate
 
-Shipfront Terminal demo: **THE CRATE**. Black ground, white type, red #FF2D2D wire cube.
+Shipfront Terminal demo: **THE CRATE**. Black ground, white type, red #FF2D2D wire cube. Space Grotesk 400/700. You Sell. We Ship.
 
 ## Live Site
 

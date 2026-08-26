@@ -1,0 +1,8 @@
+node_modules
+.playwright-mcp
+*.png
+live-*.png
+verify-*.png
+restore-*.png
+web/dist
+web/node_modules
