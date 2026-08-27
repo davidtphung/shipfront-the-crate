@@ -1,14 +1,5 @@
 <svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
   <rect width="180" height="180" rx="40" fill="#000000"/>
-  <!-- Back face -->
-  <path d="M55 72 L90 55 L125 72 L125 108 L90 125 L55 108 Z" stroke="#FF2D2D" stroke-width="2.5" fill="none"/>
-  <!-- Front face -->
-  <path d="M40 82 L75 65 L110 82 L110 118 L75 135 L40 118 Z" stroke="#FF2D2D" stroke-width="2.5" fill="none"/>
-  <!-- Connecting edges -->
-  <line x1="55" y1="72" x2="40" y2="82" stroke="#FF2D2D" stroke-width="2.5"/>
-  <line x1="90" y1="55" x2="75" y2="65" stroke="#FF2D2D" stroke-width="2.5"/>
-  <line x1="125" y1="72" x2="110" y2="82" stroke="#FF2D2D" stroke-width="2.5"/>
-  <line x1="125" y1="108" x2="110" y2="118" stroke="#FF2D2D" stroke-width="2.5"/>
-  <line x1="90" y1="125" x2="75" y2="135" stroke="#FF2D2D" stroke-width="2.5"/>
-  <line x1="55" y1="108" x2="40" y2="118" stroke="#FF2D2D" stroke-width="2.5"/>
+  <!-- THE CRATE 1A EVEN: true 30° isometric unit cube. No yaw. -->
+  <path d="M90 26 L145.42562584 58 L145.42562584 122 L90 154 L34.57437416 122 L34.57437416 58 Z M90 26 L90 154 M145.42562584 58 L34.57437416 122 M34.57437416 58 L145.42562584 122" stroke="#FF2D2D" stroke-width="2.5" stroke-linejoin="miter" stroke-linecap="square" stroke-miterlimit="2" fill="none"/>
 </svg>
