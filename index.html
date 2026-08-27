@@ -44,14 +44,20 @@
                     <h1 class="hero-title">You Sell. We Ship.</h1>
                 </div>
                 <div class="clip-mask hero-line">
-                    <p class="lede">You sell. We run the floor.</p>
+                    <p class="lede hero-deck">You sell. We run the floor.</p>
                 </div>
                 <div class="clip-mask hero-line">
-                    <p class="lede">A person at Shipfront replies. The warehouse is at 1933 S. Broadway.</p>
+                    <p class="lede hero-meta">A person at Shipfront replies. The warehouse is at 1933 S. Broadway.</p>
                 </div>
                 <div class="hero-act">
                     <a href="quote/" class="cta-pill">Get a Quote</a>
                 </div>
+                <ul class="hero-specs" aria-label="What we do">
+                    <li>Warehousing</li>
+                    <li>Fulfillment</li>
+                    <li>eCommerce Integrations</li>
+                    <li>Location</li>
+                </ul>
             </div>
             <div class="hero-cube" aria-hidden="true">
                 <svg class="cube-spin" width="220" height="220" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -65,31 +71,38 @@
             </div>
         </section>
 
-        <section class="band lane inverse-band" aria-labelledby="lane-heading">
+        <section id="how" class="band lane inverse-band" aria-labelledby="lane-heading">
             <div class="content-wrapper" data-reveal>
                 <div class="section-head" data-scrub>
-                    <p class="eyebrow">The lane</p>
-                    <h2 class="clip-line" id="lane-heading"><span>Port to customer.</span></h2>
+                    <p class="eyebrow eyebrow-sleeve">
+                        <span>How it works</span>
+                        <span class="sleeve-index">Port to customer</span>
+                    </p>
+                    <h2 class="clip-line" id="lane-heading"><span>Freight lands on our floor. Orders leave it.</span></h2>
                 </div>
-                <ol class="route" aria-label="Value chain from port to customer">
-                    <li>
-                        <span class="step">01</span>
-                        <span>Port</span>
+                <ol class="flow" aria-label="How an order moves through Shipfront">
+                    <li class="flow-step">
+                        <p class="flow-index">01</p>
+                        <h3 class="flow-name">Inbound</h3>
+                        <p class="flow-act">We receive your freight at the dock and check it onto the floor.</p>
                     </li>
-                    <li>
-                        <span class="step">02</span>
-                        <span>Freight</span>
+                    <li class="flow-step">
+                        <p class="flow-index">02</p>
+                        <h3 class="flow-name">Floor</h3>
+                        <p class="flow-act">Your product is racked, organized, and counted where we can reach it.</p>
                     </li>
-                    <li class="route-ours">
-                        <span class="step">03</span>
-                        <span>Warehouse</span>
+                    <li class="flow-step">
+                        <p class="flow-index">03</p>
+                        <h3 class="flow-name">Fulfillment</h3>
+                        <p class="flow-act">Orders are picked, packed, and labeled to the spec you set.</p>
                     </li>
-                    <li>
-                        <span class="step">04</span>
-                        <span>Customer</span>
+                    <li class="flow-step">
+                        <p class="flow-index">04</p>
+                        <h3 class="flow-name">Ship</h3>
+                        <p class="flow-act">Cartons leave the dock for your customer, FBA, or last mile.</p>
                     </li>
                 </ol>
-                <p class="lede">Shipfront sits in warehouse and integration.</p>
+                <p class="lede flow-note"><span>Freight is coordinated. We do not run the truck. Shipfront sits in warehouse and integration.</span></p>
             </div>
         </section>
 
@@ -196,26 +209,37 @@
             <div class="content-wrapper" data-reveal>
                 <div class="why-rule" aria-hidden="true"></div>
                 <div class="section-head" data-scrub>
-                    <p class="eyebrow">Why Shipfront</p>
-                    <h2 class="clip-line" id="why-heading"><span>Why Shipfront</span></h2>
+                    <p class="eyebrow eyebrow-sleeve">
+                        <span>Why Shipfront</span>
+                        <span class="sleeve-index">01 / 04</span>
+                    </p>
+                    <h2 class="clip-line why-h2" id="why-heading"><span>Why Shipfront</span></h2>
+                    <p class="deck">Four things decide whether an order ships. We hold all four on one floor.</p>
                 </div>
 
+                <ul class="outcomes" aria-label="What you stop carrying">
+                    <li class="outcome">No warehouse lease.</li>
+                    <li class="outcome">No pick crew to hire.</li>
+                    <li class="outcome">No second system to run.</li>
+                </ul>
+
                 <article class="why-row">
+                    <p class="why-index" aria-hidden="true">01</p>
+                    <div class="why-copy">
+                        <h3>Warehousing</h3>
+                        <p class="why-out">Your product gets an address.</p>
+                        <p>Our warehouses hold your product on our floor, secured and organized, until it ships to your customer.</p>
+                    </div>
                     <div class="why-still still-grain">
                         <img src="images/procurement.jpg" alt="Warehouse racking and pick bins stocked with cartons">
                     </div>
-                    <div class="why-copy">
-                        <h3>Warehousing</h3>
-                        <p>Our warehouses hold your product on our floor, secured and organized, until it ships to your customer.</p>
-                    </div>
                 </article>
 
-                <article class="why-row why-row-flip">
-                    <div class="why-still still-grain">
-                        <img src="images/fulfillment.jpg" alt="Warehouse racking and pick aisle">
-                    </div>
+                <article class="why-row">
+                    <p class="why-index" aria-hidden="true">02</p>
                     <div class="why-copy">
                         <h3>Fulfillment</h3>
+                        <p class="why-out">Every order leaves the way you specified.</p>
                         <p>We build custom workflows to pick, pack, label, and ship your products exactly how you would like.</p>
                         <ul class="chips">
                             <li>Inbound</li>
@@ -227,26 +251,38 @@
                             <li>Same-Day Delivery</li>
                         </ul>
                     </div>
+                    <div class="why-still still-grain">
+                        <img src="images/fulfillment.jpg" alt="Warehouse racking and pick aisle">
+                    </div>
                 </article>
 
                 <article class="why-row why-integrations">
-                    <div class="why-still why-still--dock still-grain">
-                        <img src="images/integration.jpg" alt="Trailers parked in rows at loading docks, seen from above">
-                    </div>
+                    <p class="why-index" aria-hidden="true">03</p>
                     <div class="why-copy">
                         <h3>eCommerce Integrations</h3>
+                        <p class="why-out">The store talks to the floor.</p>
                         <p>The stack you already sell on.</p>
+                    </div>
+                    <div class="why-still why-still--dock still-grain">
+                        <img src="images/integration.jpg" alt="Trailers parked in rows at loading docks, seen from above">
                     </div>
                 </article>
 
                 <article class="why-row why-row-type">
+                    <p class="why-index" aria-hidden="true">04</p>
                     <div class="why-copy">
                         <h3>Location</h3>
+                        <p class="why-out">Downtown, on the freeway grid.</p>
                         <p>1933 S. Broadway, Los Angeles CA 90007. Downtown L.A., next to the 10, 110, and 101.</p>
                     </div>
                 </article>
 
-                <a href="quote/" class="cta-pill why-cta">Get a Quote</a>
+                <div class="why-close">
+                    <p class="eyebrow">Get started</p>
+                    <h2 class="close-title">Send us the product. We will run the floor.</h2>
+                    <p class="lede">A person at Shipfront replies. The warehouse is at 1933 S. Broadway.</p>
+                    <a href="quote/" class="cta-pill why-cta">Get a Quote</a>
+                </div>
             </div>
         </section>
     </main>
