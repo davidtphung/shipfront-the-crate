@@ -1,6 +1,6 @@
 # shipfront-the-crate
 
-Shipfront Terminal demo: **THE CRATE**. Black ground, white type, red #FF2D2D wire cube.
+Shipfront Terminal demo: **THE CRATE**. Black ground, white type, hard-line red #FF2D2D isometric cube.
 
 ## Live Site
 
@@ -22,12 +22,14 @@ Shipfront Terminal demo: **THE CRATE**. Black ground, white type, red #FF2D2D wi
 - Get a Quote `/quote/`
 - Contact `/contact/`
 
-## Identity Lock (THE CRATE 1A EVEN)
+## Identity Lock (THE CRATE)
 
 - **Language**: Terminal. Ground #000000. Type white. Space Grotesk 400 and 700. JetBrains Mono for meta and step numbers.
 - **Accent**: #FF2D2D only. CTA fill is #FF2D2D with BLACK label (7:1+ contrast).
-- **Logo**: THE CRATE 1A EVEN. Side-on axonometric 12-edge even wire cube, red #FF2D2D on black.
-- **Tagline**: You Sell. We Ship.
+- **Logo**: Hard-line isometric box. Visible faces: top + two sides meeting at a front vertical edge. Faces filled #000. Uniform #FF2D2D strokes. No gradients, no shear, no rotateY/perspective, no yaw.
+- **Tagline**: You Sell. We Ship. eCommerce at Scale
+- **Quote**: Required Name, Email, Phone. Optional Company Name, Website, Message. Preview only.
+- **Contact**: 1933 S. Broadway, Los Angeles CA 90007. info@myshipfront.com. No business phone.
 
 ## Development
 
