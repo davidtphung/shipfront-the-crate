@@ -724,111 +724,21 @@ footer p {
 .hero-cube {
   position: absolute;
   right: max(-4vw, -60px);
-  bottom: -12vh;
+  bottom: -8vh;
   z-index: 1;
-  width: min(36vw, 430px);
-  opacity: 0.5;
-  perspective: 1400px;
+  width: min(34vw, 400px);
+  opacity: 1;
 }
 
 .hero-cube svg {
+  display: block;
   width: 100%;
   height: auto;
-  transform-origin: 50% 50%;
 }
 
-/* Same 1A EVEN paths. Only the rendered stroke is scaled back so the mark
-   reads as a wireframe at hero size instead of a solid shape. */
-.hero-cube svg g {
-  stroke-width: 0.14;
-}
-
-/* THE CRATE living mark. The 1A EVEN paths are untouched: the stroke draws
-   itself on load, then the three inner faces breathe on an even 10s cycle.
-   No yaw at rest. CRATE stays even, never corner-on. */
-.js .mark g path,
-.js .cube-spin g path {
-  stroke-dashoffset: 0;
-}
-
-.js .mark g path:nth-child(1),
-.js .cube-spin g path:nth-child(1) {
-  --len: 36;
-  stroke-dasharray: 36;
-  animation: crate-draw 0.7s ease-out both;
-}
-
-.js .mark g path:nth-child(2),
-.js .cube-spin g path:nth-child(2) {
-  --len: 12;
-  stroke-dasharray: 12;
-  animation:
-    crate-draw 0.55s ease-out 0.3s both,
-    crate-face 10s ease-in-out 1.15s infinite;
-}
-
-.js .mark g path:nth-child(3),
-.js .cube-spin g path:nth-child(3) {
-  --len: 6;
-  stroke-dasharray: 6;
-  animation:
-    crate-draw 0.5s ease-out 0.45s both,
-    crate-face 10s ease-in-out 1.15s infinite;
-}
-
-.js .mark g path:nth-child(4),
-.js .cube-spin g path:nth-child(4) {
-  --len: 12;
-  stroke-dasharray: 12;
-  animation:
-    crate-draw 0.55s ease-out 0.5s both,
-    crate-face 10s ease-in-out 1.15s infinite;
-}
-
-@keyframes crate-draw {
-  from {
-    stroke-dashoffset: var(--len, 36);
-  }
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-@keyframes crate-face {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.45;
-  }
-}
-
-/* Nav mark: an even 8deg nod, 180ms. */
 .logo .mark {
-  transform-origin: 50% 50%;
-  transition: transform 180ms ease-out;
-}
-
-.logo:hover .mark,
-.logo:focus-visible .mark {
-  transform: perspective(160px) rotateX(8deg);
-}
-
-/* Hero mark: one slow even nod, then it settles back flat. A yaw would
-   crush this flat wireframe to a line at 90deg, so the nod carries it. */
-.hero-cube.is-nodding .cube-spin {
-  animation: crate-nod 12s ease-in-out both;
-}
-
-@keyframes crate-nod {
-  0%,
-  100% {
-    transform: rotateX(0deg);
-  }
-  50% {
-    transform: rotateX(8deg);
-  }
+  display: block;
+  flex-shrink: 0;
 }
 
 .band {
@@ -1490,6 +1400,12 @@ label {
   color: var(--muted);
 }
 
+.field-opt {
+  margin-left: 8px;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.38);
+}
+
 input,
 textarea {
   width: 100%;
@@ -1502,6 +1418,11 @@ textarea {
   font: inherit;
   font-size: 15px;
   transition: border-color 0.4s var(--ease);
+}
+
+textarea {
+  min-height: 140px;
+  resize: vertical;
 }
 
 input:hover,
@@ -2285,24 +2206,9 @@ footer {
     transform: none;
   }
 
-  /* Static drawn cube. No draw-on, no face pulse, no nod.
-     :nth-child(n) matches the specificity of the draw rules above. */
-  .js .mark g path:nth-child(n),
-  .js .cube-spin g path:nth-child(n),
-  .hero-cube.is-nodding .cube-spin,
-  .cube-spin,
   .blueprint {
     animation: none;
-    stroke-dasharray: none;
-    stroke-dashoffset: 0;
     opacity: 1;
-  }
-
-  .logo .mark,
-  .logo:hover .mark,
-  .logo:focus-visible .mark {
-    transform: none;
-    transition: none;
   }
 }
 

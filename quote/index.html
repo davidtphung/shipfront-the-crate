@@ -18,13 +18,13 @@
     <header class="hud-bar" role="banner">
         <nav role="navigation" aria-label="Main navigation">
             <a href="./" class="logo" aria-label="Shipfront home">
-                <svg class="mark" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <g stroke="#FF2D2D" stroke-width="1.25" stroke-linecap="square" stroke-linejoin="miter">
-                        <path d="M7 9 L12 6 L17 9 L17 15 L12 18 L7 15 Z"/>
-                        <path d="M7 9 L12 12 L17 9"/>
-                        <path d="M12 12 L12 18"/>
-                        <path d="M7 15 L12 12 L17 15"/>
-                    </g>
+                <svg class="mark" width="20" height="20" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path fill="#000000" d="M80 32 L121.569 56 L80 80 L38.431 56 Z"/>
+                    <path fill="#000000" d="M38.431 56 L80 80 L80 128 L38.431 104 Z"/>
+                    <path fill="#000000" d="M121.569 56 L80 80 L80 128 L121.569 104 Z"/>
+                    <path stroke="#FF2D2D" stroke-width="7" stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="2" d="M80 32 L121.569 56 L121.569 104 L80 128 L38.431 104 L38.431 56 Z"/>
+                    <path stroke="#FF2D2D" stroke-width="7" stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="2" d="M38.431 56 L80 80 L121.569 56"/>
+                    <path stroke="#FF2D2D" stroke-width="7" stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="2" d="M80 80 L80 128"/>
                 </svg>
                 <span class="wordmark">SHIPFRONT</span>
             </a>
@@ -45,7 +45,7 @@
                     <h1>Get a Quote</h1>
                 </div>
                 <div class="clip-mask hero-line">
-                    <p class="lede" id="quote-hint">Name, email, and company. This preview does not send.</p>
+                    <p class="lede" id="quote-hint">Name, email, and phone. Company, website, and message are optional. This preview does not send.</p>
                 </div>
             </div>
         </section>
@@ -62,8 +62,20 @@
                         <input type="email" id="email" name="email" required aria-required="true" autocomplete="email">
                     </div>
                     <div class="form-group">
-                        <label for="company">Company</label>
-                        <input type="text" id="company" name="company" required aria-required="true" autocomplete="organization">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" name="phone" required aria-required="true" autocomplete="tel">
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Company Name <span class="field-opt">optional</span></label>
+                        <input type="text" id="company" name="company" autocomplete="organization">
+                    </div>
+                    <div class="form-group">
+                        <label for="website">Website <span class="field-opt">optional</span></label>
+                        <input type="text" id="website" name="website" autocomplete="url" inputmode="url" placeholder="https://">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message <span class="field-opt">optional</span></label>
+                        <textarea id="message" name="message" rows="5"></textarea>
                     </div>
                     <button type="submit" class="cta-pill">Submit Request</button>
                 </form>

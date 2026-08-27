@@ -322,30 +322,6 @@
         });
     }
 
-    /* Hero mark: one slow even nod per invitation, then it settles back flat.
-       A nod already under way is never restarted or cut short. */
-    var cube = document.querySelector('.hero-cube');
-    var hero = document.querySelector('.hero');
-
-    if (cube && hero) {
-        var nodding = false;
-
-        var nodCube = function () {
-            if (nodding || reduceOn()) return;
-            nodding = true;
-            cube.classList.add('is-nodding');
-        };
-
-        cube.addEventListener('animationend', function (ev) {
-            if (ev.animationName !== 'crate-nod') return;
-            cube.classList.remove('is-nodding');
-            nodding = false;
-        });
-
-        cube.addEventListener('pointerenter', nodCube);
-        hero.addEventListener('focusin', nodCube);
-    }
-
     /* ---- Spring scroll ---------------------------------------------------
        The jump to the Why band rides the same critically damped spring as the
        sheet. Any wheel, touch, or key from the reader cancels it on the spot,
