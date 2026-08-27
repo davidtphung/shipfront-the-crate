@@ -32,25 +32,27 @@
 
 :root {
   --ground: #000000;
-  --panel: #060606;
-  --band: #090909;
+  --panel: #000000;
+  --band: #000000;
   --type: #ffffff;
   --accent: #ff2d2d;
   --muted: rgba(255, 255, 255, 0.62);
   --line: rgba(255, 255, 255, 0.14);
-  --hair: rgba(255, 255, 255, 0.1);
+  /* AREA hairline on black. */
+  --hair: rgba(255, 255, 255, 0.07);
   --mark: rgba(255, 255, 255, 0.55);
   --font: "Space Grotesk", sans-serif;
   --mono: "JetBrains Mono", ui-monospace, monospace;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --press: cubic-bezier(0.22, 1, 0.36, 1);
   --cine: 0.82s;
   --cine-long: 0.95s;
   --grid: 48px;
-  --air: 168px;
-  /* Editorial recut: squared corners, one radius token, 0 to 4px. */
+  --air: 184px;
+  /* One radius token, 0 to 4px. */
   --r: 2px;
-  /* Figma 6:541 Asimov card set */
+  /* Caps run at 11px across the site. */
+  --cap: 11px;
+  /* Asimov card set. */
   --card-move: 220ms;
   --card-press: 120ms;
   --card-focus: 80ms;
@@ -98,7 +100,7 @@ address {
   position: absolute;
   left: 12px;
   top: -80px;
-  z-index: 40;
+  z-index: 44;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -127,18 +129,18 @@ address {
   outline: none;
 }
 
-/* Figma 6:541 grid. 48px hairline, faded so it reads as atmosphere. */
+/* 48px hairline grid, faded so it reads as atmosphere. */
 .blueprint {
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
   background-size: 48px 48px;
-  -webkit-mask-image: radial-gradient(125% 95% at 50% 0%, #000 0%, rgba(0, 0, 0, 0.55) 44%, transparent 84%);
-  mask-image: radial-gradient(125% 95% at 50% 0%, #000 0%, rgba(0, 0, 0, 0.55) 44%, transparent 84%);
+  -webkit-mask-image: radial-gradient(125% 95% at 50% 0%, #000 0%, rgba(0, 0, 0, 0.5) 44%, transparent 82%);
+  mask-image: radial-gradient(125% 95% at 50% 0%, #000 0%, rgba(0, 0, 0, 0.5) 44%, transparent 82%);
 }
 
 /* Soft radial stage light. White only, under 6%, so the black stays black
@@ -154,7 +156,6 @@ address {
     radial-gradient(70% 60% at 96% 84%, rgba(255, 255, 255, 0.022), transparent 60%);
 }
 
-.canvas-grain,
 body::after {
   content: "";
   position: fixed;
@@ -166,57 +167,6 @@ body::after {
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.6 0'/></filter><rect width='100%25' height='100%25' filter='url(%23g)'/></svg>");
   background-size: 180px 180px;
 }
-
-.grid-tick {
-  position: fixed;
-  top: calc(var(--grid) * 3);
-  left: 0;
-  z-index: 6;
-  width: 28px;
-  height: 1px;
-  background: var(--accent);
-  pointer-events: none;
-}
-
-.crop-layer,
-.hud-corners {
-  position: fixed;
-  inset: 14px;
-  z-index: 18;
-  pointer-events: none;
-}
-
-.crop {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-}
-
-.crop::before,
-.crop::after {
-  content: "";
-  position: absolute;
-  background: var(--mark);
-}
-
-.crop::before {
-  width: 20px;
-  height: 1px;
-  left: 0;
-  top: 50%;
-}
-
-.crop::after {
-  width: 1px;
-  height: 20px;
-  left: 50%;
-  top: 0;
-}
-
-.crop.tl { top: -10px; left: -10px; }
-.crop.tr { top: -10px; right: -10px; }
-.crop.bl { bottom: -10px; left: -10px; }
-.crop.br { bottom: -10px; right: -10px; }
 
 .edge-rule {
   position: absolute;
@@ -230,16 +180,17 @@ body::after {
 .content-wrapper {
   position: relative;
   z-index: 2;
-  width: min(1200px, calc(100% - 40px));
+  width: min(1240px, calc(100% - 48px));
   margin: 0 auto;
 }
 
 .content-wrapper.narrow {
-  width: min(640px, calc(100% - 40px));
+  width: min(640px, calc(100% - 48px));
 }
 
-/* HUD nav. Transparent over the hero, then a compact dark bar. The settle is
-   scrubbed off scroll position, so the bar arrives instead of snapping. */
+/* HUD nav. Transparent over the hero, then a compact solid bar. The settle is
+   scrubbed off scroll position, so the bar arrives instead of snapping.
+   Solid black at rest, never frosted, never glass. */
 .hud-bar {
   --settle: 0;
   --read: 0;
@@ -249,8 +200,8 @@ body::after {
   left: 0;
   z-index: 20;
   display: block;
-  padding: 0 20px;
-  background: rgba(0, 0, 0, calc(var(--settle) * 0.96));
+  padding: 0 24px;
+  background: rgba(0, 0, 0, var(--settle));
   border: 0;
   box-shadow: none;
   backdrop-filter: none;
@@ -293,7 +244,7 @@ html:not(.js) .hud-bar,
 
 .stamp {
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: var(--cap);
   font-weight: 400;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -366,7 +317,7 @@ nav {
 
 .cta-pill,
 .why-cta,
-.cta-button-large {
+.tile-cta {
   --btn: 0px;
   --btn-z: 1;
   display: inline-flex;
@@ -383,31 +334,33 @@ nav {
   font-weight: 400;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  white-space: nowrap;
   cursor: pointer;
-  transform: translateY(var(--btn)) scale(var(--btn-z));
-  box-shadow: 0 0 0 rgba(255, 45, 45, 0);
-  transition:
-    transform var(--card-move) var(--ease),
-    box-shadow var(--card-move) var(--ease);
+  transform: translate3d(0, var(--btn), 0) scale(var(--btn-z));
+  transition: transform var(--card-move) var(--ease);
 }
 
 .cta-pill:hover,
 .cta-pill:focus-visible,
 .why-cta:hover,
-.why-cta:focus-visible,
-.cta-button-large:hover,
-.cta-button-large:focus-visible {
+.why-cta:focus-visible {
   --btn: -2px;
-  box-shadow: 0 10px 26px rgba(255, 45, 45, 0.24);
 }
 
-.cta-pill:active,
-.why-cta:active,
-.cta-button-large:active {
+/* Press has exactly one owner. With the script live that is the spring, which
+   starts on pointer down and hands its live value straight to the settle. This
+   fallback only runs when there is no script to do it. */
+html:not(.js) .cta-pill:active,
+html:not(.js) .why-cta:active {
   --btn: 0px;
   --btn-z: 0.97;
-  transition-duration: var(--card-press);
+  transition-duration: 100ms;
   transition-timing-function: ease-out;
+}
+
+/* While a spring is running the element carries its own per frame value. */
+.is-springing {
+  transition: none !important;
 }
 
 /* Text links in the bar get their own hairline instead of a second pill. */
@@ -441,7 +394,7 @@ nav {
   margin: 0 0 22px;
   color: var(--muted);
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: var(--cap);
   font-weight: 400;
   letter-spacing: 0.18em;
   line-height: 1;
@@ -463,7 +416,7 @@ nav {
   flex: 0 0 28px;
 }
 
-/* Sleeve index. Catalog meta pulled from the existing step numbers. */
+/* Sleeve index. Catalog meta pulled from the existing cut numbers. */
 .eyebrow-sleeve {
   gap: 0;
 }
@@ -546,16 +499,6 @@ h2,
   max-width: 22ch;
 }
 
-.why-copy h3 {
-  margin: 0;
-  font-family: var(--font);
-  font-size: clamp(28px, 3.6vw, 44px);
-  font-weight: 700;
-  line-height: 1.04;
-  letter-spacing: -0.035em;
-  text-transform: none;
-}
-
 /* The one huge line on the page. It sets the ceiling every other size
    measures down from. */
 .why-h2 {
@@ -577,7 +520,6 @@ h2,
 }
 
 .lede,
-.card-body,
 .why-copy p,
 .form-notice p,
 .contact-block p,
@@ -589,18 +531,7 @@ footer p {
 }
 
 .lede,
-.why-copy p,
-.card-body {
-  color: var(--muted);
-}
-
-.step,
-.card-step {
-  margin: 0 0 10px;
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+.why-copy p {
   color: var(--muted);
 }
 
@@ -708,7 +639,6 @@ footer p {
 
 .hero-copy {
   z-index: 2;
-  width: min(1200px, calc(100% - 40px));
   /* The empty right half of the wrapper must not swallow the mark's hover. */
   pointer-events: none;
 }
@@ -730,27 +660,6 @@ footer p {
   text-transform: none;
   color: #fff;
   -webkit-text-fill-color: #fff;
-}
-
-.bar-strip {
-  width: min(520px, 100%);
-  height: 22px;
-  margin: 0 0 22px;
-  background: repeating-linear-gradient(
-    90deg,
-    #fff 0 1px,
-    transparent 1px 4px,
-    #fff 4px 6px,
-    transparent 6px 8px,
-    #fff 8px 9px,
-    transparent 9px 14px,
-    #fff 14px 17px,
-    transparent 17px 19px,
-    #fff 19px 20px,
-    transparent 20px 24px
-  );
-  opacity: 0.28;
-  pointer-events: none;
 }
 
 .hero .lede {
@@ -781,7 +690,7 @@ footer p {
   display: flex;
   flex-wrap: wrap;
   gap: 0 24px;
-  width: min(720px, 100%);
+  width: min(760px, 100%);
   margin: 52px 0 0;
   padding: 18px 0 0;
   border-top: 1px solid var(--hair);
@@ -794,7 +703,7 @@ footer p {
   gap: 10px;
   color: var(--muted);
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: var(--cap);
   letter-spacing: 0.16em;
   line-height: 1.8;
   text-transform: uppercase;
@@ -810,26 +719,6 @@ footer p {
 .js .hero-specs {
   opacity: 0;
   animation: rise-in var(--cine) var(--ease) 1020ms both;
-}
-
-.spec-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 0 0 28px;
-  padding: 0;
-  list-style: none;
-}
-
-.spec-chips li {
-  padding: 6px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  border-radius: var(--r);
-  background: transparent;
-  color: var(--muted);
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
 }
 
 .hero-cube {
@@ -942,12 +831,6 @@ footer p {
   }
 }
 
-.inverse-band {
-  background: var(--band);
-  border-top: 1px solid rgba(255, 45, 45, 0.5);
-  border-bottom: 1px solid rgba(255, 45, 45, 0.5);
-}
-
 .band {
   position: relative;
   padding: var(--air) 0;
@@ -955,13 +838,13 @@ footer p {
 
 /* Sequential how-it-works. Four columns divided by hairlines, one accent
    rule across the top that draws inbound to ship. No panels, no radius:
-   the sequence is the shape. */
+   the sequence is the shape, and it stays short so the floor carries scale. */
 .flow {
   position: relative;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0;
-  margin: 84px 0 0;
+  margin: 72px 0 0;
   padding: 0;
   list-style: none;
   border-top: 1px solid var(--hair);
@@ -991,7 +874,7 @@ footer p {
 
 .flow-step {
   position: relative;
-  padding: 34px 32px 0 0;
+  padding: 30px 32px 0 0;
   min-width: 0;
 }
 
@@ -1001,9 +884,9 @@ footer p {
 }
 
 .flow-index {
-  margin: 0 0 18px;
+  margin: 0 0 16px;
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: var(--cap);
   font-weight: 400;
   letter-spacing: 0.2em;
   line-height: 1;
@@ -1011,7 +894,7 @@ footer p {
 }
 
 .flow-name {
-  margin: 0 0 12px;
+  margin: 0 0 10px;
   font-family: var(--font);
   font-size: clamp(19px, 1.9vw, 24px);
   font-weight: 700;
@@ -1021,16 +904,16 @@ footer p {
 
 .flow-act {
   margin: 0;
-  max-width: 24ch;
+  max-width: 22ch;
   color: var(--muted);
   font-size: 15px;
   line-height: 1.5;
 }
 
 .flow-note {
-  margin: 72px 0 0;
+  margin: 64px 0 0;
   max-width: none;
-  padding-top: 30px;
+  padding-top: 28px;
   border-top: 1px solid var(--hair);
 }
 
@@ -1056,7 +939,6 @@ footer p {
 .js [data-reveal].is-in .flow-step:nth-child(4) { transition-delay: 610ms; }
 
 @media (hover: hover) and (pointer: fine) {
-  .flow-step .flow-name,
   .flow-step .flow-act {
     transition: color var(--card-move) ease-out;
   }
@@ -1066,14 +948,14 @@ footer p {
   }
 }
 
-/* Floor bento: 3-col Chatto stack. Crop marks stay on the box. */
+/* ---- The floor. Capability tiles on an uneven 3 column bento. ---- */
+
 .cards-box {
   position: relative;
-  width: 1200px;
-  max-width: 100%;
-  margin: 64px auto 0;
-  padding: 16px;
-  border: 1px solid rgba(255, 45, 45, 0.42);
+  width: 100%;
+  margin: 72px auto 0;
+  padding: 20px;
+  border: 1px solid rgba(255, 45, 45, 0.38);
   overflow: visible;
 }
 
@@ -1095,292 +977,94 @@ footer p {
   position: absolute;
   z-index: 5;
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: var(--cap);
   font-weight: 400;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
   color: var(--accent);
   pointer-events: none;
 }
 
-.coord.tl { top: -18px; left: 10px; }
-.coord.tr { top: -18px; right: 10px; }
-.coord.bl { bottom: -18px; left: 10px; }
-.coord.br { bottom: -18px; right: 10px; }
+.coord.tl { top: -22px; left: 12px; }
+.coord.tr { top: -22px; right: 12px; }
+.coord.bl { bottom: -22px; left: 12px; }
+.coord.br { bottom: -22px; right: 12px; }
 
-.cards-grid,
-.card-grid,
-.bento-grid {
+/* Uneven on both axes: the columns are unequal, and the stack inside each
+   column is unequal too. Never a 2x2. */
+.tile-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.2fr) minmax(0, 0.92fr);
+  gap: 20px;
   width: 100%;
-  margin: 0;
+  min-height: 780px;
   align-items: stretch;
-  min-height: 608px;
 }
 
-.bento-col {
+.tile-col {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
   min-width: 0;
 }
 
-.bento-tile {
-  --rx: 0deg;
-  --ry: 0deg;
+.tile-col--a .tile--cut { flex: 1.74 1 0; }
+.tile-col--a .tile--plate { flex: 0 0 auto; }
+.tile-col--b .tile--hero { flex: 1 1 0; }
+.tile-col--c .tile--cut:first-child { flex: 1 1 0; }
+.tile-col--c .tile--cut:last-child { flex: 1.36 1 0; }
+
+.tile {
   --lift: 0px;
   --zoom: 1;
-  --mx: 50%;
-  --my: 50%;
   position: relative;
+  display: block;
   overflow: hidden;
+  min-height: 220px;
   border: 1px solid var(--hair);
   border-radius: var(--r);
   background: var(--panel);
   color: var(--type);
-  transform: perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(var(--lift)) scale(var(--zoom));
-  transform-origin: center center;
+  transform: translate3d(0, var(--lift), 0) scale(var(--zoom));
+  transform-origin: 50% 50%;
   transition:
     opacity var(--cine) var(--ease),
     transform var(--cine) var(--ease),
-    border-color 0.5s var(--ease),
-    box-shadow 0.5s var(--ease);
+    border-color var(--card-move) ease-out;
 }
 
-/* Pointer key light on the text tiles. Photo cards stay image-only. */
-.bento-tile:not(.bento-tile--photo)::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  pointer-events: none;
-  opacity: 0;
-  border-radius: inherit;
-  background: radial-gradient(46% 46% at var(--mx) var(--my), rgba(255, 255, 255, 0.06), transparent 70%);
-  transition: opacity 0.5s var(--ease);
-}
-
-.js .bento-tile {
+.js .tile {
   opacity: 0;
   --lift: 22px;
   --zoom: 0.98;
 }
 
-.js .bento-tile.is-in {
+.js .tile.is-in {
   opacity: 1;
   --lift: 0px;
   --zoom: 1;
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .js .bento-tile.is-in:hover {
-    --lift: -6px;
-    z-index: 3;
-    border-color: rgba(255, 255, 255, 0.22);
-    transition-duration: var(--card-move);
-    transition-timing-function: ease-out;
-  }
-
-  .js .bento-tile:not(.bento-tile--photo).is-in:hover::before {
-    opacity: 1;
-  }
-
-  .js .bento-tile--pop.is-in:hover {
-    border-color: rgba(255, 45, 45, 0.45);
-    box-shadow: 0 18px 60px rgba(255, 45, 45, 0.12);
-  }
-
-  /* Asimov: accent hairline on the card edge. */
-  .js .bento-tile--photo.is-in:hover {
-    border-color: var(--accent);
-  }
-
-  /* Asimov: image zoom 1.06, clipped to the card. */
-  .bento-tile--photo:hover .card-image img {
-    transform: scale(1.06);
-  }
+.tile--cut {
+  cursor: pointer;
 }
 
-/* Focus states carry the same treatment as hover, at 80ms. */
-.js .bento-tile--photo.is-in:focus-visible,
-.js .bento-tile--photo.is-in:focus-within {
-  border-color: var(--accent);
-  transition-duration: var(--card-focus);
-  transition-timing-function: ease-out;
+.tile--hero {
+  min-height: 620px;
 }
 
-.bento-tile--photo:focus-visible .card-image img,
-.bento-tile--photo:focus-within .card-image img {
-  transform: scale(1.06);
-  transition-duration: var(--card-focus);
-}
-
-/* Asimov press. */
-.js .bento-tile.is-in:active {
-  --zoom: 0.97;
-  transition-duration: var(--card-press);
-  transition-timing-function: ease-out;
-}
-
-.bento-tile--tall {
-  flex: 1.7 1 0;
-  min-height: 400px;
-}
-
-.bento-tile--loc {
-  flex: 0 0 auto;
-  min-height: 160px;
-  padding: 28px;
-}
-
-.bento-tile--loc address {
-  margin: 0;
-  font-style: normal;
-  color: var(--muted);
-}
-
-.bento-tile--sm {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  flex: 0 0 auto;
-  min-height: 138px;
-  padding: 24px;
-}
-
-.bento-sm-copy {
-  flex: 1 1 auto;
-  min-width: 0;
-}
-
-.bento-sm-still {
-  flex: 0 0 76px;
-  width: 76px;
-  height: 76px;
-  overflow: hidden;
-  border-radius: var(--r);
-}
-
-.bento-sm-still img {
+.tile-still {
+  position: absolute;
+  inset: 0;
   display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: saturate(0.82) contrast(1.03) brightness(0.86);
 }
 
-.bento-tile--ful {
-  flex: 0 0 auto;
-  padding: 28px;
-}
-
-.bento-tile--ful .chips {
-  margin-top: 18px;
-}
-
-.bento-tile--pop {
-  flex: 1 1 0;
-  min-height: 208px;
-  padding: 28px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  border-color: rgba(255, 45, 45, 0.28);
-  background:
-    radial-gradient(130% 90% at 100% 0%, #ff2d2d 0%, #7a1010 34%, #1a0000 68%, #000 100%);
-}
-
-.bento-tile--pop::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  border-radius: inherit;
-  opacity: 0.38;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.55 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-  background-size: 160px 160px;
-}
-
-.bento-tile--pop .card-label,
-.bento-tile--pop .card-body {
-  position: relative;
-  z-index: 1;
-}
-
-.bento-tile--pop .card-body {
-  color: rgba(255, 255, 255, 0.78);
-}
-
-.bento-tile--pop .card-label {
-  color: #fff;
-}
-
-.bento-tile--cloud {
-  flex: 0 0 auto;
-  min-height: 208px;
-  padding: 28px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  background: var(--panel);
-}
-
-.chips-cloud {
-  margin: 0 0 22px;
-}
-
-.bento-tile--ful .chips li,
-.chips-cloud li {
-  border-color: rgba(255, 255, 255, 0.16);
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.bento-tile--photo {
-  padding: 0;
-}
-
-.bento-tile--photo .card-image {
-  position: absolute;
-  inset: 0;
-}
-
-/* Asimov: bottom bar at 82% black carrying the existing label and body.
-   Readable at rest. Nothing is hidden until hover. */
-.bento-tile--photo .card-overlay {
-  inset: auto 0 0 0;
-  opacity: 1;
-  padding: 22px 24px 24px;
-  background: rgba(0, 0, 0, 0.82);
-  transition: none;
-}
-
-/* Track-list feel: the four cut numbers carry the accent. Other meta does not. */
-#floor .bento-tile--photo .card-step,
-#floor .bento-tile--sm .card-step,
-#floor .bento-tile--ful .card-step {
-  margin: 0 0 6px;
-  color: var(--accent);
-  opacity: 0.9;
-}
-
-.bento-tile--photo .card-label {
-  margin: 0 0 6px;
-  color: #fff;
-}
-
-.bento-tile--photo .card-step,
-.bento-tile--photo .card-body {
-  color: rgba(255, 255, 255, 0.9);
-}
-
-/* Light grade only, so daylight stills sit on black without going muddy. */
-.bento-tile--photo .card-image img {
+.tile-still img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: 50% 44%;
+  /* Light grade only, so daylight stills sit on black without going muddy. */
   filter: saturate(0.86) contrast(1.03) brightness(0.9);
   transform: scale(1);
   transform-origin: 50% 44%;
@@ -1389,31 +1073,155 @@ footer p {
 
 /* The dock aerial carries two painted prohibition marks near its right edge.
    Frame them out instead of touching the file. */
-.bento-tile--dock .card-image img {
+.tile--dock .tile-still img {
   width: 124%;
   max-width: none;
   object-position: 50% 62%;
   filter: saturate(0.8) contrast(1.04) brightness(0.82);
 }
 
-.card-image,
-.card img,
-.why-still img {
+.tile--hero .tile-still img {
+  object-position: 50% 50%;
+  transform-origin: 50% 50%;
+}
+
+/* Rest is the still. The face dissolves in on hover, press, or Tab focus:
+   80ms, 60% black scrim, the same copy for pointer and keyboard.
+
+   The caption plate rides on top of that scrim and deepens toward the bottom
+   edge, landing the copy on the Asimov value of 0.82 black. The scrim itself
+   never leaves 60%, and the still is never crushed with a filter. */
+.tile-face {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 34px;
+  background:
+    linear-gradient(to top, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.28) 34%, rgba(0, 0, 0, 0) 66%),
+    rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  transition: opacity var(--card-focus) linear;
+}
+
+.tile--cut:hover .tile-face,
+.tile--cut:active .tile-face,
+.tile--cut:focus-visible .tile-face,
+.tile--cut:focus-within .tile-face {
+  opacity: 1;
+}
+
+/* Caption plate. Outlined, signal on the border, no fill. */
+.tile-sleeve {
+  display: inline-flex;
+  align-items: center;
+  min-height: 22px;
+  margin: 0 0 16px;
+  padding: 0 10px;
+  border: 1px solid var(--accent);
+  border-radius: 0;
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: var(--cap);
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.tile-title {
   display: block;
-  width: 100%;
-  height: 100%;
+  margin: 0;
+  font-family: var(--font);
+  font-size: clamp(25px, 2.5vw, 36px);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -0.035em;
 }
 
-.card img,
-.why-still img {
-  object-fit: cover;
-  transition: none;
+.tile-body {
+  display: block;
+  margin: 12px 0 0;
+  max-width: 30ch;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 15px;
+  line-height: 1.5;
 }
 
-.still-grain {
-  position: relative;
-  width: 100%;
-  height: 100%;
+.tile-cta {
+  margin: 24px 0 0;
+}
+
+.tile--plate {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 218px;
+  padding: 34px;
+}
+
+.plate-title {
+  margin: 0;
+  max-width: 18ch;
+  font-family: var(--font);
+  font-size: clamp(21px, 1.9vw, 28px);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+}
+
+.tile--plate .tile-sleeve {
+  color: var(--muted);
+  border-color: var(--hair);
+}
+
+.floor-note {
+  margin: 34px 0 0;
+}
+
+.floor-note > span {
+  display: block;
+  max-width: 46ch;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  /* 220ms hover, 6px lift, accent hairline on the card edge. */
+  .js .tile--cut.is-in:hover {
+    --lift: -6px;
+    z-index: 3;
+    border-color: var(--accent);
+    transition-duration: var(--card-move);
+    transition-timing-function: ease-out;
+  }
+
+  /* Asimov: image zoom 1.06, clipped to the card. */
+  .tile--cut:hover .tile-still img {
+    transform: scale(1.06);
+  }
+}
+
+/* Focus carries the same treatment as hover, at the 80ms card focus rate. */
+.js .tile--cut.is-in:focus-visible,
+.js .tile--cut.is-in:focus-within {
+  border-color: var(--accent);
+  transition-duration: var(--card-focus);
+  transition-timing-function: ease-out;
+}
+
+.tile--cut:focus-visible .tile-still img,
+.tile--cut:focus-within .tile-still img {
+  transform: scale(1.06);
+  transition-duration: var(--card-focus);
+}
+
+/* Asimov press, for the no script case. The spring owns it otherwise. */
+html:not(.js) .tile--cut:active {
+  --zoom: 0.97;
+  transition-duration: var(--card-press);
+  transition-timing-function: ease-out;
 }
 
 .still-grain::after {
@@ -1427,43 +1235,39 @@ footer p {
   background-size: 160px 160px;
 }
 
-.card-overlay,
-.card-copy {
-  position: absolute;
-  inset: 0;
+/* Outlined chips. Signal lives on the border. Fill only when active, and an
+   active chip takes black type on the accent, never white on red. */
+.chips {
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 28px;
-  background: rgba(0, 0, 0, 0.6);
-  opacity: 0;
-  transition: opacity 80ms linear;
-  z-index: 2;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
 }
 
-.card:hover .card-overlay,
-.card:focus-within .card-overlay,
-.card:active .card-overlay,
-.card:hover .card-copy,
-.card:focus-within .card-copy,
-.card:active .card-copy {
-  opacity: 1;
+.chips li {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 5px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.72);
+  font-family: var(--mono);
+  font-size: var(--cap);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
-.card-label,
-.card-overlay h3,
-.bento-tile .card-label {
-  margin: 0 0 10px;
-  font-size: 21px;
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.03em;
+.chips li.is-active {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #000;
 }
 
-.card-body,
-.card-overlay p {
-  margin: 0;
-}
+/* ---- Why. The argument runs on type. The floor carries the picture. ---- */
 
 .why-rule {
   width: 100%;
@@ -1527,31 +1331,40 @@ footer p {
 .js [data-reveal].is-in .outcome:nth-child(2) { transition-delay: 220ms; }
 .js [data-reveal].is-in .outcome:nth-child(3) { transition-delay: 320ms; }
 
-/* Rows read left to right every time: index, argument, evidence. Consistent
+/* Rows read left to right every time: index, name, argument. Consistent
    columns give the section the rhythm of a spec sheet rather than a zigzag. */
 .why-row {
   display: grid;
-  grid-template-columns: 64px minmax(0, 1fr) minmax(0, 520px);
-  gap: 0 48px;
+  grid-template-columns: 72px minmax(0, 0.86fr) minmax(0, 1.14fr);
+  gap: 0 56px;
   align-items: start;
-  margin: 0 0 104px;
+  margin: 0 0 96px;
   padding-top: 44px;
   border-top: 1px solid var(--hair);
-  clear: both;
 }
 
 .why-index {
   margin: 0;
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: var(--cap);
   font-weight: 400;
   letter-spacing: 0.2em;
   line-height: 1.6;
   color: var(--accent);
 }
 
+.why-name h3 {
+  margin: 0;
+  font-family: var(--font);
+  font-size: clamp(28px, 3.6vw, 46px);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  text-transform: none;
+}
+
 .why-copy .why-out {
-  margin: 22px 0 0;
+  margin: 0;
   max-width: 26ch;
   color: var(--type);
   font-size: clamp(19px, 2vw, 26px);
@@ -1560,8 +1373,9 @@ footer p {
   letter-spacing: -0.02em;
 }
 
-.why-row-type {
-  grid-template-columns: 64px minmax(0, 1fr);
+.why-copy p + p {
+  margin: 20px 0 0;
+  max-width: 44ch;
 }
 
 .why-rows .why-row:last-of-type {
@@ -1580,100 +1394,22 @@ footer p {
   max-width: 40ch;
 }
 
-.why-still {
-  --zoom: 1;
-  width: 100%;
-  max-width: 100%;
-  height: 320px;
-  overflow: hidden;
-  border: 1px solid var(--hair);
-  border-radius: var(--r);
-  transform: scale(var(--zoom));
-  transition: border-color var(--card-move) ease-out, transform var(--card-move) ease-out;
-}
-
-.why-still img {
-  filter: saturate(0.86) contrast(1.03) brightness(0.9);
-}
-
-/* Asimov card motion on the Why stills. Same zoom, hairline, and press. */
-@media (hover: hover) and (pointer: fine) {
-  .js .why-row .why-still:hover,
-  .js .why-row.is-in .why-still:hover {
-    border-color: var(--accent);
-  }
-
-  .js .why-row.is-in .why-still:hover img {
-    transform: scale(1.06);
-    transition: transform var(--card-move) ease-out;
-  }
-}
-
-.js .why-row .why-still:focus-visible,
-.js .why-row .why-still:focus-within,
-.js .why-row.is-in .why-still:focus-visible,
-.js .why-row.is-in .why-still:focus-within {
-  border-color: var(--accent);
-  transition-duration: var(--card-focus);
-}
-
-.js .why-row.is-in .why-still:focus-visible img,
-.js .why-row.is-in .why-still:focus-within img {
-  transform: scale(1.06);
-  transition: transform var(--card-focus) ease-out;
-}
-
-.js .why-row .why-still:active,
-.js .why-row.is-in .why-still:active {
-  --zoom: 0.97;
-  transition-duration: var(--card-press);
-}
-
-/* Same dock aerial, landscape crop. The horizontal crop keeps the painted
-   marks out of frame, which frees the vertical band to sit on the trailers. */
-.why-still--dock img {
-  width: 124%;
-  max-width: none;
-  object-position: 50% 34%;
-}
-
-/* Clip reveal: the still opens from its own bottom edge as the row enters. */
-.js .why-row .why-still {
-  clip-path: inset(0 0 100% 0 round var(--r));
-}
-
-.js .why-row .why-still img {
-  transform: scale(1.08);
-}
-
-.js .why-row.is-in .why-still {
-  clip-path: inset(0 0 0 0 round var(--r));
-  transition:
-    clip-path 0.9s var(--ease),
-    border-color var(--card-move) ease-out,
-    transform var(--card-move) ease-out;
-}
-
-.js .why-row.is-in .why-still img {
-  transform: scale(1);
-  transition: transform 1.5s var(--ease);
-}
-
+.js .why-row .why-name,
 .js .why-row .why-copy > * {
   opacity: 0;
   transform: translateY(14px);
 }
 
+.js .why-row.is-in .why-name,
 .js .why-row.is-in .why-copy > * {
   opacity: 1;
   transform: none;
   transition: opacity var(--cine) var(--ease), transform var(--cine) var(--ease);
 }
 
-.js .why-row.is-in .why-copy > *:nth-child(1) { transition-delay: 120ms; }
-.js .why-row.is-in .why-copy > *:nth-child(2) { transition-delay: 200ms; }
-.js .why-row.is-in .why-copy > *:nth-child(3) { transition-delay: 280ms; }
-.js .why-row.is-in .why-copy > *:nth-child(4) { transition-delay: 360ms; }
+.js .why-row.is-in .why-name { transition-delay: 100ms; }
+.js .why-row.is-in .why-copy > *:nth-child(1) { transition-delay: 180ms; }
+.js .why-row.is-in .why-copy > *:nth-child(2) { transition-delay: 260ms; }
 
 .js .why-row .why-index {
   opacity: 0;
@@ -1684,42 +1420,11 @@ footer p {
   transition: opacity var(--cine) var(--ease) 60ms;
 }
 
-.why-copy h3 {
-  margin: 0;
-}
-
-.why-copy p {
-  margin: 18px 0 0;
-  max-width: 38ch;
-}
-
-.chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 24px 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.chips li {
-  display: inline-flex;
-  align-items: center;
-  min-height: 32px;
-  padding: 6px 14px;
-  border: 1px solid var(--hair);
-  border-radius: 0;
-  background: rgba(255, 255, 255, 0.02);
-  color: rgba(255, 255, 255, 0.82);
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
 .why-cta {
   margin-top: 40px;
 }
+
+/* ---- Quote and contact ---- */
 
 .page-hero {
   position: relative;
@@ -1761,9 +1466,7 @@ footer p {
   padding-bottom: 128px;
 }
 
-.quote-form,
-.contact-card,
-.form {
+.quote-form {
   padding: 40px;
   border: 1px solid var(--hair);
   border-radius: var(--r);
@@ -1779,7 +1482,7 @@ label {
   display: block;
   margin: 0 0 10px;
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: var(--cap);
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--muted);
@@ -1792,11 +1495,11 @@ textarea {
   padding: 14px 16px;
   border: 1px solid var(--line);
   border-radius: var(--r);
-  background: rgba(255, 255, 255, 0.02);
+  background: transparent;
   color: var(--type);
   font: inherit;
   font-size: 15px;
-  transition: border-color 0.4s var(--ease), background 0.4s var(--ease);
+  transition: border-color 0.4s var(--ease);
 }
 
 input:hover,
@@ -1807,21 +1510,6 @@ textarea:hover {
 input:focus-visible,
 textarea:focus-visible {
   border-color: var(--accent);
-  background: rgba(255, 255, 255, 0.04);
-}
-
-textarea {
-  min-height: 120px;
-  resize: vertical;
-}
-
-.form-notice {
-  margin: 28px 0 0;
-  padding: 24px 28px;
-  border: 1px solid rgba(255, 45, 45, 0.32);
-  border-radius: var(--r);
-  background: rgba(255, 45, 45, 0.04);
-  color: var(--muted);
 }
 
 .form-notice p {
@@ -1837,22 +1525,113 @@ textarea {
   font-weight: 700;
 }
 
-.form-notice[hidden] {
-  display: none;
-}
-
 .form-notice a,
-.contact-block a,
-.hours a {
+.contact-block a {
   color: var(--type);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
 
+/* ---- Sheet. One interruptible surface, entered and exited on one path. ---- */
+
+.sheet-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 38;
+  background: #000;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sheet-scrim.is-live {
+  pointer-events: auto;
+}
+
+.sheet {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 40;
+  padding: 14px 24px calc(32px + env(safe-area-inset-bottom, 0px));
+  background: #000;
+  border-top: 1px solid var(--accent);
+  transform: translate3d(0, 100%, 0);
+  will-change: transform;
+  touch-action: none;
+}
+
+.sheet[hidden] {
+  display: none;
+}
+
+.sheet-grip {
+  width: 44px;
+  height: 4px;
+  margin: 0 auto 22px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.sheet-panel {
+  width: min(640px, 100%);
+  margin: 0 auto;
+}
+
+.sheet-panel .eyebrow {
+  margin-bottom: 16px;
+}
+
+.sheet-title {
+  margin: 0 0 12px;
+  font-size: clamp(24px, 3.2vw, 34px);
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+  max-width: 24ch;
+}
+
+.sheet-body {
+  margin: 0;
+  max-width: 46ch;
+  color: var(--muted);
+}
+
+.sheet-act {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.sheet-dismiss {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 22px;
+  border: 1px solid var(--hair);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--type);
+  font: inherit;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color var(--card-move) ease-out;
+}
+
+.sheet-dismiss:hover,
+.sheet-dismiss:focus-visible {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
 .contact-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
+  gap: 20px;
 }
 
 .contact-block {
@@ -1863,7 +1642,7 @@ textarea {
   border-radius: var(--r);
   background: var(--panel);
   box-shadow: none;
-  transform: translateY(var(--rise));
+  transform: translate3d(0, var(--rise), 0);
   transition: border-color var(--card-move) ease-out, transform var(--card-move) var(--ease);
 }
 
@@ -1877,7 +1656,8 @@ textarea {
 .contact-block h2 {
   margin: 0 0 18px;
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: var(--cap);
+  font-weight: 400;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--muted);
@@ -1898,7 +1678,7 @@ textarea {
 .hours-list dt {
   margin: 0 0 2px;
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: var(--cap);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--muted);
@@ -1931,14 +1711,14 @@ body {
   justify-content: space-between;
   gap: 16px;
   min-height: 56px;
-  padding: 6px 20px;
+  padding: 6px 24px;
   background: #000;
   border-top: 1px solid var(--hair);
 }
 
 /* The dock waits under the fold and rises once the hero is behind you. */
 .js .dock-bar {
-  transform: translateY(100%);
+  transform: translate3d(0, 100%, 0);
   transition: transform 460ms var(--ease);
 }
 
@@ -2014,7 +1794,7 @@ footer {
 }
 
 .footer-byline {
-  width: min(1200px, calc(100% - 40px));
+  width: min(1240px, calc(100% - 48px));
   margin: 0 auto;
   color: var(--muted);
 }
@@ -2051,7 +1831,7 @@ footer {
 .js [data-reveal].is-in > *:nth-child(7) { transition-delay: 540ms; }
 .js [data-reveal].is-in > *:nth-child(8) { transition-delay: 630ms; }
 
-/* Why rows run their own clip reveal, so the section stagger leaves them alone. */
+/* Why rows run their own reveal, so the section stagger leaves them alone. */
 .js [data-reveal] > .why-row,
 .js [data-reveal].is-in > .why-row {
   opacity: 1;
@@ -2062,18 +1842,15 @@ footer {
 
 @media (max-width: 1240px) {
   :root {
-    --air: 128px;
+    --air: 132px;
   }
 
-  .cards-box {
-    width: min(1200px, calc(100% - 40px));
+  .tile-grid {
+    min-height: 660px;
   }
 
-  .bento-grid,
-  .cards-grid,
-  .card-grid {
-    width: 100%;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  .tile--hero {
+    min-height: 520px;
   }
 
   .why-rows {
@@ -2081,25 +1858,19 @@ footer {
     padding-bottom: 144px;
   }
 
-  .why-row,
-  .why-row-type {
-    grid-template-columns: 48px minmax(0, 1fr);
-    gap: 28px 28px;
-    margin-bottom: 88px;
+  .why-row {
+    grid-template-columns: 56px minmax(0, 1fr);
+    gap: 24px 28px;
+    margin-bottom: 84px;
     padding-top: 36px;
   }
 
-  .why-row .why-still {
+  .why-row .why-copy {
     grid-column: 2;
   }
 
   .outcomes {
     margin: 88px 0 104px;
-  }
-
-  .why-still {
-    width: 100%;
-    height: 280px;
   }
 
   .flow {
@@ -2130,36 +1901,78 @@ footer {
   }
 }
 
-@media (max-width: 900px) {
-  .bento-grid,
-  .cards-grid,
-  .card-grid {
-    grid-template-columns: 1fr;
+/* Two columns before one. The stack inside each column stays uneven. */
+@media (max-width: 1000px) {
+  .tile-grid {
+    grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
     min-height: 0;
   }
 
-  .bento-tile--tall {
-    min-height: 300px;
+  .tile-col--b {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .tile-col--a {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .tile-col--c {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    flex-direction: row;
+  }
+
+  .tile-col--c .tile--cut:first-child,
+  .tile-col--c .tile--cut:last-child {
+    flex: 1 1 0;
+    min-height: 320px;
+  }
+
+  .tile--hero {
+    min-height: 560px;
   }
 }
 
 @media (max-width: 860px) {
   :root {
-    --air: 88px;
+    --air: 92px;
+  }
+
+  .tile-grid,
+  .tile-col--c {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+  }
+
+  .tile-col--a,
+  .tile-col--b,
+  .tile-col--c {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .tile--cut,
+  .tile-col--c .tile--cut:first-child,
+  .tile-col--c .tile--cut:last-child {
+    min-height: 340px;
+  }
+
+  .tile--hero {
+    min-height: 420px;
+  }
+
+  .tile-face {
+    padding: 26px;
+  }
+
+  .cards-box {
+    padding: 14px;
   }
 
   .hud-bar {
-    grid-template-columns: 1fr;
     padding-top: 8px;
-  }
-
-  .hud-bar .stamp:first-child,
-  .hud-bar .stamp:last-child {
-    display: none;
-  }
-
-  .nav-links {
-    gap: 14px;
   }
 
   .contact-grid,
@@ -2227,18 +2040,16 @@ footer {
     padding-bottom: 96px;
   }
 
-  .why-row,
-  .why-row-type {
+  .why-row {
     grid-template-columns: 1fr;
     gap: 0;
     margin-bottom: 72px;
     padding-top: 28px;
   }
 
-  .why-row .why-still {
+  .why-row .why-copy {
     grid-column: 1;
-    height: 240px;
-    margin-top: 28px;
+    margin-top: 22px;
   }
 
   .why-index {
@@ -2263,9 +2074,7 @@ footer {
     padding-top: 36px;
   }
 
-  .quote-form,
-  .contact-card,
-  .form {
+  .quote-form {
     padding: 28px;
   }
 }
@@ -2329,6 +2138,11 @@ footer {
   .dock-bar p {
     font-size: 13px;
   }
+
+  .sheet {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2366,6 +2180,10 @@ footer {
   .js [data-reveal].is-in .outcome,
   .js .why-row .why-index,
   .js .why-row.is-in .why-index,
+  .js .why-row .why-name,
+  .js .why-row.is-in .why-name,
+  .js .why-row .why-copy > *,
+  .js .why-row.is-in .why-copy > *,
   .js .dock-bar,
   .js .dock-bar.is-up {
     opacity: 1;
@@ -2386,80 +2204,69 @@ footer {
     transition: none;
   }
 
+  /* No press scale and no overshoot. The cross fade carries the feedback. */
   .cta-pill,
   .why-cta,
-  .cta-button-large,
+  .tile-cta,
   .cta-pill:hover,
   .why-cta:hover,
-  .cta-button-large:hover,
   .cta-pill:focus-visible,
   .why-cta:focus-visible,
-  .cta-button-large:focus-visible {
+  .cta-pill:active,
+  .why-cta:active {
     --btn: 0px;
     --btn-z: 1;
     transform: none;
-    transition: none;
-    box-shadow: none;
+    transition: opacity 200ms linear;
   }
 
-  .js .bento-tile,
-  .js .bento-tile.is-in,
-  .js .bento-tile.is-in:hover,
-  .js .bento-tile.is-in:active,
-  .js .bento-tile.is-in:focus-visible,
-  .js .bento-tile.is-in:focus-within {
+  .js .tile,
+  .js .tile.is-in,
+  .js .tile--cut.is-in:hover,
+  .js .tile--cut.is-in:active,
+  .js .tile--cut.is-in:focus-visible,
+  .js .tile--cut.is-in:focus-within {
     opacity: 1;
     --lift: 0px;
     --zoom: 1;
-    --rx: 0deg;
-    --ry: 0deg;
     transform: none;
-    transition: none;
+    transition: border-color var(--card-focus) linear;
     box-shadow: none;
   }
 
-  .js .bento-tile::before,
-  .js .bento-tile:not(.bento-tile--photo).is-in:hover::before {
-    opacity: 0;
-    transition: none;
-  }
-
-  /* No zoom and no press scale. The accent hairline still marks the edge. */
-  .bento-tile--photo .card-image img,
-  .bento-tile--photo:hover .card-image img,
-  .bento-tile--photo:focus-visible .card-image img,
-  .bento-tile--photo:focus-within .card-image img {
+  /* No zoom on the still. The accent hairline still marks the edge. */
+  .tile-still img,
+  .tile--cut:hover .tile-still img,
+  .tile--cut:focus-visible .tile-still img,
+  .tile--cut:focus-within .tile-still img {
     animation: none;
     transform: none;
     transition: none;
   }
 
-  .js .why-row .why-still,
-  .js .why-row.is-in .why-still,
-  .js .why-row .why-still:active,
-  .js .why-row.is-in .why-still:active {
-    --zoom: 1;
-    clip-path: none;
-    transform: none;
-    transition: none;
+  /* The 80ms Focus dissolve is kept. It is the card contract, not decoration. */
+  .tile-face {
+    transition: opacity var(--card-focus) linear;
   }
 
-  .js .why-row .why-still img,
-  .js .why-row.is-in .why-still img,
-  .js .why-row.is-in .why-still:hover img,
-  .js .why-row.is-in .why-still:focus-visible img,
-  .js .why-row.is-in .why-still:focus-within img,
-  .js .why-row .why-copy > *,
-  .js .why-row.is-in .why-copy > * {
+  /* The sheet drops its travel and cross fades in place. */
+  .sheet {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+    transition: opacity 200ms linear;
+  }
+
+  .sheet.is-open {
     opacity: 1;
-    transform: none;
-    transition: none;
+  }
+
+  .sheet-scrim {
+    transition: opacity 200ms linear;
   }
 
   .hud-bar,
   .hud-bar::before,
   .contact-block,
-  .flow-step .flow-name,
   .flow-step .flow-act,
   .flow-step:hover .flow-act,
   input,
@@ -2495,11 +2302,33 @@ footer {
     transform: none;
     transition: none;
   }
+}
 
-  .cta-pill:active,
-  .why-cta:active,
-  .cta-button-large:active {
-    transform: none;
+/* Solid #000 everywhere. No scrim alpha, no grain plate, no stage light. */
+@media (prefers-reduced-transparency: reduce) {
+  .stage-light,
+  .blueprint,
+  body::after,
+  .still-grain::after,
+  .hero::before,
+  .page-hero::before {
+    display: none;
+  }
+
+  .tile-face,
+  .sheet,
+  .dock-bar,
+  .hud-bar.is-solid,
+  .hud-bar:focus-within {
+    background: #000;
+  }
+
+  .hud-bar {
+    background: rgba(0, 0, 0, var(--settle));
+  }
+
+  .sheet-scrim {
+    background: #000;
   }
 }
 
@@ -2509,21 +2338,17 @@ footer {
 }
 
 @media (forced-colors: active) {
-  .bento-tile,
+  .tile,
   .cards-box,
   .chips li,
   input,
   textarea,
-  .cta-pill {
+  .cta-pill,
+  .sheet {
     border: 1px solid ButtonText;
   }
 
-  .bento-tile--pop {
-    background: Canvas;
-    color: CanvasText;
-  }
-
-  .card-overlay {
+  .tile-face {
     background: Canvas;
   }
 }
