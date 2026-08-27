@@ -5,125 +5,313 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="/shipfront-the-crate/">
     <title>Home | Shipfront</title>
-    <meta name="description" content="Shipfront - You Sell. We Ship. Professional fulfillment services in Los Angeles.">
+    <meta name="description" content="Shipfront. You Sell. We Ship. Warehousing, fulfillment, and eCommerce integrations at 1933 S. Broadway, Los Angeles.">
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
 </head>
 <body>
     <a href="#main" class="skip-link">Skip to main content</a>
-    
-    <header role="banner">
+    <div class="stage-light" aria-hidden="true"></div>
+    <div class="blueprint" aria-hidden="true"></div>
+
+    <header class="hud-bar" role="banner">
         <nav role="navigation" aria-label="Main navigation">
-            <a href="./" class="logo" aria-label="Shipfront home">
-                <svg class="mark" width="20" height="20" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path d="M50 65 L90 45 L130 65 L130 105 L90 125 L50 105 Z" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke" fill="none"/>
-                    <path d="M30 75 L70 55 L110 75 L110 115 L70 135 L30 115 Z" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke" fill="none"/>
-                    <line x1="50" y1="65" x2="30" y2="75" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke"/>
-                    <line x1="90" y1="45" x2="70" y2="55" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke"/>
-                    <line x1="130" y1="65" x2="110" y2="75" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke"/>
-                    <line x1="130" y1="105" x2="110" y2="115" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke"/>
-                    <line x1="90" y1="125" x2="70" y2="135" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke"/>
-                    <line x1="50" y1="105" x2="30" y2="115" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke"/>
+            <a href="./" class="logo" aria-label="Shipfront home" aria-current="page">
+                <svg class="mark" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <g stroke="#FF2D2D" stroke-width="1.25" stroke-linecap="square" stroke-linejoin="miter">
+                        <path d="M7 9 L12 6 L17 9 L17 15 L12 18 L7 15 Z"/>
+                        <path d="M7 9 L12 12 L17 9"/>
+                        <path d="M12 12 L12 18"/>
+                        <path d="M7 15 L12 12 L17 15"/>
+                    </g>
                 </svg>
                 <span class="wordmark">SHIPFRONT</span>
             </a>
             <ul class="nav-links">
-                <li><a href="#why-shipfront">Why Shipfront</a></li>
-                <li><a href="contact/">Contact</a></li>
-                <li><a href="quote/" class="cta-button">Get a Quote</a></li>
+                <li><a class="nav-text" href="./">Home</a></li>
+                <li><a class="cta-pill" href="quote/">Get a Quote</a></li>
+                <li><a class="nav-text" href="contact/">Contact</a></li>
             </ul>
         </nav>
     </header>
 
-    <main id="main" role="main">
-        <section class="hero" aria-label="Hero section">
-            <div class="hero-content">
-                <p class="eyebrow"><span class="meta">1933 S. Broadway</span></p>
-                <div class="hero-lockup">
-                    <svg class="mark" width="44" height="44" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <path d="M50 65 L90 45 L130 65 L130 105 L90 125 L50 105 Z" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke" fill="none"/>
-                        <path d="M30 75 L70 55 L110 75 L110 115 L70 135 L30 115 Z" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke" fill="none"/>
-                        <line x1="50" y1="65" x2="30" y2="75" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke"/>
-                        <line x1="90" y1="45" x2="70" y2="55" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke"/>
-                        <line x1="130" y1="65" x2="110" y2="75" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke"/>
-                        <line x1="130" y1="105" x2="110" y2="115" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke"/>
-                        <line x1="90" y1="125" x2="70" y2="135" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke"/>
-                        <line x1="50" y1="105" x2="30" y2="115" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke"/>
-                    </svg>
-                    <h1>SHIPFRONT</h1>
+    <main id="main" role="main" tabindex="-1">
+        <section class="hero" aria-label="Hero">
+            <div class="content-wrapper hero-copy">
+                <p class="eyebrow hero-eyebrow">Third party logistics, downtown L.A.</p>
+                <div class="clip-mask">
+                    <h1 class="hero-title">You Sell. We Ship.</h1>
                 </div>
-                <p class="tagline">You Sell. We Ship.</p>
-                <a href="quote/" class="cta-button-large">Get a Quote</a>
+                <div class="clip-mask hero-line">
+                    <p class="lede hero-deck">You sell. We run the floor.</p>
+                </div>
+                <div class="clip-mask hero-line">
+                    <p class="lede hero-meta">A person at Shipfront replies. The warehouse is at 1933 S. Broadway.</p>
+                </div>
+                <div class="hero-act">
+                    <a href="quote/" class="cta-pill">Get a Quote</a>
+                </div>
+                <ul class="hero-specs" aria-label="What we do">
+                    <li>Warehousing</li>
+                    <li>Fulfillment</li>
+                    <li>eCommerce Integrations</li>
+                    <li>Location</li>
+                </ul>
+            </div>
+            <div class="hero-cube" aria-hidden="true">
+                <svg class="cube-spin" width="220" height="220" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <g stroke="#FF2D2D" stroke-width="1.25" stroke-linecap="square" stroke-linejoin="miter">
+                        <path d="M7 9 L12 6 L17 9 L17 15 L12 18 L7 15 Z"/>
+                        <path d="M7 9 L12 12 L17 9"/>
+                        <path d="M12 12 L12 18"/>
+                        <path d="M7 15 L12 12 L17 15"/>
+                    </g>
+                </svg>
             </div>
         </section>
 
-        <section id="why-shipfront" class="why" aria-labelledby="why-heading">
-            <div class="content-wrapper">
-                <div class="band-head">
-                    <h2 id="why-heading" class="eyebrow">Why Shipfront</h2>
-                    <p class="band-lead">Port to customer. We sit in warehouse and integration.</p>
-                    <ol class="chain" aria-label="Value chain from port to customer">
-                        <li>Port</li>
-                        <li>Freight</li>
-                        <li class="chain-ours">Warehouse</li>
-                        <li>Customer</li>
-                    </ol>
-                    <p class="chain-note">Not the port. Not the van.</p>
+        <section id="how" class="band lane inverse-band" aria-labelledby="lane-heading">
+            <div class="content-wrapper" data-reveal>
+                <div class="section-head" data-scrub>
+                    <p class="eyebrow eyebrow-sleeve">
+                        <span>How it works</span>
+                        <span class="sleeve-index">Port to customer</span>
+                    </p>
+                    <h2 class="clip-line" id="lane-heading"><span>Freight lands on our floor. Orders leave it.</span></h2>
+                </div>
+                <ol class="flow" aria-label="How an order moves through Shipfront">
+                    <li class="flow-step">
+                        <p class="flow-index">01</p>
+                        <h3 class="flow-name">Inbound</h3>
+                        <p class="flow-act">We receive your freight at the dock and check it onto the floor.</p>
+                    </li>
+                    <li class="flow-step">
+                        <p class="flow-index">02</p>
+                        <h3 class="flow-name">Floor</h3>
+                        <p class="flow-act">Your product is racked, organized, and counted where we can reach it.</p>
+                    </li>
+                    <li class="flow-step">
+                        <p class="flow-index">03</p>
+                        <h3 class="flow-name">Fulfillment</h3>
+                        <p class="flow-act">Orders are picked, packed, and labeled to the spec you set.</p>
+                    </li>
+                    <li class="flow-step">
+                        <p class="flow-index">04</p>
+                        <h3 class="flow-name">Ship</h3>
+                        <p class="flow-act">Cartons leave the dock for your customer, FBA, or last mile.</p>
+                    </li>
+                </ol>
+                <p class="lede flow-note"><span>Freight is coordinated. We do not run the truck. Shipfront sits in warehouse and integration.</span></p>
+            </div>
+        </section>
+
+        <section id="floor" class="band why" aria-labelledby="floor-heading">
+            <div class="edge-rule" aria-hidden="true"></div>
+            <div class="content-wrapper" data-reveal>
+                <div class="section-head" data-scrub>
+                    <p class="eyebrow eyebrow-sleeve">
+                        <span>The floor</span>
+                        <span class="sleeve-index">SF-01 / SF-04</span>
+                    </p>
+                    <h2 class="clip-line" id="floor-heading"><span>The floor.</span></h2>
+                </div>
+                <div class="cards-box">
+                    <span class="reg-sq tl" aria-hidden="true"></span>
+                    <span class="reg-sq tr" aria-hidden="true"></span>
+                    <span class="reg-sq bl" aria-hidden="true"></span>
+                    <span class="reg-sq br" aria-hidden="true"></span>
+                    <span class="coord tl" aria-hidden="true">0, 0</span>
+                    <span class="coord tr" aria-hidden="true">1200, 0</span>
+                    <span class="coord bl" aria-hidden="true">0, 640</span>
+                    <span class="coord br" aria-hidden="true">1200, 640</span>
+                    <div class="cards-grid bento-grid">
+                        <div class="bento-col">
+                            <article class="bento-tile bento-tile--photo bento-tile--tall" data-stagger="0" aria-labelledby="floor-logistics">
+                                <div class="card-image still-grain">
+                                    <img src="images/logistics.jpg" alt="American long-hood freight trucks parked in a lot" width="2400" height="1596" decoding="async">
+                                </div>
+                                <div class="card-overlay">
+                                    <p class="card-step">02</p>
+                                    <h3 class="card-label" id="floor-logistics">Logistics</h3>
+                                    <p class="card-body">Freight is coordinated. We do not run the truck.</p>
+                                </div>
+                            </article>
+                            <article class="bento-tile bento-tile--loc" data-stagger="1" aria-labelledby="floor-location">
+                                <p class="card-step">Location</p>
+                                <h3 class="card-label" id="floor-location">1933 S. Broadway, Los Angeles CA 90007.</h3>
+                                <address class="card-body">Downtown L.A., next to the 10, 110, and 101.</address>
+                            </article>
+                        </div>
+
+                        <div class="bento-col">
+                            <article class="bento-tile bento-tile--sm" data-stagger="2" aria-labelledby="floor-procurement">
+                                <div class="bento-sm-copy">
+                                    <p class="card-step">01</p>
+                                    <h3 class="card-label" id="floor-procurement">Procurement</h3>
+                                    <p class="card-body">They buy. Freight arrives at our floor. Inbound at 1933 S. Broadway.</p>
+                                </div>
+                                <div class="bento-sm-still still-grain">
+                                    <img src="images/procurement.jpg" alt="" width="800" height="1080" decoding="async">
+                                </div>
+                            </article>
+                            <article class="bento-tile bento-tile--ful" data-stagger="3" aria-labelledby="floor-fulfillment">
+                                <p class="card-step">03</p>
+                                <h3 class="card-label" id="floor-fulfillment">Fulfillment</h3>
+                                <p class="card-body">Pick, pack, label, dock on our floor.</p>
+                                <ul class="chips" aria-label="Fulfillment on the floor">
+                                    <li>Inbound</li>
+                                    <li>Kitting</li>
+                                    <li>Storage</li>
+                                    <li>FBA Prep</li>
+                                    <li>Outbound</li>
+                                    <li>Last-Mile Delivery</li>
+                                    <li>Same-Day Delivery</li>
+                                </ul>
+                            </article>
+                            <article class="bento-tile bento-tile--pop" data-stagger="4" aria-labelledby="floor-pop">
+                                <h3 class="card-label" id="floor-pop">You sell. We run the floor.</h3>
+                                <p class="card-body">Shipfront sits in warehouse and integration.</p>
+                            </article>
+                        </div>
+
+                        <div class="bento-col">
+                            <article class="bento-tile bento-tile--photo bento-tile--tall bento-tile--dock" data-stagger="5" aria-labelledby="floor-integration">
+                                <div class="card-image still-grain">
+                                    <img src="images/integration.jpg" alt="Trailers parked in rows at loading docks, seen from above" width="800" height="1080" decoding="async">
+                                </div>
+                                <div class="card-overlay">
+                                    <p class="card-step">04</p>
+                                    <h3 class="card-label" id="floor-integration">Integration</h3>
+                                    <p class="card-body">The store talks to the floor.</p>
+                                </div>
+                            </article>
+                            <article class="bento-tile bento-tile--cloud" data-stagger="6" aria-labelledby="floor-cloud">
+                                <ul class="chips chips-cloud" aria-label="Fulfillment on the floor">
+                                    <li>Inbound</li>
+                                    <li>Kitting</li>
+                                    <li>Storage</li>
+                                    <li>FBA Prep</li>
+                                    <li>Outbound</li>
+                                    <li>Last-Mile Delivery</li>
+                                    <li>Same-Day Delivery</li>
+                                </ul>
+                                <h3 class="card-label" id="floor-cloud">Fulfillment and integration.</h3>
+                                <p class="card-body">The stack you already sell on.</p>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="why" class="band why-rows" aria-labelledby="why-heading">
+            <div class="content-wrapper" data-reveal>
+                <div class="why-rule" aria-hidden="true"></div>
+                <div class="section-head" data-scrub>
+                    <p class="eyebrow eyebrow-sleeve">
+                        <span>Why Shipfront</span>
+                        <span class="sleeve-index">01 / 04</span>
+                    </p>
+                    <h2 class="clip-line why-h2" id="why-heading"><span>Why Shipfront</span></h2>
+                    <p class="deck">Four things decide whether an order ships. We hold all four on one floor.</p>
                 </div>
 
-                <div class="cards-grid">
-                    <article class="card" tabindex="0">
-                        <div class="card-image">
-                            <img src="images/procurement.jpg" alt="Inbound pallet at warehouse dock">
-                        </div>
-                        <div class="card-overlay">
-                            <p class="card-step meta">01</p>
-                            <h3 class="card-label">Procurement</h3>
-                            <p class="card-body">They buy. Freight arrives at our floor. Inbound at 1933 S. Broadway.</p>
-                        </div>
-                    </article>
+                <ul class="outcomes" aria-label="What you stop carrying">
+                    <li class="outcome">No warehouse lease.</li>
+                    <li class="outcome">No pick crew to hire.</li>
+                    <li class="outcome">No second system to run.</li>
+                </ul>
 
-                    <article class="card" tabindex="0">
-                        <div class="card-image">
-                            <img src="images/logistics.jpg" alt="White trailer at dock door">
-                        </div>
-                        <div class="card-overlay">
-                            <p class="card-step meta">02</p>
-                            <h3 class="card-label">Logistics</h3>
-                            <p class="card-body">Freight is coordinated. We do not run the truck.</p>
-                        </div>
-                    </article>
+                <article class="why-row">
+                    <p class="why-index" aria-hidden="true">01</p>
+                    <div class="why-copy">
+                        <h3>Warehousing</h3>
+                        <p class="why-out">Your product gets an address.</p>
+                        <p>Our warehouses hold your product on our floor, secured and organized, until it ships to your customer.</p>
+                    </div>
+                    <div class="why-still still-grain">
+                        <img src="images/procurement.jpg" alt="Warehouse racking and pick bins stocked with cartons">
+                    </div>
+                </article>
 
-                    <article class="card" tabindex="0">
-                        <div class="card-image">
-                            <img src="images/fulfillment.jpg" alt="Warehouse racking and pick aisle">
-                        </div>
-                        <div class="card-overlay">
-                            <p class="card-step meta">03</p>
-                            <h3 class="card-label">Fulfillment</h3>
-                            <p class="card-body">Pick, pack, label, dock on our floor.</p>
-                            <p class="card-meta meta">Inbound | Kitting | Storage | FBA Prep | Outbound | Last-Mile | Same-Day</p>
-                        </div>
-                    </article>
+                <article class="why-row">
+                    <p class="why-index" aria-hidden="true">02</p>
+                    <div class="why-copy">
+                        <h3>Fulfillment</h3>
+                        <p class="why-out">Every order leaves the way you specified.</p>
+                        <p>We build custom workflows to pick, pack, label, and ship your products exactly how you would like.</p>
+                        <ul class="chips">
+                            <li>Inbound</li>
+                            <li>Kitting</li>
+                            <li>Storage</li>
+                            <li>FBA Prep</li>
+                            <li>Outbound</li>
+                            <li>Last-Mile Delivery</li>
+                            <li>Same-Day Delivery</li>
+                        </ul>
+                    </div>
+                    <div class="why-still still-grain">
+                        <img src="images/fulfillment.jpg" alt="Warehouse racking and pick aisle">
+                    </div>
+                </article>
 
-                    <article class="card" tabindex="0">
-                        <div class="card-image">
-                            <img src="images/integration.jpg" alt="Warehouse scanning tablet station">
-                        </div>
-                        <div class="card-overlay">
-                            <p class="card-step meta">04</p>
-                            <h3 class="card-label">Integration</h3>
-                            <p class="card-body">The store talks to the floor. Shipfront is built on the Flowspace Warehouse Management System (WMS).</p>
-                        </div>
-                    </article>
+                <article class="why-row why-integrations">
+                    <p class="why-index" aria-hidden="true">03</p>
+                    <div class="why-copy">
+                        <h3>eCommerce Integrations</h3>
+                        <p class="why-out">The store talks to the floor.</p>
+                        <p>The stack you already sell on.</p>
+                    </div>
+                    <div class="why-still why-still--dock still-grain">
+                        <img src="images/integration.jpg" alt="Trailers parked in rows at loading docks, seen from above">
+                    </div>
+                </article>
+
+                <article class="why-row why-row-type">
+                    <p class="why-index" aria-hidden="true">04</p>
+                    <div class="why-copy">
+                        <h3>Location</h3>
+                        <p class="why-out">Downtown, on the freeway grid.</p>
+                        <p>1933 S. Broadway, Los Angeles CA 90007. Downtown L.A., next to the 10, 110, and 101.</p>
+                    </div>
+                </article>
+
+                <div class="why-close">
+                    <p class="eyebrow">Get started</p>
+                    <h2 class="close-title">Send us the product. We will run the floor.</h2>
+                    <p class="lede">A person at Shipfront replies. The warehouse is at 1933 S. Broadway.</p>
+                    <a href="quote/" class="cta-pill why-cta">Get a Quote</a>
                 </div>
             </div>
         </section>
     </main>
 
     <footer role="contentinfo">
-        <p>Built by David T Phung</p>
+        <div class="content-wrapper footer-grid" data-reveal>
+            <div class="clip-mask footer-mark-mask">
+                <p class="footer-mark">SHIPFRONT</p>
+            </div>
+            <div>
+                <p class="eyebrow">Home</p>
+                <a href="./">Home</a>
+                <a href="./#why">Why Shipfront</a>
+            </div>
+            <div>
+                <p class="eyebrow">Quote</p>
+                <a href="quote/">Get a Quote</a>
+            </div>
+            <div>
+                <p class="eyebrow">Contact</p>
+                <a href="contact/">Visit Us Today</a>
+            </div>
+        </div>
+        <p class="footer-byline">Built by David T Phung</p>
     </footer>
+    <aside class="dock-bar" aria-label="Get a Quote">
+        <p>A person at Shipfront replies.</p>
+        <a class="cta-pill" href="quote/">Get a Quote</a>
+    </aside>
+    <script src="js/site.js"></script>
 </body>
 </html>
