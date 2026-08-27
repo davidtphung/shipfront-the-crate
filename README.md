@@ -22,11 +22,11 @@ Shipfront Terminal demo: **THE CRATE**. Black ground, white type, red #FF2D2D wi
 - Get a Quote `/quote/`
 - Contact `/contact/`
 
-## Identity Lock (THE CRATE 1A EVEN)
+## Identity Lock (THE CRATE YAW)
 
 - **Language**: Terminal. Ground #000000. Type white. Space Grotesk 400 and 700. JetBrains Mono for meta and step numbers.
 - **Accent**: #FF2D2D only. CTA fill is #FF2D2D with BLACK label (7:1+ contrast).
-- **Logo**: THE CRATE 1A EVEN. Side-on axonometric 12-edge even wire cube, red #FF2D2D on black.
+- **Logo**: THE CRATE YAW θ=30° (27 Aug lock). Three face paths, shared edges stroke once, red #FF2D2D on black. EVEN unused. Not #FF6A00.
 - **Tagline**: You Sell. We Ship.
 
 ## Development
