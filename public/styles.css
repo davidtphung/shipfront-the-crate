@@ -1158,6 +1158,8 @@ footer p {
 .tile--plate {
   display: flex;
   flex-direction: column;
+  /* Shrink to fit, so the caption plate stays a plate and not a full width bar. */
+  align-items: flex-start;
   justify-content: flex-end;
   min-height: 218px;
   padding: 34px;

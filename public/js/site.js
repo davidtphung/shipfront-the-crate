@@ -540,9 +540,14 @@
         var y = dragBase + delta;
         if (y < 0) y = -band(-y);
 
+        /* Blend the last two samples. A single jittery frame should not read
+           as a fling, and a real fling still reaches the threshold. */
         var now = performance.now();
         var dt = (now - lastT) / 1000;
-        if (dt > 0) dragVelocity = (ev.clientY - lastY) / dt;
+        if (dt > 0) {
+            var instant = (ev.clientY - lastY) / dt;
+            dragVelocity = dragVelocity * 0.4 + instant * 0.6;
+        }
         lastY = ev.clientY;
         lastT = now;
 
