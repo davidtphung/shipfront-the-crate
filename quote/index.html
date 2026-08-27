@@ -52,7 +52,7 @@
 
         <section class="band page-band">
             <div class="content-wrapper narrow" data-reveal>
-                <form class="quote-form" id="quoteForm" aria-label="Quote request form" aria-describedby="quote-hint">
+                <form class="quote-form" id="quoteForm" data-sheet-open aria-label="Quote request form" aria-describedby="quote-hint">
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" id="name" name="name" required aria-required="true" autocomplete="name">
@@ -68,10 +68,12 @@
                     <button type="submit" class="cta-pill">Submit Request</button>
                 </form>
 
-                <div class="form-notice" id="formNotice" hidden role="status" aria-live="polite" tabindex="-1">
-                    <p><strong>This preview does not send.</strong></p>
-                    <p>For quote requests, please email <a href="mailto:info@myshipfront.com">info@myshipfront.com</a></p>
-                </div>
+                <noscript>
+                    <div class="form-notice">
+                        <p><strong>This preview does not send.</strong></p>
+                        <p>For quote requests, please email <a href="mailto:info@myshipfront.com">info@myshipfront.com</a></p>
+                    </div>
+                </noscript>
             </div>
         </section>
     </main>
@@ -97,33 +99,26 @@
         </div>
         <p class="footer-byline">Built by David T Phung</p>
     </footer>
+
     <aside class="dock-bar" aria-label="Get a Quote">
         <p>A person at Shipfront replies.</p>
         <a class="cta-pill" href="quote/" aria-current="page">Get a Quote</a>
     </aside>
 
+    <div class="sheet-scrim" data-sheet-scrim hidden></div>
+    <div class="sheet" data-sheet role="dialog" aria-labelledby="sheet-title" tabindex="-1" hidden>
+        <div class="sheet-grip" aria-hidden="true"></div>
+        <div class="sheet-panel">
+            <p class="eyebrow">Quote</p>
+            <h2 class="sheet-title" id="sheet-title">This preview does not send.</h2>
+            <p class="sheet-body">Send the request to info@myshipfront.com and a person at Shipfront replies. The warehouse is at 1933 S. Broadway, Los Angeles CA 90007.</p>
+            <div class="sheet-act">
+                <a class="cta-pill" href="mailto:info@myshipfront.com">Email Shipfront</a>
+                <button type="button" class="sheet-dismiss" data-sheet-close>Close</button>
+            </div>
+        </div>
+    </div>
+
     <script src="js/site.js"></script>
-    <script>
-        const form = document.getElementById('quoteForm');
-        const notice = document.getElementById('formNotice');
-
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            notice.hidden = false;
-            notice.style.display = 'block';
-            notice.style.opacity = '0';
-            notice.style.transform = 'translateY(-8px)';
-
-            requestAnimationFrame(function () {
-                notice.style.transition = 'opacity 200ms ease, transform 200ms cubic-bezier(0.25, 0.1, 0.25, 1)';
-                notice.style.opacity = '1';
-                notice.style.transform = 'translateY(0)';
-            });
-
-            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            notice.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'nearest' });
-            notice.focus();
-        });
-    </script>
 </body>
 </html>
