@@ -15,8 +15,8 @@ Shipfront Terminal. Black ground, white type, cube, one accent.
 ## Identity Lock (Friday Terminal)
 
 - **Language**: Terminal. Ground #000000. Type white. Space Grotesk 400 and 700. JetBrains Mono for meta.
-- **Accent**: #FF6A00 only on the wordmark bar and Get a Quote. CTA label is #000 on the accent.
-- **Cube**: Kunal hex + inner Y (stem down). Fill #000. One accent. Square caps, miter. Not a pip. Not 32x36 / M16 3.2.
+- **Accent**: #FF2D2D only on the wordmark bar and Get a Quote. CTA label is #000 on the accent.
+- **Cube**: 1A EVEN. viewBox 0 0 24 26. Kunal hex + inner Y, stem down. Fill #000. Stroke #FF2D2D. Square caps, miter. Not a pip. Not 32x36 / M16 3.2.
 - **Copy**: myshipfront.com live copy. Value props: Warehousing, Fulfillment, eCommerce Integrations, Location. Reef is an address. No phone, no SLAs, no FDA, no WMS, no temp.
 - **Form**: Name, Email, Company.
 - **Footer**: Built by David T Phung
