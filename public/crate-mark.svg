@@ -1,4 +1,5 @@
-<svg width="64" height="64" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Kunal hex + inner Y, stem down. Fill #000. Stroke #FF6A00. Square caps, miter. -->
   <rect width="160" height="160" fill="#000000"/>
   <path fill="#000000" d="M80 32 L121.569 56 L80 80 L38.431 56 Z"/>
   <path fill="#000000" d="M38.431 56 L80 80 L80 128 L38.431 104 Z"/>
