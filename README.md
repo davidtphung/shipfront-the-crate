@@ -1,20 +1,10 @@
 # shipfront-the-crate
 
-Shipfront Terminal demo: **THE CRATE**. Black ground, white type, red #FF2D2D wire cube.
+Shipfront Terminal. Black ground, white type, cube, one accent.
 
 ## Live Site
 
 🔗 **https://davidtphung.github.io/shipfront-the-crate/**
-
-> **Note**: GitHub Pages must be enabled in repository settings to make the site live.
-> 
-> To enable:
-> 1. Go to Settings → Pages
-> 2. Under "Build and deployment", select "Deploy from a branch"
-> 3. Select branch: `gh-pages`, folder: `/ (root)`
-> 4. Click Save
->
-> The site will be live at the URL above within a few minutes.
 
 ## Pages
 
@@ -22,11 +12,14 @@ Shipfront Terminal demo: **THE CRATE**. Black ground, white type, red #FF2D2D wi
 - Get a Quote `/quote/`
 - Contact `/contact/`
 
-## Identity Lock (THE CRATE 1A EVEN)
+## Identity Lock (Friday Terminal)
 
-- **Language**: Terminal. Ground #000000. Type white. Space Grotesk 400 and 700. JetBrains Mono for meta and step numbers.
-- **Accent**: #FF2D2D only. CTA fill is #FF2D2D with BLACK label (7:1+ contrast).
-- **Logo**: THE CRATE 1A EVEN. Side-on axonometric 12-edge even wire cube, red #FF2D2D on black.
+- **Language**: Terminal. Ground #000000. Type white. Space Grotesk 400 and 700. JetBrains Mono for meta.
+- **Accent**: #FF2D2D only on the wordmark bar and Get a Quote. CTA label is #000 on the accent.
+- **Cube**: 1A EVEN. viewBox 0 0 24 26. Kunal hex + inner Y, stem down. Fill #000. Stroke #FF2D2D. Square caps, miter. Not a pip. Not 32x36 / M16 3.2.
+- **Copy**: myshipfront.com live copy. Value props: Warehousing, Fulfillment, eCommerce Integrations, Location. Reef is an address. No phone, no SLAs, no FDA, no WMS, no temp.
+- **Form**: Name, Email, Company.
+- **Footer**: Built by David T Phung
 - **Tagline**: You Sell. We Ship.
 
 ## Development
@@ -63,6 +56,7 @@ Deployed to GitHub Pages from the `public/` directory.
 ## Contact
 
 Shipfront  
+The Reef  
 1933 S. Broadway  
 Los Angeles, CA 90007  
 info@myshipfront.com

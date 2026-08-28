@@ -12,87 +12,111 @@
 </head>
 <body>
     <a href="#main" class="skip-link">Skip to main content</a>
-    
-    <header role="banner">
+    <div class="stage-light" aria-hidden="true"></div>
+    <div class="blueprint" aria-hidden="true"></div>
+
+    <header class="hud-bar" role="banner">
         <nav role="navigation" aria-label="Main navigation">
             <a href="./" class="logo" aria-label="Shipfront home">
-                <svg class="mark" width="20" height="20" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path d="M50 65 L90 45 L130 65 L130 105 L90 125 L50 105 Z" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke" fill="none"/>
-                    <path d="M30 75 L70 55 L110 75 L110 115 L70 135 L30 115 Z" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke" fill="none"/>
-                    <line x1="50" y1="65" x2="30" y2="75" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke"/>
-                    <line x1="90" y1="45" x2="70" y2="55" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke"/>
-                    <line x1="130" y1="65" x2="110" y2="75" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke"/>
-                    <line x1="130" y1="105" x2="110" y2="115" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke"/>
-                    <line x1="90" y1="125" x2="70" y2="135" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke"/>
-                    <line x1="50" y1="105" x2="30" y2="115" stroke="#FF2D2D" stroke-width="1.25" vector-effect="non-scaling-stroke"/>
+                <svg class="mark" width="20" height="22" viewBox="0 0 24 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path fill="#000000" d="M7 9 L12 6 L17 9 L17 15 L12 18 L7 15 Z"/>
+                    <path stroke="#FF2D2D" stroke-width="1.25" stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="2" d="M7 9 L12 6 L17 9 L17 15 L12 18 L7 15 Z"/>
+                    <path stroke="#FF2D2D" stroke-width="1.25" stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="2" d="M7 9 L12 12 L17 9"/>
+                    <path stroke="#FF2D2D" stroke-width="1.25" stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="2" d="M12 12 L12 18"/>
                 </svg>
                 <span class="wordmark">SHIPFRONT</span>
             </a>
             <ul class="nav-links">
-                <li><a href="./#why-shipfront">Why Shipfront</a></li>
-                <li><a href="contact/">Contact</a></li>
-                <li><a href="quote/" class="cta-button" aria-current="page">Get a Quote</a></li>
+                <li><a class="nav-text" href="./">Home</a></li>
+                <li><a class="cta-pill" href="quote/" aria-current="page">Get a Quote</a></li>
+                <li><a class="nav-text" href="contact/">Contact</a></li>
             </ul>
         </nav>
     </header>
 
-    <main id="main" role="main">
-        <section class="quote-section">
-            <p class="eyebrow"><span class="meta">Quote</span></p>
-            <h1>Get a Quote</h1>
-            <p class="section-intro">Tell us about your business and we will get back to you.</p>
-            
-            <form class="quote-form" id="quoteForm" aria-label="Quote request form">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" required aria-required="true">
+    <main id="main" role="main" tabindex="-1">
+        <section class="page-hero" aria-label="Quote">
+            <p class="stamp stamp-fold" aria-hidden="true">3PL</p>
+            <div class="content-wrapper narrow">
+                <p class="eyebrow hero-eyebrow">Quote</p>
+                <div class="clip-mask">
+                    <h1>Fast &amp; Easy Quotes</h1>
                 </div>
-                
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required aria-required="true">
+                <div class="clip-mask hero-line">
+                    <p class="lede" id="quote-hint">Please take a moment to give us some information. We have expert agents standing by to take care of your logistics needs.</p>
                 </div>
-                
-                <div class="form-group">
-                    <label for="company">Company</label>
-                    <input type="text" id="company" name="company" required aria-required="true">
-                </div>
-                
-                <button type="submit" class="cta-button-large">Submit Request</button>
-            </form>
+            </div>
+        </section>
 
-            <div class="form-notice" id="formNotice" style="display: none;" role="alert">
-                <p><strong>This preview does not send.</strong></p>
-                <p>For quote requests, please email <a href="mailto:info@myshipfront.com">info@myshipfront.com</a></p>
+        <section class="band page-band">
+            <div class="content-wrapper narrow" data-reveal>
+                <form class="quote-form" id="quoteForm" data-sheet-open aria-label="Quote request form" aria-describedby="quote-hint">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required aria-required="true" autocomplete="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required aria-required="true" autocomplete="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Company</label>
+                        <input type="text" id="company" name="company" required aria-required="true" autocomplete="organization">
+                    </div>
+                    <button type="submit" class="cta-pill">Submit Request</button>
+                </form>
+
+                <noscript>
+                    <div class="form-notice">
+                        <p><strong>This preview does not send.</strong></p>
+                        <p>For quote requests, please email <a href="mailto:info@myshipfront.com">info@myshipfront.com</a></p>
+                    </div>
+                </noscript>
             </div>
         </section>
     </main>
 
     <footer role="contentinfo">
-        <p>Built by David T Phung</p>
+        <div class="content-wrapper footer-grid" data-reveal>
+            <div class="clip-mask footer-mark-mask">
+                <p class="footer-mark">SHIPFRONT</p>
+            </div>
+            <div>
+                <p class="eyebrow">Home</p>
+                <a href="./">Home</a>
+                <a href="./#why">Why Shipfront</a>
+            </div>
+            <div>
+                <p class="eyebrow">Quote</p>
+                <a href="quote/">Get a Quote</a>
+            </div>
+            <div>
+                <p class="eyebrow">Contact</p>
+                <a href="contact/">Visit Us Today</a>
+            </div>
+        </div>
+        <p class="footer-byline">Built by David T Phung</p>
     </footer>
 
-    <script>
-        const form = document.getElementById('quoteForm');
-        const notice = document.getElementById('formNotice');
-        
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            notice.style.display = 'block';
-            notice.style.opacity = '0';
-            notice.style.transform = 'translateY(-8px)';
-            
-            requestAnimationFrame(() => {
-                notice.style.transition = 'opacity 340ms cubic-bezier(0.25, 0.1, 0.25, 1), transform 340ms cubic-bezier(0.25, 0.1, 0.25, 1)';
-                notice.style.opacity = '1';
-                notice.style.transform = 'translateY(0)';
-            });
-            
-            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            const scrollBehavior = prefersReducedMotion ? 'auto' : 'smooth';
-            notice.scrollIntoView({ behavior: scrollBehavior, block: 'nearest' });
-        });
-    </script>
+    <aside class="dock-bar" aria-label="Get a Quote">
+        <p>The Reef, 1933 S. Broadway.</p>
+        <a class="cta-pill" href="quote/" aria-current="page">Get a Quote</a>
+    </aside>
+
+    <div class="sheet-scrim" data-sheet-scrim hidden></div>
+    <div class="sheet" data-sheet role="dialog" aria-labelledby="sheet-title" tabindex="-1" hidden>
+        <div class="sheet-grip" aria-hidden="true"></div>
+        <div class="sheet-panel">
+            <p class="eyebrow">Quote</p>
+            <h2 class="sheet-title" id="sheet-title">This preview does not send.</h2>
+            <p class="sheet-body">This preview does not send. For quote requests, email info@myshipfront.com. The floor is at The Reef, 1933 S. Broadway, Los Angeles CA 90007.</p>
+            <div class="sheet-act">
+                <a class="cta-pill" href="mailto:info@myshipfront.com">Email Shipfront</a>
+                <button type="button" class="sheet-dismiss" data-sheet-close>Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/site.js"></script>
 </body>
 </html>
