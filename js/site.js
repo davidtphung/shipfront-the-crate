@@ -376,6 +376,21 @@
         window.addEventListener('load', function () { scrollToWhy(); });
     }
 
+    /* ---- Quote form ------------------------------------------------------
+       Native POST to Formsubmit. After _next lands on ?thanks=1, swap the
+       form for the on-page thanks state. Do not preventDefault. */
+    var quoteForm = document.getElementById('quoteForm');
+    var quoteThanks = document.getElementById('quote-thanks');
+    if (quoteForm && quoteThanks && /(?:^|[?&])thanks=1(?:&|$)/.test(window.location.search)) {
+        quoteForm.hidden = true;
+        quoteThanks.hidden = false;
+        var quoteHint = document.getElementById('quote-hint');
+        if (quoteHint) {
+            quoteHint.textContent = 'A person at Shipfront replies.';
+        }
+        quoteThanks.focus({ preventScroll: true });
+    }
+
     /* ---- Sheet -----------------------------------------------------------
        One surface, one path. It enters and leaves along the same axis on the
        same critically damped spring, so a dismiss that starts halfway through
@@ -569,12 +584,4 @@
         measure();
     }, { passive: true });
 
-    var form = document.querySelector('[data-sheet-open]');
-
-    if (form) {
-        form.addEventListener('submit', function (ev) {
-            ev.preventDefault();
-            openSheet(document.activeElement);
-        });
-    }
 }());
