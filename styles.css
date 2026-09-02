@@ -802,16 +802,6 @@ footer p {
   pointer-events: none;
 }
 
-.js .flow::before {
-  transform: scaleX(0);
-  transform-origin: 0 50%;
-}
-
-.js [data-reveal].is-in .flow::before {
-  transform: scaleX(1);
-  transition: transform 1.2s var(--ease) 220ms;
-}
-
 .flow-step {
   position: relative;
   padding: 30px 32px 0 0;
@@ -958,10 +948,9 @@ footer p {
 }
 
 .cut-ghost {
-  stroke: var(--ink-1);
+  stroke: var(--ink-2);
   stroke-width: 1;
   stroke-linecap: square;
-  opacity: 0.22;
 }
 
 .cut-held {
@@ -2249,8 +2238,6 @@ footer {
   .js .hero-eyebrow,
   .js .hero-act,
   .js .hero-specs,
-  .js .flow::before,
-  .js [data-reveal].is-in .flow::before,
   .js .flow-step,
   .js [data-reveal].is-in .flow-step,
   .js .outcome,
