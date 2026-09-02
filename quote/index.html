@@ -45,24 +45,30 @@
                     <h1>Get a Quote</h1>
                 </div>
                 <div class="clip-mask hero-line">
-                    <p class="lede" id="quote-hint">Name, email, and phone. Company, website, and message are optional. This preview does not send.</p>
+                    <p class="lede" id="quote-hint">Name, email, and phone. Company, website, and message are optional.</p>
                 </div>
             </div>
         </section>
 
         <section class="band page-band">
             <div class="content-wrapper narrow" data-reveal>
-                <form class="quote-form" id="quoteForm" data-sheet-open aria-label="Quote request form" aria-describedby="quote-hint">
+                <form class="quote-form" id="quoteForm" action="https://formsubmit.co/info@myshipfront.com" method="POST" aria-label="Quote request form" aria-describedby="quote-hint">
+                    <input type="hidden" name="_next" value="https://davidtphung.github.io/shipfront-the-crate/quote/?thanks=1">
+                    <input type="hidden" name="_subject" value="Shipfront quote request">
+                    <div class="form-group honey" aria-hidden="true">
+                        <label for="website-url">Website URL</label>
+                        <input type="text" id="website-url" name="_honey" tabindex="-1" autocomplete="off">
+                    </div>
                     <div class="form-group">
-                        <label for="name">Name</label>
+                        <label for="name">Name *</label>
                         <input type="text" id="name" name="name" required aria-required="true" autocomplete="name">
                     </div>
                     <div class="form-group">
-                        <label for="email">Email</label>
+                        <label for="email">Email *</label>
                         <input type="email" id="email" name="email" required aria-required="true" autocomplete="email">
                     </div>
                     <div class="form-group">
-                        <label for="phone">Phone</label>
+                        <label for="phone">Phone *</label>
                         <input type="tel" id="phone" name="phone" required aria-required="true" autocomplete="tel">
                     </div>
                     <div class="form-group">
@@ -80,12 +86,11 @@
                     <button type="submit" class="cta-pill">Submit Request</button>
                 </form>
 
-                <noscript>
-                    <div class="form-notice">
-                        <p><strong>This preview does not send.</strong></p>
-                        <p>For quote requests, please email <a href="mailto:info@myshipfront.com">info@myshipfront.com</a></p>
-                    </div>
-                </noscript>
+                <div class="quote-thanks" id="quote-thanks" hidden tabindex="-1">
+                    <p class="eyebrow">Quote</p>
+                    <h2>Request received</h2>
+                    <p>A person at Shipfront replies.</p>
+                </div>
             </div>
         </section>
     </main>
@@ -116,20 +121,6 @@
         <p>A person at Shipfront replies.</p>
         <a class="cta-pill" href="quote/" aria-current="page">Get a Quote</a>
     </aside>
-
-    <div class="sheet-scrim" data-sheet-scrim hidden></div>
-    <div class="sheet" data-sheet role="dialog" aria-labelledby="sheet-title" tabindex="-1" hidden>
-        <div class="sheet-grip" aria-hidden="true"></div>
-        <div class="sheet-panel">
-            <p class="eyebrow">Quote</p>
-            <h2 class="sheet-title" id="sheet-title">This preview does not send.</h2>
-            <p class="sheet-body">Send the request to info@myshipfront.com and a person at Shipfront replies. The warehouse is at 1933 S. Broadway, Los Angeles CA 90007.</p>
-            <div class="sheet-act">
-                <a class="cta-pill" href="mailto:info@myshipfront.com">Email Shipfront</a>
-                <button type="button" class="sheet-dismiss" data-sheet-close>Close</button>
-            </div>
-        </div>
-    </div>
 
     <script src="js/site.js"></script>
 </body>
