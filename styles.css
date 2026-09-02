@@ -37,9 +37,26 @@
   --type: #ffffff;
   --accent: #ff2d2d;
   --muted: rgba(255, 255, 255, 0.62);
-  --line: rgba(255, 255, 255, 0.14);
-  /* AREA hairline on black. */
-  --hair: rgba(255, 255, 255, 0.07);
+  /*
+    Three-tier stroke system. Every remaining line has a named job.
+
+    1 Primary (crate / floor / route): 2px #FF2D2D.
+       Jobs: mark, route, hold, connect.
+    2 Secondary (structure): 1px ink at ~20%.
+       Jobs: dock, rack, waybill.
+    3 Tertiary (atmosphere): 1px ink at ~2.5%.
+       Job: grid. Must recede. Never competes with the mark or story drawings.
+
+    Cube path data stays locked. Weight is CSS stroke-width only.
+  */
+  --ink-1: #ff2d2d;
+  --w-1: 2px;
+  --ink-2: rgba(255, 255, 255, 0.2);
+  --w-2: 1px;
+  --ink-3: rgba(255, 255, 255, 0.025);
+  --w-3: 1px;
+  --line: var(--ink-2);
+  --hair: var(--ink-3);
   --mark: rgba(255, 255, 255, 0.55);
   --font: "Space Grotesk", sans-serif;
   --mono: "JetBrains Mono", ui-monospace, monospace;
@@ -129,18 +146,19 @@ address {
   outline: none;
 }
 
-/* 48px hairline grid, faded so it reads as atmosphere. */
+/* Tertiary grid. Atmosphere only. Recedes under the mark and story drawings. */
 .blueprint {
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  background-size: 48px 48px;
-  -webkit-mask-image: radial-gradient(125% 95% at 50% 0%, #000 0%, rgba(0, 0, 0, 0.5) 44%, transparent 82%);
-  mask-image: radial-gradient(125% 95% at 50% 0%, #000 0%, rgba(0, 0, 0, 0.5) 44%, transparent 82%);
+    linear-gradient(var(--ink-3) var(--w-3), transparent var(--w-3)),
+    linear-gradient(90deg, var(--ink-3) var(--w-3), transparent var(--w-3));
+  background-size: 64px 64px;
+  opacity: 0.7;
+  -webkit-mask-image: radial-gradient(125% 95% at 50% 0%, #000 0%, rgba(0, 0, 0, 0.4) 40%, transparent 78%);
+  mask-image: radial-gradient(125% 95% at 50% 0%, #000 0%, rgba(0, 0, 0, 0.4) 40%, transparent 78%);
 }
 
 /* Soft radial stage light. White only, under 6%, so the black stays black
@@ -173,8 +191,8 @@ body::after {
   left: 0;
   right: 0;
   top: 0;
-  height: 1px;
-  background: var(--line);
+  height: var(--w-2);
+  background: var(--ink-2);
 }
 
 .content-wrapper {
@@ -214,20 +232,20 @@ body::after {
   left: 0;
   right: 0;
   bottom: 0;
-  height: 1px;
-  background: var(--line);
+  height: var(--w-2);
+  background: var(--ink-2);
   opacity: var(--settle);
 }
 
-/* Reading position, drawn on the same hairline. One accent, no second colour. */
+/* Route. Reading position on the dock hairline. One accent. */
 .hud-bar::after {
   content: "";
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
-  height: 1px;
-  background: var(--accent);
+  height: var(--w-1);
+  background: var(--ink-1);
   opacity: calc(var(--settle) * 0.9);
   transform: scaleX(var(--read));
   transform-origin: 0 50%;
@@ -257,6 +275,8 @@ html:not(.js) .hud-bar,
   right: 24px;
   bottom: 28px;
   z-index: 3;
+  padding: 6px 8px;
+  border: var(--w-2) solid var(--ink-2);
 }
 
 nav {
@@ -278,6 +298,17 @@ nav {
   flex: 0 0 auto;
   width: 20px;
   height: 20px;
+}
+
+/* Mark weight only. Path data, viewBox, and yaw stay locked. */
+.logo .mark path[stroke] {
+  stroke: var(--ink-1);
+  stroke-width: 16;
+}
+
+.hero-cube .mark path[stroke] {
+  stroke: var(--ink-1);
+  stroke-width: 3.5;
 }
 
 .wordmark {
@@ -374,11 +405,11 @@ html:not(.js) .why-cta:active {
   left: 0;
   right: 0;
   bottom: 12px;
-  height: 1px;
+  height: var(--w-2);
   background: currentColor;
   transform: scaleX(0);
   transform-origin: 0 50%;
-  opacity: 0.6;
+  opacity: 0.55;
   transition: transform var(--card-move) var(--ease);
 }
 
@@ -405,10 +436,10 @@ html:not(.js) .why-cta:active {
 .eyebrow::after {
   content: "";
   display: block;
-  height: 1px;
+  height: var(--w-2);
   flex: 1 1 auto;
   background: currentColor;
-  opacity: 0.28;
+  opacity: 0.18;
 }
 
 .hero .eyebrow::before,
@@ -427,7 +458,7 @@ html:not(.js) .why-cta:active {
 
 .eyebrow-sleeve .sleeve-index {
   padding: 0 14px;
-  border-left: 1px solid currentColor;
+  border-left: var(--w-2) solid var(--ink-2);
   color: rgba(255, 255, 255, 0.42);
   letter-spacing: 0.2em;
 }
@@ -685,7 +716,7 @@ footer p {
   line-height: 1.55;
 }
 
-/* Tight service labels on a hairline. What we do, named once, no claims. */
+/* Waybill. What we do, named once, no claims. */
 .hero-specs {
   display: flex;
   flex-wrap: wrap;
@@ -693,7 +724,7 @@ footer p {
   width: min(760px, 100%);
   margin: 52px 0 0;
   padding: 18px 0 0;
-  border-top: 1px solid var(--hair);
+  border-top: var(--w-2) solid var(--ink-2);
   list-style: none;
 }
 
@@ -711,9 +742,9 @@ footer p {
 
 .hero-specs li::before {
   content: "";
-  width: 12px;
-  height: 1px;
-  background: var(--accent);
+  width: 16px;
+  height: var(--w-1);
+  background: var(--ink-1);
 }
 
 .js .hero-specs {
@@ -746,9 +777,8 @@ footer p {
   padding: var(--air) 0;
 }
 
-/* Sequential how-it-works. Four columns divided by hairlines, one accent
-   rule across the top that draws inbound to ship. No panels, no radius:
-   the sequence is the shape, and it stays short so the floor carries scale. */
+/* Route. Inbound, Floor, Fulfillment, Ship. The 2px accent spine is the
+   path freight takes across our floor. Verticals are dock marks. */
 .flow {
   position: relative;
   display: grid;
@@ -757,7 +787,7 @@ footer p {
   margin: 72px 0 0;
   padding: 0;
   list-style: none;
-  border-top: 1px solid var(--hair);
+  border-top: var(--w-2) solid var(--ink-2);
 }
 
 .flow::before {
@@ -765,10 +795,10 @@ footer p {
   position: absolute;
   left: 0;
   right: 0;
-  top: -1px;
-  height: 1px;
-  background: var(--accent);
-  opacity: 0.85;
+  top: -2px;
+  height: var(--w-1);
+  background: var(--ink-1);
+  opacity: 1;
   pointer-events: none;
 }
 
@@ -788,9 +818,24 @@ footer p {
   min-width: 0;
 }
 
+.flow-step::after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 22px;
+  height: var(--w-1);
+  background: var(--ink-1);
+  pointer-events: none;
+}
+
 .flow-step + .flow-step {
   padding-left: 32px;
-  border-left: 1px solid var(--hair);
+  border-left: var(--w-2) solid var(--ink-2);
+}
+
+.flow-step + .flow-step::after {
+  left: 32px;
 }
 
 .flow-index {
@@ -824,7 +869,7 @@ footer p {
   margin: 64px 0 0;
   max-width: none;
   padding-top: 28px;
-  border-top: 1px solid var(--hair);
+  border-top: var(--w-2) solid var(--ink-2);
 }
 
 .flow-note > span {
@@ -863,9 +908,9 @@ footer p {
 .cards-box {
   position: relative;
   width: 100%;
-  margin: 72px auto 0;
+  margin: 36px auto 0;
   padding: 20px;
-  border: 1px solid rgba(255, 45, 45, 0.38);
+  border: var(--w-1) solid var(--ink-1);
   overflow: visible;
 }
 
@@ -900,6 +945,64 @@ footer p {
 .coord.bl { bottom: -22px; left: 12px; }
 .coord.br { bottom: -22px; right: 12px; }
 
+/* Four cuts of the chain. Ghost spine is the truck we do not run.
+   Hold + Connect are the two we keep, drawn at primary weight. */
+.cut-draw {
+  margin: 48px 0 0;
+}
+
+.cut-draw-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.cut-ghost {
+  stroke: var(--ink-1);
+  stroke-width: 1;
+  stroke-linecap: square;
+  opacity: 0.22;
+}
+
+.cut-held {
+  stroke: var(--ink-1);
+  stroke-width: 2;
+  stroke-linecap: square;
+}
+
+.cut-out {
+  fill: none;
+  stroke: var(--ink-2);
+  stroke-width: 1;
+}
+
+.cut-in {
+  fill: none;
+  stroke: var(--ink-1);
+  stroke-width: 2;
+}
+
+.cut-draw-keys {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cut-draw-keys li {
+  text-align: center;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: var(--cap);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.cut-draw-keys li.is-held {
+  color: var(--ink-1);
+}
+
 /* Uneven on both axes: the columns are unequal, and the stack inside each
    column is unequal too. Never a 2x2. */
 .tile-grid {
@@ -931,7 +1034,7 @@ footer p {
   display: block;
   overflow: hidden;
   min-height: 220px;
-  border: 1px solid var(--hair);
+  border: var(--w-2) solid var(--ink-2);
   border-radius: var(--r);
   background: var(--panel);
   color: var(--type);
@@ -1031,7 +1134,7 @@ footer p {
   min-height: 22px;
   margin: 0 0 16px;
   padding: 0 10px;
-  border: 1px solid var(--accent);
+  border: var(--w-2) solid var(--ink-1);
   border-radius: 0;
   color: var(--accent);
   font-family: var(--mono);
@@ -1087,7 +1190,7 @@ footer p {
 
 .tile--plate .tile-sleeve {
   color: var(--muted);
-  border-color: var(--hair);
+  border-color: var(--ink-2);
 }
 
 .floor-note {
@@ -1163,7 +1266,7 @@ html:not(.js) .tile--cut:active {
   align-items: center;
   min-height: 30px;
   padding: 5px 14px;
-  border: 1px solid rgba(255, 255, 255, 0.22);
+  border: var(--w-2) solid var(--ink-2);
   border-radius: 0;
   background: transparent;
   color: rgba(255, 255, 255, 0.72);
@@ -1174,8 +1277,8 @@ html:not(.js) .tile--cut:active {
 }
 
 .chips li.is-active {
-  border-color: var(--accent);
-  background: var(--accent);
+  border: var(--w-1) solid var(--ink-1);
+  background: var(--ink-1);
   color: #000;
 }
 
@@ -1183,9 +1286,9 @@ html:not(.js) .tile--cut:active {
 
 .why-rule {
   width: 100%;
-  height: 2px;
+  height: var(--w-2);
   margin: 0 0 40px;
-  background: var(--accent);
+  background: var(--ink-2);
   border: 0;
 }
 
@@ -1204,7 +1307,7 @@ html:not(.js) .tile--cut:active {
   margin: 104px 0 128px;
   padding: 0;
   list-style: none;
-  border-top: 1px solid var(--hair);
+  border-top: var(--w-2) solid var(--ink-2);
 }
 
 .outcome {
@@ -1212,7 +1315,7 @@ html:not(.js) .tile--cut:active {
   align-items: baseline;
   gap: 20px;
   padding: 26px 0;
-  border-bottom: 1px solid var(--hair);
+  border-bottom: var(--w-2) solid var(--ink-2);
   font-size: clamp(22px, 3vw, 37px);
   font-weight: 700;
   line-height: 1.06;
@@ -1223,9 +1326,9 @@ html:not(.js) .tile--cut:active {
   content: "";
   flex: 0 0 auto;
   width: 28px;
-  height: 1px;
+  height: var(--w-1);
   margin-bottom: 0.34em;
-  background: var(--accent);
+  background: var(--ink-1);
 }
 
 .js .outcome {
@@ -1252,7 +1355,7 @@ html:not(.js) .tile--cut:active {
   align-items: start;
   margin: 0 0 96px;
   padding-top: 44px;
-  border-top: 1px solid var(--hair);
+  border-top: var(--w-2) solid var(--ink-2);
 }
 
 .why-index {
@@ -1298,7 +1401,7 @@ html:not(.js) .tile--cut:active {
 .why-close {
   margin: 128px 0 0;
   padding-top: 48px;
-  border-top: 1px solid var(--line);
+  border-top: var(--w-2) solid var(--ink-2);
 }
 
 .why-close .lede {
@@ -1381,7 +1484,7 @@ html:not(.js) .tile--cut:active {
 .quote-form {
   position: relative;
   padding: 40px;
-  border: 1px solid var(--hair);
+  border: var(--w-2) solid var(--ink-2);
   border-radius: var(--r);
   background: var(--panel);
   box-shadow: none;
@@ -1412,7 +1515,7 @@ textarea {
   width: 100%;
   min-height: 52px;
   padding: 14px 16px;
-  border: 1px solid var(--line);
+  border: var(--w-2) solid var(--ink-2);
   border-radius: var(--r);
   background: transparent;
   color: var(--type);
@@ -1450,7 +1553,7 @@ textarea:focus-visible {
 
 .quote-thanks {
   padding: 40px;
-  border: 1px solid var(--hair);
+  border: var(--w-2) solid var(--ink-2);
   border-radius: var(--r);
   background: var(--panel);
 }
@@ -1509,7 +1612,7 @@ textarea:focus-visible {
   z-index: 40;
   padding: 14px 24px calc(32px + env(safe-area-inset-bottom, 0px));
   background: #000;
-  border-top: 1px solid var(--accent);
+  border-top: var(--w-1) solid var(--ink-1);
   transform: translate3d(0, 100%, 0);
   will-change: transform;
   touch-action: none;
@@ -1565,7 +1668,7 @@ textarea:focus-visible {
   justify-content: center;
   min-height: 44px;
   padding: 0 22px;
-  border: 1px solid var(--hair);
+  border: var(--w-2) solid var(--ink-2);
   border-radius: 999px;
   background: transparent;
   color: var(--type);
@@ -1592,7 +1695,7 @@ textarea:focus-visible {
   --rise: 0px;
   min-height: 200px;
   padding: 32px;
-  border: 1px solid var(--hair);
+  border: var(--w-2) solid var(--ink-2);
   border-radius: var(--r);
   background: var(--panel);
   box-shadow: none;
@@ -1654,6 +1757,7 @@ body {
   padding-bottom: 56px;
 }
 
+/* Dock. Night floor chrome. Secondary so it does not compete with the mark. */
 .dock-bar {
   position: fixed;
   right: 0;
@@ -1667,7 +1771,7 @@ body {
   min-height: 56px;
   padding: 6px 24px;
   background: #000;
-  border-top: 1px solid var(--hair);
+  border-top: var(--w-2) solid var(--ink-2);
 }
 
 /* The dock waits under the fold and rises once the hero is behind you. */
@@ -1692,11 +1796,12 @@ body {
   color: #000;
 }
 
+/* Waybill. Close of the sheet. */
 footer {
   position: relative;
   z-index: 2;
   padding: 120px 0 48px;
-  border-top: 1px solid var(--hair);
+  border-top: var(--w-2) solid var(--ink-2);
   background: transparent;
 }
 
@@ -1840,14 +1945,22 @@ footer {
     padding-left: 28px;
   }
 
+  .flow-step + .flow-step::after {
+    left: 28px;
+  }
+
   .flow-step:nth-child(3),
   .flow-step:nth-child(4) {
-    border-top: 1px solid var(--hair);
+    border-top: var(--w-2) solid var(--ink-2);
   }
 
   .flow-step:nth-child(3) {
     border-left: 0;
     padding-left: 0;
+  }
+
+  .flow-step:nth-child(3)::after {
+    left: 0;
   }
 
   .flow-note {
@@ -1943,11 +2056,17 @@ footer {
   .flow-step + .flow-step {
     padding: 26px 0;
     border-left: 0;
-    border-top: 1px solid var(--hair);
+    border-top: var(--w-2) solid var(--ink-2);
   }
 
   .flow-step:first-child {
     border-top: 0;
+  }
+
+  .flow-step::after,
+  .flow-step + .flow-step::after,
+  .flow-step:nth-child(3)::after {
+    left: 0;
   }
 
   .flow-step:nth-child(3) {
@@ -2030,6 +2149,10 @@ footer {
 
   .quote-form {
     padding: 28px;
+  }
+
+  .cut-draw-keys li {
+    letter-spacing: 0.06em;
   }
 }
 
